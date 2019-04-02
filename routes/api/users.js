@@ -97,8 +97,8 @@ router.post("/register", (req, res) => {
                 text:
                   `Hello ${user.name},\n\n` +
                   "Please verify your account by clicking the link: \nhttp://" +
-                  req.headers.host +
-                  "/api/confirmation/" +
+                  "localhost:3000" +
+                  "/acount-verify/" +
                   token.token +
                   ".\n"
               ***REMOVED***
