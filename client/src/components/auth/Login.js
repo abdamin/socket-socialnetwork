@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import { bindActionCreators } from "redux";
 import TextFieldGroup from "../common/TextFieldGroup";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   constructor() {
@@ -72,8 +73,14 @@ class Login extends Component {
                   type="password"
                   value={this.state.password}
                   onChange={this.onChange}
-                  error={errors.password}
+                  error={errors.password || errors.isVerified}
                 />
+                {errors.isVerified && (
+                  <Link to="/resendVerification" class="form-check-label">
+                    Resend Verification Email?
+                  </Link>
+                )}
+
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>

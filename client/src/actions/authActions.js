@@ -19,6 +19,18 @@ export const registerUser = (userData, history) => dispatch => {
     });
 };
 
+// Resend User Account Verification Email
+export const verifyUser = userData => dispatch => {
+  axios
+    .post("/api/confirmation/resend", userData)
+    .then(result => {})
+    .catch(err => {
+      return dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
 //Login - Get User Token
 export const loginUser = userData => dispatch => {
   axios
