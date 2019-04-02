@@ -5,6 +5,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
+
+//nodemail credentials
+const EMAIL = require("../../config/keys").emailAddress;
+const PASSWORD = require("../../config/keys").password;
 
 //Load input validation
 const validateRegisterInput = require("../../validation/register");
@@ -12,6 +18,9 @@ const validateLoginInput = require("../../validation/login");
 
 //Load user model
 const User = require("../../models/User");
+
+//Load Account Verification Token Model
+const Token = require("../../models/Token");
 
 //  @route GET api/users/test
 //  @desc Tests users router
@@ -54,7 +63,53 @@ router.post("/register", (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then(user => res.json(user))
+            .then(user => {
+              //create a new tokeen
+              const token = new Token({
+                user: user._id,
+                token: crypto.randomBytes(16).toString("hex")
+              });
+
+              //generate verification token
+              token.save().catch(err => {
+                if (err) {
+                  throw err;
+                }
+              });
+
+              //send a confirmation email
+              const transporter = nodemailer.createTransport({
+                service: "gmail",
+                port: 25,
+                auth: {
+                  user: EMAIL,
+                  pass: PASSWORD
+              ***REMOVED***
+                tls: {
+                  rejectUnauthorised: false
+                }
+              });
+
+              const mailOptions = {
+                from: "no-reply@devconnector.com",
+                to: newUser.email,
+                subject: "Account Verification Token",
+                text:
+                  `Hello ${user.name},\n\n` +
+                  "Please verify your account by clicking the link: \nhttp://" +
+                  req.headers.host +
+                  "/api/confirmation/" +
+                  token.token +
+                  ".\n"
+              ***REMOVED***
+              transporter.sendMail(mailOptions, (err, info) => {
+                if (err) {
+                  return console.log(err);
+                }
+                console.log(info);
+              });
+              return res.json(user);
+            })
             .catch(err => console.log(err));
         });
       });
@@ -82,6 +137,13 @@ router.post("/login", (req, res) => {
     if (!user) {
       errors.email = "User not found";
       return res.status(404).json(errors);
+    }
+
+    //check if the user is verified
+    if (!user.isVerified) {
+      errors.isVerified =
+        "Your account has not been verified yet. Please check your email.";
+      return res.status(401).json(errors);
     }
 
     //Check password
