@@ -30,7 +30,8 @@ router.get("/:token", (req, res) => {
     token: req.params.token
   }).then(token => {
     if (!token) {
-      return res.redirect("http://localhost:3000/token-expired");
+      return res.status(400).json({ response: "This link has expired" });
+      //return res.redirect("http://localhost:3000/token-expired");
     }
 
     //look for matching user
@@ -38,21 +39,26 @@ router.get("/:token", (req, res) => {
       _id: token.user
     }).then(user => {
       if (!user) {
-        // return res
-        //   .status(400)
-        //   .json({ error: "We were unable to find a user for this token" });
-        return res.redirect("http://localhost:3000/token-expired");
+        return res
+          .status(400)
+          .json({ response: "We were unable to find a user for this token" });
+        //return res.redirect("http://localhost:3000/token-expired");
       } else if (user.isVerified) {
-        // return res
-        //   .status(400)
-        //   .json({ error: "This user has already been verified" });
-        return res.redirect("http://localhost:3000/token-expired");
+        return res
+          .status(400)
+          .json({ response: "This user has already been verified" });
+        //return res.redirect("http://localhost:3000/token-expired");
       }
       //verify and save user
       user.isVerified = true;
       user
         .save()
-        .then(user => res.redirect("http://localhost:3000/account-verified"))
+        .then(user => {
+          return res
+            .status(200)
+            .json({ response: "Account Verified. You may login." });
+          //res.redirect("http://localhost:3000/account-verified")
+        })
         .catch(err => console.log(err));
     });
   });
@@ -117,8 +123,8 @@ router.post("/resend", (req, res) => {
             text:
               `Hello ${user.name},\n\n` +
               "Please verify your account by clicking the link: \nhttp://" +
-              req.headers.host +
-              "/api/confirmation/" +
+              "localhost:3000" +
+              "/account-verify/" +
               token.token +
               ".\n"
           };

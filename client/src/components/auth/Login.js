@@ -80,8 +80,23 @@ class Login extends Component {
                     Resend Verification Email?
                   </Link>
                 )}
+                <input
+                  type="submit"
+                  value="Login"
+                  className="btn btn-info btn-block mt-4"
+                />
 
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <div class="mt-4">
+                  <div class="d-flex justify-content-center links">
+                    Don't have an account?{" "}
+                    <Link to="/register" class="ml-2">
+                      Sign Up
+                    </Link>
+                  </div>
+                  <div class="d-flex justify-content-center links">
+                    <Link to="/forgot-password">Forgot your password?</Link>
+                  </div>
+                </div>
               </form>
             </div>
           </div>

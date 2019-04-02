@@ -13,10 +13,11 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import AccountVerified from "./components/AccountVerification/AccountVerified";
-import TokenExpired from "./components/AccountVerification/TokenExpired";
+import AccountVerify from "./components/AccountVerification/AccountVerify";
 
 import EmailVerification from "./components/AccountVerification/EmailVerification";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
@@ -63,10 +64,10 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/account-verified"
-                component={AccountVerified}
+                path="/account-verify/:token"
+                component={AccountVerify}
               />
-              <Route exact path="/token-expired" component={TokenExpired} />
+              <Route exact path="/forgot-password" component={ForgotPassword} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>
