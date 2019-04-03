@@ -76,7 +76,7 @@ class Login extends Component {
                   error={errors.password || errors.isVerified}
                 />
                 {errors.isVerified && (
-                  <Link to="/resendVerification" class="form-check-label">
+                  <Link to="/resendVerification" className="form-check-label">
                     Resend Verification Email?
                   </Link>
                 )}
@@ -86,14 +86,14 @@ class Login extends Component {
                   className="btn btn-info btn-block mt-4"
                 />
 
-                <div class="mt-4">
-                  <div class="d-flex justify-content-center links">
+                <div className="mt-4">
+                  <div className="d-flex justify-content-center links">
                     Don't have an account?{" "}
-                    <Link to="/register" class="ml-2">
+                    <Link to="/register" className="ml-2">
                       Sign Up
                     </Link>
                   </div>
-                  <div class="d-flex justify-content-center links">
+                  <div className="d-flex justify-content-center links">
                     <Link to="/forgot-password">Forgot your password?</Link>
                   </div>
                 </div>

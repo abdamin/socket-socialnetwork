@@ -31,6 +31,35 @@ export const verifyUser = userData => dispatch => {
       });
     });
 ***REMOVED***
+
+// Change User Password
+export const changePassword = (userData, history, token) => dispatch => {
+  axios
+    .post(`/api/passwordChange/${token}`, userData)
+    .then(result => {
+      history.push("/login");
+    })
+    .catch(err => {
+      return dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+***REMOVED***
+
+// Send Password Change Email
+export const sendPasswordChangeEmail = userData => dispatch => {
+  axios
+    .post("/api/passwordChange/user/send", userData)
+    .then(result => {})
+    .catch(err => {
+      return dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+***REMOVED***
+
 //Login - Get User Token
 export const loginUser = userData => dispatch => {
   axios

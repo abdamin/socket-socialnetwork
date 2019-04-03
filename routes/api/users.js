@@ -67,6 +67,7 @@ router.post("/register", (req, res) => {
               //create a new tokeen
               const token = new Token({
                 user: user._id,
+                type: "verification",
                 token: crypto.randomBytes(16).toString("hex")
               });
 

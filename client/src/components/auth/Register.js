@@ -50,7 +50,6 @@ class Register extends Component {
   ***REMOVED***
 
   render() {
-    console.log(this.props);
     const { errors } = this.state;
 
     return (

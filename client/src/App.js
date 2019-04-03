@@ -17,6 +17,7 @@ import AccountVerify from "./components/AccountVerification/AccountVerify";
 
 import EmailVerification from "./components/AccountVerification/EmailVerification";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import ChangePassword from "./components/ForgotPassword/ChangePassword";
 
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/create-profile/CreateProfile";
@@ -68,6 +69,11 @@ class App extends Component {
                 component={AccountVerify}
               />
               <Route exact path="/forgot-password" component={ForgotPassword} />
+              <Route
+                exact
+                path="/change-password/:token"
+                component={ChangePassword}
+              />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>
