@@ -8,9 +8,13 @@ const TokenSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
+  type: {
+    type: String,
+    required: true
+  },
   token: {
     type: String,
-    requied: true
+    required: true
   },
   createdAt: {
     type: Date,

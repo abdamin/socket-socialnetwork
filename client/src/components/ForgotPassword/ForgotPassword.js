@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { verifyUser } from "../../actions/authActions";
+import { sendPasswordChangeEmail } from "../../actions/authActions";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import isEmpty from "../../validation/is-empty";
 
-class ResetEmail extends Component {
+class ForgotPassword extends Component {
   constructor() {
     super();
     this.state = {
@@ -43,7 +43,7 @@ class ResetEmail extends Component {
     const userData = {
       email: this.state.email
     };
-    this.props.verifyUser(userData);
+    this.props.sendPasswordChangeEmail(userData);
     this.setState({ emailSent: isEmpty(this.state.errors) });
   };
 
@@ -95,8 +95,8 @@ class ResetEmail extends Component {
   }
 }
 
-ResetEmail.propTypes = {
-  verifyUser: PropTypes.func.isRequired,
+ForgotPassword.propTypes = {
+  sendPasswordChangeEmail: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -107,10 +107,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ verifyUser: verifyUser }, dispatch);
+  return bindActionCreators(
+    { sendPasswordChangeEmail: sendPasswordChangeEmail },
+    dispatch
+  );
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(ResetEmail));
+)(withRouter(ForgotPassword));

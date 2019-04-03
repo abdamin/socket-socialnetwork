@@ -27,7 +27,8 @@ router.get("/test", (req, res) => res.json({ msg: "Confirmationx Works" }));
 router.get("/:token", (req, res) => {
   //find a matching token
   Token.findOne({
-    token: req.params.token
+    token: req.params.token,
+    type: "verification"
   }).then(token => {
     if (!token) {
       return res.status(400).json({ response: "This link has expired" });
@@ -54,6 +55,12 @@ router.get("/:token", (req, res) => {
       user
         .save()
         .then(user => {
+          Token.findOneAndRemove({
+            user: user._id,
+            type: "verification"
+          })
+            .then(token => console.log("removed token"))
+            .catch(err => console.log(err));
           return res
             .status(200)
             .json({ response: "Account Verified. You may login." });
@@ -64,7 +71,7 @@ router.get("/:token", (req, res) => {
   });
 });
 
-//  @route GET api/confirmation/resent
+//  @route POST api/confirmation/resent
 //  @desc Resend Confirmation Token to User
 //  @access Public
 router.post("/resend", (req, res) => {
@@ -90,11 +97,13 @@ router.post("/resend", (req, res) => {
 
     //delete already exisitn token
     Token.findOneAndRemove({
-      user: user._id
+      user: user._id,
+      type: "verification"
     }).then(console.log("Successfuly removed old token"));
     //create a new tokeen
     const token = new Token({
       user: user._id,
+      type: "verification",
       token: crypto.randomBytes(16).toString("hex")
     });
 

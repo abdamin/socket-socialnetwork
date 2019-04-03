@@ -12,6 +12,8 @@ class AccountVerify extends React.Component {
   }
 
   componentDidMount() {
+    //if logged-in go to dashboard: TODO BY ADDING REDUX
+
     const token = this.props.match.params.token;
     axios
       .get(`/api/confirmation/${token}`)
@@ -57,13 +59,13 @@ class AccountVerify extends React.Component {
               <div className="col-md-8 m-auto">
                 <p className="lead text-center">{response}</p>
                 <div className="text-center">
-                  <Link
+                  {/* <Link
                     to="/resendVerification"
                     value="Login"
                     className="btn btn-info btn-lg mt-4"
                   >
                     Resend Confirmation Email
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
