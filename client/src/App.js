@@ -13,15 +13,17 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import AccountVerify from "./components/AccountVerification/AccountVerify";
+import AccountVerify from "./components/accountVerification/AccountVerify";
 
-import EmailVerification from "./components/AccountVerification/EmailVerification";
-import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
-import ChangePassword from "./components/ForgotPassword/ChangePassword";
+import EmailVerification from "./components/accountVerification/EmailVerification";
+import ForgotPassword from "./components/forgotPassword/ForgotPassword";
+import ChangePassword from "./components/forgotPassword/ChangePassword";
 
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
+import AddEducation from "./components/add-credentials/AddEducation";
+import AddExperience from "./components/add-credentials/AddExperience";
 
 import "./App.css";
 import { clearCurrentProfile } from "./actions/profileActions";
@@ -89,6 +91,20 @@ class App extends Component {
                   exact
                   path="/edit-profile"
                   component={EditProfile}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/add-experience"
+                  component={AddExperience}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/add-education"
+                  component={AddEducation}
                 />
               </Switch>
             </div>
