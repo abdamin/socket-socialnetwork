@@ -19,12 +19,14 @@ const validateVerificationInput = require("../../validation/confirmation");
 //  @route GET api/confirmation/test
 //  @desc Tests confirmation router
 //  @access Public
-router.get("/test", (req, res) => res.json({ msg: "Confirmationx Works" }));
+router.get("/test", (req, res) => res.json({ msg: "Confirmation Works" }));
 
 //  @route GET api/confirmation/
 //  @desc Verify User's Account
 //  @access Publlic
 router.get("/:token", (req, res) => {
+  console.log("here");
+
   //find a matching token
   Token.findOne({
     token: req.params.token,

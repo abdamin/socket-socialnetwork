@@ -27,6 +27,7 @@ class AccountVerify extends React.Component {
 
   render() {
     const { response, isVerified } = this.state;
+    console.log(response);
     if (isVerified) {
       return (
         <div className="login">
