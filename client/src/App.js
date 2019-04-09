@@ -27,6 +27,12 @@ import AddExperience from "./components/add-credentials/AddExperience";
 
 import "./App.css";
 import { clearCurrentProfile } from "./actions/profileActions";
+import Profiles from "./components/profiles/Profiles";
+import Profile from "./components/profile/Profile";
+import NotFound from "./components/not-found/NotFound";
+
+import Posts from "./components/posts/Posts";
+import Post from "./components/post/Post";
 
 //Check for Token and change store state to make it persists over page refreshes as well
 if (localStorage.jwtToken) {
@@ -60,6 +66,9 @@ class App extends Component {
             <div className="container">
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/profiles" component={Profiles} />
+              <Route exact path="/profile/:handle" component={Profile} />
+
               <Route
                 exact
                 path="/resendVerification"
@@ -107,6 +116,13 @@ class App extends Component {
                   component={AddEducation}
                 />
               </Switch>
+              <Switch>
+                <PrivateRoute exact path="/feed" component={Posts} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/post/:id" component={Post} />
+              </Switch>
+              <Route exact path="/not-found" component={NotFound} />
             </div>
             <Footer />
           </div>

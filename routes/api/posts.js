@@ -49,7 +49,7 @@ router.post(
     //check validation
     if (!isValid) {
       //if any errors send 400 with errors object
-      res.status(400).json(errors);
+      return res.status(400).json(errors);
     }
 
     //for avatar in react we will pull the name and the avatar from the state
@@ -85,10 +85,10 @@ router.delete(
           post
             .remove()
             .then(() => {
-              res.json({ success: "true" });
+              return res.json({ success: "true" });
             })
             .catch(err => {
-              res.status(404).json({ postnotfound: "Post not found" });
+              return res.status(404).json({ postnotfound: "Post not found" });
             });
         })
         .catch(err => res.status(404).json({ postnotfound: "Post not found" }));
@@ -172,7 +172,7 @@ router.post(
     //check validation
     if (!isValid) {
       //if any errors send 400 with errors object
-      res.status(400).json(errors);
+      return res.status(400).json(errors);
     }
 
     Post.findById(req.params.id)

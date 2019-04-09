@@ -142,26 +142,41 @@ router.post(
     if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
     if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
 
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    //NOTE THAT THESE QUERIES ARE IN IF ELSE BRANCHES BECUASE MONGOOSE CALLS ARE ASYNC AND THEY ALL CAN BE RUN AT THE SAME TIME SO TO AVOID BOTH CALLS TOGETHER, IN THIS CASE WE USE IF ELSE
+    //Check if someother user has this handle
+    Profile.findOne({
+      user: { $ne: req.user.id },
+      handle: profileFields.handle
+    }).then(profile => {
       if (profile) {
-        //Update Profile
-        Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        ).then(profile => res.json(profile));
+        errors.handle = "That handle already exists";
+        handleExists = true;
+        return res.status(400).json(errors);
       } else {
-        //Create
-
-        //Check if handle exists
-        Profile.findOne({ handle: profileFields.handle }).then(profile => {
+        //else find the user profile and if it exists update it
+        Profile.findOne({ user: req.user.id }).then(profile => {
           if (profile) {
-            errors.handle = "That handle already exists";
-            res.status(400).json(errors);
-          }
+            //Update Profile
+            Profile.findOneAndUpdate(
+              { user: req.user.id },
+              { $set: profileFields },
+              { new: true }
+            ).then(profile => res.json(profile));
+          } else {
+            //Create profile if it does not exist
 
-          //Save profile if handle does not already exist
-          new Profile(profileFields).save().then(profile => res.json(profile));
+            Profile.findOne({ handle: profileFields.handle }).then(profile => {
+              if (profile) {
+                errors.handle = "That handle already exists";
+                return res.status(400).json(errors);
+              }
+
+              //Save profile if handle does not already exist
+              new Profile(profileFields)
+                .save()
+                .then(profile => res.json(profile));
+            });
+          }
         });
       }
     });

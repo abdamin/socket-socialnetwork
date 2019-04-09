@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Proptypes from "prop-types";
+import PropTypes from "prop-types";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import { bindActionCreators } from "redux";
 import Spinner from "../common/Spinner";
@@ -73,10 +73,10 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  getCurrentProfile: Proptypes.func.isRequired,
-  profile: Proptypes.object.isRequired,
-  auth: Proptypes.object.isRequired,
-  deleteAccount: Proptypes.func.isRequired
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  deleteAccount: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => {
