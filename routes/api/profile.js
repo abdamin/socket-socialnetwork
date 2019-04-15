@@ -7,6 +7,7 @@ const passport = require("passport");
 const validateProfileInput = require("../../validation/profile");
 const validateExperienceInput = require("../../validation/experience");
 const validateEducationInput = require("../../validation/education");
+const validateSocialInput = require("../../validation/social");
 
 //Load Profile Model
 const Profile = require("../../models/Profile");
@@ -74,7 +75,7 @@ router.get("/handle/:handle", (req, res) => {
     .then(profile => {
       if (!profile) {
         errors.noprofile = "There is no profile for this user";
-        res.status(404).json(errors);
+        return res.status(404).json(errors);
       }
 
       res.json(profile);
@@ -177,6 +178,56 @@ router.post(
                 .then(profile => res.json(profile));
             });
           }
+        });
+      }
+    });
+  }
+);
+
+//  @route POST api/profile/social
+//  @desc Create or Edit User's Profile
+//  @access Private
+router.post(
+  "/social",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateSocialInput(req.body);
+
+    //Check Validation
+    if (!isValid) {
+      //Return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+
+    const profileFields = {***REMOVED***
+    profileFields.user = req.user.id;
+
+    //Social initialize first becuase social will be an object that we receive
+    profileFields.social = {***REMOVED***
+    if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
+    if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
+    if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
+    if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
+    if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
+
+    //NOTE THAT THESE QUERIES ARE IN IF ELSE BRANCHES BECUASE MONGOOSE CALLS ARE ASYNC AND THEY ALL CAN BE RUN AT THE SAME TIME SO TO AVOID BOTH CALLS TOGETHER, IN THIS CASE WE USE IF ELSE
+    //Check if someother user has this handle
+
+    //else find the user profile and if it exists update it
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      if (profile) {
+        //Update Profile
+        Profile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: profileFields },
+          { new: true }
+        ).then(profile => res.json(profile));
+      } else {
+        //Create profile if it does not exist
+
+        Profile.findOne({ handle: profileFields.handle }).then(profile => {
+          //Save profile if handle does not already exist
+          new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
     });

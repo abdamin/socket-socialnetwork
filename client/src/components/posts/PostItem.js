@@ -5,6 +5,7 @@ import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { deletePost, addLike, removeLike } from "../../actions/postActions";
+import { MoreHorizontal } from "react-feather";
 
 class PostItem extends Component {
   onDeleteClick = postId => {
@@ -30,58 +31,88 @@ class PostItem extends Component {
   render() {
     const { post, auth, showActions } = this.props;
     return (
-      <div className="card card-body mb-3">
-        <div className="row">
-          <div className="col-md-2">
-            <a href="profile.html">
-              <img
-                className="rounded-circle d-none d-md-block"
-                src={post.avatar}
-                alt=""
-              />
-            </a>
-            <br />
-            <p className="text-center">{post.name}</p>
+      <div>
+        <div className="card">
+          <div className="card-header">
+            <div className="card-actions float-right">
+              <div className="btn-group">
+                <a
+                  href="/"
+                  className="dropdown-toggle"
+                  id="dropdownMenu2"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <MoreHorizontal />
+                </a>
+                <div className="dropdown-menu dropdown-menu-right">
+                  <div className="dropdown-item">Action</div>
+                  <div className="dropdown-item">Another Action</div>
+                  <div className="dropdown-item">Something else here</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="col-md-10">
-            <p className="lead">{post.text}</p>
-            {showActions ? (
-              <span>
-                {" "}
-                <button
-                  onClick={() => this.onLikeClick(post._id)}
-                  type="button"
-                  className="btn btn-light mr-1"
-                >
-                  {/* Add class to thumbs up if post was liked to ensure its not greyed out */}
-                  <i
-                    className={classnames("fas fa-thumbs-up", {
-                      "text-info": this.findUserLike(post.likes)
-                    })}
-                  />
-                  <span className="badge badge-light">{post.likes.length}</span>
-                </button>
-                <button
-                  onClick={() => this.onUnlikeClick(post._id)}
-                  type="button"
-                  className="btn btn-light mr-1"
-                >
-                  <i className="text-secondary fas fa-thumbs-down" />
-                </button>
-                <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
-                  Comments
-                </Link>
-                {post.user === auth.user.id ? (
+          <div className="card-body">
+            <div className="media">
+              <img
+                src={post.avatar}
+                //   width="36"
+                //   height="36"
+                style={{ width: "40px", height: "40px" }}
+                className="rounded-circle mr-2"
+                alt="Ashley Briggs"
+              />
+              <div className="media-body">
+                <small className="float-right text-navy">5m ago</small>
+                <strong>{post.name}</strong> Posted <br />
+                <small className="text-muted">Today 7:51 pm</small>
+                <br />
+                <strong>{post.text}</strong>
+              </div>
+            </div>
+            <div className="mt-4">
+              {showActions ? (
+                <span>
+                  {" "}
                   <button
-                    onClick={() => this.onDeleteClick(post._id)}
+                    onClick={() => this.onLikeClick(post._id)}
                     type="button"
-                    className="btn btn-danger mr-1"
+                    className="btn btn-light mr-1"
                   >
-                    <i className="fas fa-times" />
+                    {/* Add class to thumbs up if post was liked to ensure its not greyed out */}
+                    <i
+                      className={classnames("fas fa-thumbs-up", {
+                        "text-info": this.findUserLike(post.likes)
+                      })}
+                    />
+                    <span className="badge badge-light">
+                      {post.likes.length}
+                    </span>
                   </button>
-                ) : null}
-              </span>
-            ) : null}
+                  <button
+                    onClick={() => this.onUnlikeClick(post._id)}
+                    type="button"
+                    className="btn btn-light mr-1"
+                  >
+                    <i className="text-secondary fas fa-thumbs-down" />
+                  </button>
+                  <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
+                    Comments
+                  </Link>
+                  {post.user === auth.user.id ? (
+                    <button
+                      onClick={() => this.onDeleteClick(post._id)}
+                      type="button"
+                      className="btn btn-danger mr-1"
+                    >
+                      <i className="fas fa-times" />
+                    </button>
+                  ) : null}
+                </span>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

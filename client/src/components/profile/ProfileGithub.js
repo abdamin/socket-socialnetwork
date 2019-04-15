@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 
@@ -18,7 +18,7 @@ class ProfileGithub extends Component {
 
   componentDidMount() {
     const { username } = this.props;
-    const { count, sort, clientId, clientSecret } = this.state;
+    // const { count, sort, clientId, clientSecret } = this.state;
 
     // fetch(
     //   `https://api.github.com/user/${username}/repos?per_page${count}&sort=${sort}&client_id=${clientId}&client_secret=${clientSecret}`

@@ -3,6 +3,7 @@ const router = express.Router();
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 //Load user model
 const User = require("../../models/User");
@@ -17,6 +18,7 @@ const PASSWORD = require("../../config/keys").password;
 //Load input validation
 const validatePasswordInput = require("../../validation/passwordChange");
 const validateEmailInput = require("../../validation/confirmation");
+const validateProfilePasswordChangeInput = require("../../validation/profilePasswordChange");
 
 //  @route GET api/confirmation/test
 //  @desc Tests confirmation router
@@ -55,7 +57,7 @@ router.get("/:token", (req, res) => {
 });
 
 //  @route post api/passwordChange/:token
-//  @desc Change User's Account Password
+//  @desc Change User's Account Password through reset email method
 //  @access Publlic
 router.post("/:token", (req, res) => {
   //find a matching token
@@ -116,6 +118,65 @@ router.post("/:token", (req, res) => {
     });
   });
 });
+
+//  @route post api/passwordChange/profile
+//  @desc Change User's Account password from profile settings
+//  @access Publlic
+router.post(
+  "/profile/password",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    //look for matching user
+    User.findOne({
+      _id: req.user.id
+    }).then(user => {
+      if (!user) {
+        return res.status(400).json({ response: "No User found" });
+      } else {
+        const data = {
+          currentPassword: req.body.currentPassword,
+          password: req.body.password,
+          password2: req.body.password2
+        ***REMOVED***
+
+        const { errors, isValid } = validateProfilePasswordChangeInput(data);
+        //Check validation
+        if (!isValid) {
+          return res.status(400).json(errors);
+        }
+
+        //check if old password matches
+        bcrypt
+          .compare(req.body.currentPassword, user.password)
+          .then(isMatch => {
+            if (isMatch) {
+              bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(data.password, salt, (err, hash) => {
+                  if (err) {
+                    throw err;
+                  }
+                  user.password = hash;
+                  user
+                    .save()
+                    .then(user => {
+                      return res
+                        .status(200)
+                        .json({ response: "Password Changed Succesfully" });
+                    })
+                    .catch(err => {
+                      return console.log(err);
+                    });
+                });
+              });
+            } else {
+              errors.currentPassword = "Password incorrect";
+              return res.status(400).json(errors);
+            }
+          });
+      }
+    });
+  }
+);
 
 //  @route POST api/passwordChange/send
 //  @desc Send Password Change Token to User

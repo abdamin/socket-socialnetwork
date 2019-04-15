@@ -19,7 +19,6 @@ import EmailVerification from "./components/accountVerification/EmailVerificatio
 import ForgotPassword from "./components/forgotPassword/ForgotPassword";
 import ChangePassword from "./components/forgotPassword/ChangePassword";
 
-import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
 import AddEducation from "./components/add-credentials/AddEducation";
@@ -33,6 +32,8 @@ import NotFound from "./components/not-found/NotFound";
 
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
+
+import Dashboard from "./components/dashboard/Dashboard";
 
 //Check for Token and change store state to make it persists over page refreshes as well
 if (localStorage.jwtToken) {
@@ -69,6 +70,10 @@ class App extends Component {
               <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/profile/:handle" component={Profile} />
 
+              <Switch>
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+
               <Route
                 exact
                 path="/resendVerification"
@@ -85,9 +90,7 @@ class App extends Component {
                 path="/change-password/:token"
                 component={ChangePassword}
               />
-              <Switch>
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              </Switch>
+
               <Switch>
                 <PrivateRoute
                   exact
