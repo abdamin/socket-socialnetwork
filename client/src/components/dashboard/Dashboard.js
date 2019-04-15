@@ -1,99 +1,88 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
-import { bindActionCreators } from "redux";
-import Spinner from "../common/Spinner";
-import { Link } from "react-router-dom";
-import ProfileActions from "./ProfileActions";
-import Experience from "./Experience";
-import Education from "./Education";
+import React from "react";
 
-class Dashboard extends Component {
-  componentDidMount() {
-    this.props.getCurrentProfile();
+import PasswordChangeForm from "./PasswordChangeForm";
+import SettingsNavigation from "./SettingsNavigation";
+import EditAccount from "./EditAccount";
+import SocialLinks from "./SocialLinks";
+import EducationForm from "./EducationForm";
+import ExperienceForm from "./ExperienceForm";
+
+class Settings extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      settingsOption: "Account"
+    };
   }
 
-  onDeleteClick = e => {
-    this.props.deleteAccount();
+  handleOptionChange = option => {
+    this.setState({ settingsOption: option });
   };
+
   render() {
-    const { user } = this.props.auth;
-    const { profile, loading } = this.props.profile;
+    let settingsContent;
 
-    let dashboardContent;
-
-    if (profile === null || loading) {
-      dashboardContent = <Spinner />;
-    } else {
-      //check if logged in user has profile data (this method check if there are keys in the object)
-      if (Object.keys(profile).length > 0) {
-        dashboardContent = (
-          <div>
-            <p className="lead text-muted">
-              {" "}
-              Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
-            </p>
-            <ProfileActions />
-            <Experience experience={profile.experience} />
-            <Education education={profile.education} />
-            <div style={{ marginBottom: "60px" }} />
-            <button onClick={this.onDeleteClick} className="btn btn-danger">
-              Delete My Account
-            </button>
+    switch (this.state.settingsOption) {
+      case "Account":
+        settingsContent = (
+          <div className="card">
+            <EditAccount />
           </div>
         );
-      } else {
-        //User is logged in but has no profile
-        dashboardContent = (
-          <div>
-            <p className="lead text-muted">Welcome {user.name}</p>
-            <p>You have not yet set up a profile. Please add some info</p>
-            <Link to="/create-profile" className="btn btn-lg btn-info">
-              Create Profile
-            </Link>
+        break;
+
+      case "Social":
+        settingsContent = (
+          <div className="card">
+            <SocialLinks />
           </div>
         );
-      }
+        break;
+
+      case "Education":
+        settingsContent = (
+          <div className="card">
+            <EducationForm />
+          </div>
+        );
+        break;
+
+      case "Experience":
+        settingsContent = (
+          <div className="card">
+            <ExperienceForm />
+          </div>
+        );
+        break;
+      case "Password":
+        settingsContent = (
+          <div className="card">
+            <PasswordChangeForm />
+          </div>
+        );
+        break;
+
+      default:
+        settingsContent = (
+          <div className="card">
+            <EditAccount />
+          </div>
+        );
     }
 
     return (
-      <div className="dashboard">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h1 className="display-4">Dashboard</h1>
-              {dashboardContent}
-            </div>
+      <div className="container fluid p-0">
+        <h1 className="h3 mb-3">Dashboard</h1>
+
+        <div className="row">
+          <div className="col-md-3 col-xl-2">
+            <SettingsNavigation handleOptionChange={this.handleOptionChange} />
           </div>
+          <div className="col-md-9 col-xl-10">{settingsContent}</div>
         </div>
       </div>
     );
   }
 }
 
-Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  deleteAccount: PropTypes.func.isRequired
-};
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { getCurrentProfile: getCurrentProfile, deleteAccount: deleteAccount },
-    dispatch
-  );
-};
-
-const mapStateToProps = state => {
-  return {
-    profile: state.profile,
-    auth: state.auth
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard);
+export default Settings;

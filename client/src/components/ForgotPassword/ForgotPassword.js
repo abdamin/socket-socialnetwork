@@ -53,40 +53,60 @@ class ForgotPassword extends Component {
       <div className="login">
         <div className="container">
           <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Forgot Password</h1>
-              <p className="lead text-center">
-                Please enter your email address below and we will send you
-                information to change your password.
-              </p>
-              <form onSubmit={this.onSubmit}>
-                <div>
-                  <div className="form-group has-success">
-                    <input
-                      className={classnames("form-control form-control-lg", {
-                        //add this class to errors.type
-                        "is-invalid": errors.email,
-                        "is-valid": emailSent
-                      })}
-                      placeholder="Email Address"
-                      name="email"
-                      value={this.state.email}
-                      onChange={this.onChange}
-                    />
+            <div className="col-md-6 m-auto">
+              <div className="text-center mt-4">
+                <h1 className="h2">Reset password</h1>
+                <p className="lead">
+                  Please enter your email address below and we will send you
+                  information to change your password.
+                </p>
+              </div>
 
-                    {/*display errors if the error.name exists*/}
-                    {errors.email && (
-                      <div className="invalid-feedback">{errors.email}</div>
-                    )}
-                    {emailSent && isEmpty(errors) && (
-                      <div className="valid-feedback">
-                        Verification Link Sent. Please check your email
+              <div className="card">
+                <div className="card-body">
+                  <div className="m-sm-4">
+                    <form onSubmit={this.onSubmit}>
+                      <div className="form-group has-success">
+                        <label>Email</label>
+                        <input
+                          className={classnames(
+                            "form-control form-control-lg",
+                            {
+                              //add this class to errors.type
+                              "is-invalid": errors.email,
+                              "is-valid": emailSent
+                            }
+                          )}
+                          placeholder="Email Address"
+                          name="email"
+                          value={this.state.email}
+                          onChange={this.onChange}
+                        />
+
+                        {/*display errors if the error.name exists*/}
+                        {errors.email && (
+                          <div className="invalid-feedback">{errors.email}</div>
+                        )}
+                        {emailSent && isEmpty(errors) && (
+                          <div className="valid-feedback">
+                            Verification Link Sent. Please check your email
+                          </div>
+                        )}
                       </div>
-                    )}
+                      <div className="text-center mt-3">
+                        <button
+                          type="submit"
+                          className="btn btn-primary btn-lg"
+                          color="primary"
+                          size="lg"
+                        >
+                          Reset password
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
-              </form>
+              </div>
             </div>
           </div>
         </div>

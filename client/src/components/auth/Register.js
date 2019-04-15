@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import { bindActionCreators } from "redux";
 import TextFieldGroup from "../common/TextFieldGroup";
+import { Link } from "react-router-dom";
 
 class Register extends Component {
   constructor() {
@@ -56,57 +57,85 @@ class Register extends Component {
       <div className="register">
         <div className="container">
           <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">
-                Create your DevConnector account
-              </p>
-              <form noValidate onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="Name"
-                  name="name"
-                  type="text"
-                  value={this.state.name}
-                  onChange={this.onChange}
-                  error={errors.name}
-                />
+            <div className="col-md-3" />
+            <div className="col-md-6">
+              <div className="text-center mt-4">
+                <h1 className="h2">Get started</h1>
+                <p className="lead">Create your Devconnector account</p>
+              </div>
 
-                <TextFieldGroup
-                  placeholder="Email"
-                  name="email"
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.onChange}
-                  error={errors.email}
-                  info="This site uses Gravatar so if you want a profile image, use
-                  a Gravatar email"
-                />
-
-                <TextFieldGroup
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.onChange}
-                  error={errors.password}
-                />
-
-                <TextFieldGroup
-                  placeholder="Confrm Password"
-                  name="password2"
-                  type="password"
-                  value={this.state.password2}
-                  onChange={this.onChange}
-                  error={errors.password2}
-                />
-
-                <input
-                  type="submit"
-                  value="Sign Up"
-                  className="btn btn-info btn-block mt-4"
-                />
-              </form>
+              <div className="card">
+                <div className="card-body">
+                  <div className="m-sm-4">
+                    <form noValidate onSubmit={this.onSubmit}>
+                      <div className="form-group">
+                        <label>Name</label>
+                        <TextFieldGroup
+                          placeholder="Your full name"
+                          name="name"
+                          type="text"
+                          value={this.state.name}
+                          onChange={this.onChange}
+                          error={errors.name}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Email</label>
+                        <TextFieldGroup
+                          placeholder="Email"
+                          name="email"
+                          type="email"
+                          value={this.state.email}
+                          onChange={this.onChange}
+                          error={errors.email}
+                          info="This site uses Gravatar so if you want a profile image, use
+                          a Gravatar email"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Password</label>
+                        <TextFieldGroup
+                          placeholder="Password"
+                          name="password"
+                          type="password"
+                          value={this.state.password}
+                          onChange={this.onChange}
+                          error={errors.password}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Confirm Password</label>
+                        <TextFieldGroup
+                          placeholder="Confrm your password"
+                          name="password2"
+                          type="password"
+                          value={this.state.password2}
+                          onChange={this.onChange}
+                          error={errors.password2}
+                        />
+                        <div className="mt-4">
+                          <div className="d-flex justify-content-center links">
+                            Already have an account?{" "}
+                            <Link to="/login" className="ml-2">
+                              Sign In
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-center mt-3">
+                        <button
+                          type="submit"
+                          className="btn btn-primary btn-lg"
+                        >
+                          Sign up
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div className="col-md-3" />
           </div>
         </div>
       </div>

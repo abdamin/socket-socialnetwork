@@ -2,10 +2,12 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
-import { GET_ERRORS, SET_CURRENT_USER } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, CLEAR_ERRORS } from "./types";
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
+  dispatch(clearErrors());
+
   axios
     .post("/api/users/register", userData)
     .then(result => {
@@ -32,8 +34,10 @@ export const verifyUser = userData => dispatch => {
     });
 };
 
-// Change User Password
-export const changePassword = (userData, history, token) => dispatch => {
+// Reset User Password through email method
+export const resetPassword = (userData, history, token) => dispatch => {
+  dispatch(clearErrors());
+
   axios
     .post(`/api/passwordChange/${token}`, userData)
     .then(result => {
@@ -47,8 +51,24 @@ export const changePassword = (userData, history, token) => dispatch => {
     });
 };
 
+// Change User Password from profile settings
+export const changePassword = userData => dispatch => {
+  dispatch(clearErrors());
+  axios
+    .post("/api/passwordChange/profile/password", userData)
+
+    .catch(err => {
+      return dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
 // Send Password Change Email
 export const sendPasswordChangeEmail = userData => dispatch => {
+  dispatch(clearErrors());
+
   axios
     .post("/api/passwordChange/user/send", userData)
     .then(result => {})
@@ -62,6 +82,8 @@ export const sendPasswordChangeEmail = userData => dispatch => {
 
 //Login - Get User Token
 export const loginUser = userData => dispatch => {
+  dispatch(clearErrors());
+
   axios
     .post("/api/users/login", userData)
     .then(res => {
@@ -101,4 +123,11 @@ export const logoutUser = () => dispatch => {
   setAuthToken(false);
   // Set current user to empty object which will also set isAuthenticated to false
   dispatch(setCurrentUser({}));
+};
+
+//Clear errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
 };

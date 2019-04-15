@@ -3,7 +3,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { changePassword } from "../../actions/authActions";
+import { resetPassword } from "../../actions/authActions";
 import { bindActionCreators } from "redux";
 import TextFieldGroup from "../common/TextFieldGroup";
 
@@ -54,7 +54,7 @@ class ChangePassword extends React.Component {
       password2: this.state.password2
     };
 
-    this.props.changePassword(
+    this.props.resetPassword(
       newPassword,
       this.props.history,
       this.props.match.params.token
@@ -68,35 +68,50 @@ class ChangePassword extends React.Component {
         <div className="login">
           <div className="container">
             <div className="row">
-              <div className="col-md-8 m-auto">
-                <h3 className="display-6 text-center mb-4 mt-4">
-                  Change your password
-                </h3>
-                <form noValidate onSubmit={this.onSubmit}>
-                  <TextFieldGroup
-                    placeholder="Password"
-                    name="password"
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.onChange}
-                    error={errors.password}
-                  />
+              <div className="col-md-6 m-auto">
+                <div className="text-center mt-4">
+                  <h3 className="h2">Change your password</h3>
+                </div>
 
-                  <TextFieldGroup
-                    placeholder="Confrm Password"
-                    name="password2"
-                    type="password"
-                    value={this.state.password2}
-                    onChange={this.onChange}
-                    error={errors.password2}
-                  />
+                <div className="card">
+                  <div className="card-body">
+                    <div className="m-sm-4">
+                      <form onSubmit={this.onSubmit}>
+                        <div className="form-group has-success">
+                          <label>Password</label>
+                          <TextFieldGroup
+                            placeholder="Password"
+                            name="password"
+                            type="password"
+                            value={this.state.password}
+                            onChange={this.onChange}
+                            error={errors.password}
+                          />
+                          <label>Confirm Password</label>
 
-                  <input
-                    type="submit"
-                    value="Change Password"
-                    className="btn btn-info btn-block mt-4"
-                  />
-                </form>
+                          <TextFieldGroup
+                            placeholder="Confrm Password"
+                            name="password2"
+                            type="password"
+                            value={this.state.password2}
+                            onChange={this.onChange}
+                            error={errors.password2}
+                          />
+                        </div>
+                        <div className="text-center mt-3">
+                          <button
+                            type="submit"
+                            className="btn btn-primary btn-lg"
+                            color="primary"
+                            size="lg"
+                          >
+                            Reset password
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -119,7 +134,7 @@ class ChangePassword extends React.Component {
 }
 
 ChangePassword.propTypes = {
-  changePassword: PropTypes.func.isRequired,
+  resetPassword: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -130,7 +145,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ changePassword: changePassword }, dispatch);
+  return bindActionCreators({ resetPassword: resetPassword }, dispatch);
 };
 
 export default connect(

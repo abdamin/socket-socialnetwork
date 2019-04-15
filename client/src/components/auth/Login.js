@@ -52,53 +52,94 @@ class Login extends Component {
       <div className="login">
         <div className="container">
           <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Log In</h1>
-              <p className="lead text-center">
-                Sign in to your DevConnector account
-              </p>
-              <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="Email Address"
-                  name="email"
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.onChange}
-                  error={errors.email}
-                />
+            <div className="col-md-3" />
+            <div className="col-md-6">
+              <div className="text-center mt-4">
+                <h2>Welcome back</h2>
+                <p className="lead">
+                  Sign in to your account to connect with developers
+                </p>
+              </div>
 
-                <TextFieldGroup
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.onChange}
-                  error={errors.password || errors.isVerified}
-                />
-                {errors.isVerified && (
-                  <Link to="/resendVerification" className="form-check-label">
-                    Resend Verification Email?
-                  </Link>
-                )}
-                <input
-                  type="submit"
-                  value="Login"
-                  className="btn btn-info btn-block mt-4"
-                />
-
-                <div className="mt-4">
-                  <div className="d-flex justify-content-center links">
-                    Don't have an account?{" "}
-                    <Link to="/register" className="ml-2">
-                      Sign Up
-                    </Link>
-                  </div>
-                  <div className="d-flex justify-content-center links">
-                    <Link to="/forgot-password">Forgot your password?</Link>
+              <div className="card">
+                <div className="card-body">
+                  <div className="m-sm-4">
+                    <div className="text-center">
+                      <h2 className="mb-4">
+                        <strong>DevConnector</strong>{" "}
+                      </h2>
+                    </div>
+                    <form onSubmit={this.onSubmit}>
+                      <div className="form-group">
+                        <label>Email</label>
+                        <TextFieldGroup
+                          placeholder="Enter your email"
+                          name="email"
+                          type="email"
+                          value={this.state.email}
+                          onChange={this.onChange}
+                          error={errors.email}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Password</label>
+                        <TextFieldGroup
+                          placeholder="Password"
+                          name="password"
+                          type="password"
+                          value={this.state.password}
+                          onChange={this.onChange}
+                          error={errors.password || errors.isVerified}
+                        />
+                        {errors.isVerified && (
+                          <Link
+                            to="/resendVerification"
+                            className="form-check-label"
+                          >
+                            Resend Verification Email?
+                          </Link>
+                        )}
+                        <div className="mt-4">
+                          <div className="d-flex justify-content-center links">
+                            Don't have an account?{" "}
+                            <Link to="/register" className="ml-2">
+                              Sign Up
+                            </Link>
+                          </div>
+                          <div className="d-flex justify-content-center links">
+                            <Link to="/forgot-password">
+                              Forgot your password?
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="pl-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="rememberMe"
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="exampleCheck1"
+                        >
+                          Remember me next time
+                        </label>
+                      </div>
+                      <div className="text-center mt-3">
+                        <button
+                          type="submit"
+                          className="btn btn-primary btn-lg"
+                        >
+                          Sign in
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
+            <div className="col-md-3" />
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import {
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
+  CLEAR_ERRORS,
   SET_CURRENT_USER,
   GET_PROFILES
 } from "./types";
@@ -41,11 +42,35 @@ export const clearCurrentProfile = () => {
   };
 };
 
-export const createProfile = (profileData, history) => dispatch => {
+export const createProfile = profileData => dispatch => {
+  dispatch(clearErrors());
+
   axios
     .post("/api/profile", profileData)
     .then(res => {
-      history.push("/dashboard");
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const createSocialLinks = socialData => dispatch => {
+  dispatch(clearErrors());
+
+  axios
+    .post("/api/profile/social", socialData)
+    .then(res => {
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      });
     })
     .catch(err => {
       dispatch({
@@ -56,29 +81,27 @@ export const createProfile = (profileData, history) => dispatch => {
 };
 
 //add Experience
-export const addExperience = (expData, history) => dispatch => {
-  axios
-    .post("/api/profile/experience", expData)
-    .then(res => history.push("/dashboard"))
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      });
+export const addExperience = expData => dispatch => {
+  dispatch(clearErrors());
+
+  axios.post("/api/profile/experience", expData).catch(err => {
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
     });
+  });
 };
 
 //add Education
-export const addEducation = (educData, history) => dispatch => {
-  axios
-    .post("/api/profile/education", educData)
-    .then(res => history.push("/dashboard"))
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      });
+export const addEducation = educData => dispatch => {
+  dispatch(clearErrors());
+
+  axios.post("/api/profile/education", educData).catch(err => {
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
     });
+  });
 };
 
 //delete experience
@@ -173,4 +196,11 @@ export const deleteAccount = () => dispatch => {
         });
       });
   }
+};
+
+//Clear errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
 };
