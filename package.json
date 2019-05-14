@@ -15,14 +15,17 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "cloudinary": "^1.14.0",
     "concurrently": "^4.1.0",
     "express": "^4.16.4",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.19",
+    "multer": "^1.4.1",
     "nodemailer": "^6.0.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "path": "^0.12.7",
     "validator": "^10.11.0"
 ***REMOVED***
   "devDependencies": {

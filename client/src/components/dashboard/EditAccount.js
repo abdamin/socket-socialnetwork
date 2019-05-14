@@ -27,7 +27,8 @@ class EditAccount extends React.Component {
       githubusername: "",
       bio: "",
       errors: {},
-      didSave: false
+      didSave: false,
+      avatar: ""
     ***REMOVED***
   }
 
@@ -44,7 +45,13 @@ class EditAccount extends React.Component {
       const profile = nextProps.profile.profile;
 
       //bring skills array back to CSV
-      const skillsCSV = profile.skills.join(",");
+      const skillsCSV = !isEmpty(profile.company)
+        ? profile.skills.join(",")
+        : "";
+
+      const avatar = !isEmpty(nextProps.profile.profile)
+        ? nextProps.profile.profile.user.avatar
+        : "";
 
       //If profile field does not exist, make empty string
       profile.company = !isEmpty(profile.company) ? profile.company : "";
@@ -65,7 +72,8 @@ class EditAccount extends React.Component {
           status: profile.status,
           skills: skillsCSV,
           githubusername: profile.githubusername,
-          bio: profile.bio
+          bio: profile.bio,
+          avatar: avatar
         });
       }
     }
@@ -164,7 +172,7 @@ class EditAccount extends React.Component {
                 <div className="text-center">
                   <img
                     alt="Chris Wood"
-                    src={this.props.auth.user.avatar}
+                    src={this.state.avatar}
                     className="rounded-circle img-responsive mt-2"
                     style={{ width: "128px", height: "128px" }}
                   />
