@@ -25,7 +25,6 @@ const User = require("../../models/User");
 
 // Set The Multer Storage Engine
 const multerStorage = multer.diskStorage({
-  destination: "./uploads/",
   filename: function(req, file, cb) {
     cb(
       null,
@@ -87,7 +86,12 @@ router.post(
       //upload new image
       cloudinary.v2.uploader.upload(
         req.file.path,
-        { public_id: req.user.id, quality: "auto:eco", width: "auto:200" },
+        {
+          public_id: req.user.id,
+          quality: "auto:eco",
+          width: "400",
+          height: "400"
+      ***REMOVED***
         (error, result) => {
           if (error) {
             console.log(error);
