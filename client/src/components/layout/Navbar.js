@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { bindActionCreators } from "redux";
 import { clearCurrentProfile } from "../../actions/profileActions";
+import isEmpty from "../../validation/is-empty";
 
 class Navbar extends Component {
   onLogoutClick = e => {
@@ -14,8 +15,10 @@ class Navbar extends Component {
   };
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
-
+    const { isAuthenticated } = this.props.auth;
+    const avatar = !isEmpty(this.props.profile.profile)
+      ? this.props.profile.profile.user.avatar
+      : "";
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
@@ -32,7 +35,7 @@ class Navbar extends Component {
           <a href="/" onClick={this.onLogoutClick} className="nav-link">
             <img
               className="rounded-circle"
-              src={user.avatar}
+              src={avatar}
               alt="user.name"
               style={{ width: "25px", marginRight: "5px" }}
               title="You must have a gravatar connected to your email to display an image"
@@ -95,7 +98,8 @@ Navbar.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 });
 
 const mapDispatchToProps = dispatch => {

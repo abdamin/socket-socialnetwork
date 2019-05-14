@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
+const cloudinary = require("cloudinary");
+const multer = require("multer");
+const path = require("path");
 
 //Load Validation
 const validateProfileInput = require("../../validation/profile");
@@ -9,15 +12,140 @@ const validateExperienceInput = require("../../validation/experience");
 const validateEducationInput = require("../../validation/education");
 const validateSocialInput = require("../../validation/social");
 
+const AVATARPLACEHOLDERURL = require("../../config/keys").avatarPlaceholderUrl;
+
+//cloudinary config
+const CLOUDINARY_CONFIG = require("../../config/keys").cloudinary;
+cloudinary.config(CLOUDINARY_CONFIG);
+
 //Load Profile Model
 const Profile = require("../../models/Profile");
 //Load User Model
 const User = require("../../models/User");
 
+// Set The Multer Storage Engine
+const multerStorage = multer.diskStorage({
+  destination: "./uploads/",
+  filename: function(req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  }
+});
+
+// Check Multer Upload File Type
+function checkFileType(file, cb) {
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    return cb(new Error("Upload an image"), false);
+  }
+}
+
+// Init Multer Upload
+const multerUpload = multer({
+  storage: multerStorage,
+  limits: { fileSize: 5000000, files: 1 },
+  fileFilter: (req, file, cb) => {
+    checkFileType(file, cb);
+  }
+}).single("image");
+
 //  @route GET api/profile/test
 //  @desc Tests profile router
 //  @access Public
 router.get("/test", (req, res) => res.json({ msg: "Profile Works" }));
+
+//  @route POST api/profile/uploadProfileImage
+//  @desc Upload User Profile Avatar Image
+//  @access Private
+router.post(
+  "/uploadProfileImage",
+  passport.authenticate("jwt", { session: false }),
+  multerUpload,
+  (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    //if no image was selected
+    if (req.file == undefined) {
+      return res.status(500).json({ error: "No image was selected" });
+    }
+
+    //delete any existing profile image of user from cloud before uploading any
+    cloudinary.v2.uploader.destroy(req.user.id, (error, result) => {
+      if (error) {
+        return res.status(400).json({ Error: "error removing image" });
+      }
+
+      //upload new image
+      cloudinary.v2.uploader.upload(
+        req.file.path,
+        { public_id: req.user.id, quality: "auto:eco", width: "auto:200" },
+        (error, result) => {
+          if (error) {
+            console.log(error);
+            return res.status(400).json({ Error: "Error Uploading Image" });
+          }
+
+          const avatar = result.secure_url;
+          console.log(result);
+
+          User.findOne({
+            _id: req.user.id
+          }).then(user => {
+            if (!user) {
+              return res.status(400).json({ Error: "Error uploading image" });
+            } else {
+              //add image url to db
+              user.avatar = avatar;
+              user.save().then(user => {
+                return res
+                  .status(200)
+                  .json({ Response: "Image upload succesful" });
+              });
+            }
+          });
+        }
+      );
+    });
+  }
+);
+
+//  @route POST api/profile/removeProfileImage
+//  @desc Remove User Profile Avatar Image
+//  @access Private
+router.post(
+  "/removeProfileImage",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    cloudinary.v2.uploader.destroy(req.user.id, (error, result) => {
+      if (error) {
+        return res.status(400).json({ Error: "error removing image" });
+      }
+
+      User.findOne({
+        _id: req.user.id
+      }).then(user => {
+        if (!user) {
+          return res.status(400).json({ error: "Error Removing image" });
+        } else {
+          //add image url to db
+          user.avatar = AVATARPLACEHOLDERURL;
+          user.save().then(user => {
+            return res.status(200).json({ response: "Image Removed" });
+          });
+        }
+      });
+    });
+  }
+);
 
 //  @route GET api/profile/
 //  @desc Get Current User's Profile
