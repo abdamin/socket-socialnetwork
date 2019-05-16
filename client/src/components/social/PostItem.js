@@ -116,6 +116,11 @@ class PostItem extends Component {
                     to={`/post/${post._id}`}
                     className="btn btn-primary btn-sm mr-1"
                   >
+                    {post.comments.length > 0 && (
+                      <span className="badge badge-dark mr-1">
+                        {post.comments.length}
+                      </span>
+                    )}
                     Comments
                   </Link>
                 )}
