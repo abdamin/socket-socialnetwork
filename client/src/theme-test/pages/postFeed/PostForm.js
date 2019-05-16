@@ -43,7 +43,7 @@ class PostForm extends Component {
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
-          <div className="card-header text-white">
+          <div className="card-header bg-light text-white">
             <h5 className="card-title">Create a post</h5>
             <h6 className="card-subtitle text-muted">Say something...</h6>
           </div>
