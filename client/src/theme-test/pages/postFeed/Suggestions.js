@@ -1,74 +1,88 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import Spinner from "../../../components/common/Spinner";
+import { getProfiles } from "../../../actions/profileActions";
+import { bindActionCreators } from "redux";
+import { Link } from "react-router-dom";
 
-import avatar2 from "../../avatars/avatar-2.jpg";
-import avatar4 from "../../avatars/avatar-4.jpg";
-import avatar5 from "../../avatars/avatar-5.jpg";
+class Suggestions extends Component {
+  componentDidMount() {
+    this.props.getProfiles();
+  }
 
-const Following = () => (
-  <div className="card flex-fill mb-3">
-    <div className="class-header">
-      <div className="card-actions float-right" />
-      <h5 className="card-title mb-3 mt-4 ml-3">Developers you may know</h5>
-      <hr className="my-2" />
-    </div>
+  render() {
+    const { profiles, loading } = this.props.profile;
 
-    <div className="card-body">
-      <div className="media">
-        <img
-          src={avatar5}
-          style={{ width: "56px", height: "56px" }}
-          className="rounded-circle mr-2"
-          alt="Chris Wood"
-        />
-        <div className="media-body">
-          <p className="my-1">
-            <strong>Ashley Briggs</strong>
-          </p>
-          <button className="btn btn-outline-primary btn-sm">
-            View Profile
-          </button>
+    let profileItems;
+
+    if (profiles === null || loading) {
+      profileItems = <Spinner />;
+    } else {
+      if (profiles.length > 0) {
+        const shortlistedProfiles = profiles.slice(0, 5);
+        profileItems = shortlistedProfiles.map(profile => {
+          return (
+            <div>
+              <div className="media">
+                <img
+                  src={profile.user.avatar}
+                  style={{ width: "56px", height: "56px" }}
+                  className="rounded-circle mr-2"
+                  alt={profile.user.name}
+                />
+                <div className="media-body">
+                  <p className="my-1">
+                    <strong>{profile.user.name}</strong>
+                  </p>
+
+                  <Link
+                    to={`/profile/${profile.handle}`}
+                    className="btn btn-outline-primary btn-sm"
+                  >
+                    View Profile
+                  </Link>
+                </div>
+              </div>
+
+              <hr className="my-2" />
+            </div>
+          );
+        });
+      } else {
+        profileItems = <h4>{""}</h4>;
+      }
+    }
+
+    return (
+      <div className="card flex-fill mb-3">
+        <div className="class-header">
+          <div className="card-actions float-right" />
+          <h5 className="card-title mb-3 mt-4 ml-3">Developers you may know</h5>
+          <hr className="my-2" />
         </div>
+
+        <div className="card-body">{profileItems}</div>
       </div>
+    );
+  }
+}
 
-      <hr className="my-2" />
+Suggestions.propTypes = {
+  getProfiles: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired
+***REMOVED***
 
-      <div className="media">
-        <img
-          src={avatar2}
-          style={{ width: "56px", height: "56px" }}
-          className="rounded-circle mr-2"
-          alt="Carl Jenkins"
-        />
-        <div className="media-body">
-          <p className="my-1">
-            <strong>Carl Jenkins</strong>
-          </p>
-          <button className="btn btn-outline-primary btn-sm">
-            View Profile
-          </button>
-        </div>
-      </div>
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getProfiles: getProfiles }, dispatch);
+***REMOVED***
+const mapStateToProps = state => {
+  return {
+    profile: state.profile
+  ***REMOVED***
+***REMOVED***
 
-      <hr className="my-2" />
-
-      <div className="media">
-        <img
-          src={avatar4}
-          style={{ width: "56px", height: "56px" }}
-          className="rounded-circle mr-2"
-          alt="Stacie Hall"
-        />
-        <div className="media-body">
-          <p className="my-1">
-            <strong>Stacie Hall</strong>
-          </p>
-          <button className="btn btn-outline-primary btn-sm">
-            View Profile
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-export default Following;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Suggestions);

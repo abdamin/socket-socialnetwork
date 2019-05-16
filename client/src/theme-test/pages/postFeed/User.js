@@ -71,7 +71,7 @@ class User extends React.Component {
 
 User.propTypes = {
   profile: PropTypes.object.isRequired,
-  getPosts: PropTypes.func.isRequired
+  getCurrentProfile: PropTypes.func.isRequired
 ***REMOVED***
 
 const mapStateToProps = state => ({
