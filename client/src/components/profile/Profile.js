@@ -35,7 +35,7 @@ class Profile extends Component {
           <div className="row">
             <div className="col-md-6">
               <Link to="/profiles" className="btn btn-light mb-3 float-left">
-                Back to Profiles
+                Browse Profiles
               </Link>
             </div>
           </div>
