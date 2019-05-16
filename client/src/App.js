@@ -35,6 +35,8 @@ import Post from "./components/post/Post";
 
 import Dashboard from "./components/dashboard/Dashboard";
 
+import Social from "./theme-test/pages/postFeed/Social";
+
 //Check for Token and change store state to make it persists over page refreshes as well
 if (localStorage.jwtToken) {
   //Set Auth Token header auth
@@ -69,6 +71,10 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/profile/:handle" component={Profile} />
+
+              <Switch>
+                <PrivateRoute exact path="/testsocial" component={Social} />
+              </Switch>
 
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
