@@ -19,8 +19,6 @@ import EmailVerification from "./components/accountVerification/EmailVerificatio
 import ForgotPassword from "./components/forgotPassword/ForgotPassword";
 import ChangePassword from "./components/forgotPassword/ChangePassword";
 
-import CreateProfile from "./components/create-profile/CreateProfile";
-import EditProfile from "./components/edit-profile/EditProfile";
 import AddEducation from "./components/add-credentials/AddEducation";
 import AddExperience from "./components/add-credentials/AddExperience";
 
@@ -92,20 +90,6 @@ class App extends Component {
                 component={ChangePassword}
               />
 
-              <Switch>
-                <PrivateRoute
-                  exact
-                  path="/create-profile"
-                  component={CreateProfile}
-                />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  exact
-                  path="/edit-profile"
-                  component={EditProfile}
-                />
-              </Switch>
               <Switch>
                 <PrivateRoute
                   exact

@@ -23,7 +23,7 @@ class Suggestions extends Component {
         const shortlistedProfiles = profiles.slice(0, 5);
         profileItems = shortlistedProfiles.map(profile => {
           return (
-            <div>
+            <div key={profile._id}>
               <div className="media">
                 <img
                   src={profile.user.avatar}

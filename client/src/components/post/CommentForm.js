@@ -4,13 +4,19 @@ import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { addComment } from "../../actions/postActions";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faLaughWink } from "@fortawesome/free-regular-svg-icons";
 
 class CommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: "",
-      errors: {}
+      errors: {},
+      showEmojis: false
     };
   }
 
@@ -33,11 +39,31 @@ class CommentForm extends Component {
     };
 
     this.props.addComment(postId, newComment);
-    this.setState({ text: "" });
+    this.setState({ text: "", showEmojis: false });
   };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  addEmoji = e => {
+    //console.log(e.unified)
+    if (e.unified.length <= 5) {
+      let emojiPic = String.fromCodePoint(`0x${e.unified}`);
+      this.setState({
+        text: this.state.text + emojiPic
+      });
+    } else {
+      let sym = e.unified.split("-");
+      let codesArray = [];
+      sym.forEach(el => codesArray.push("0x" + el));
+      //console.log(codesArray.length)
+      //console.log(codesArray)  // ["0x1f3f3", "0xfe0f"]
+      let emojiPic = String.fromCodePoint(...codesArray);
+      this.setState({
+        text: this.state.text + emojiPic
+      });
+    }
   };
 
   render() {
@@ -62,7 +88,27 @@ class CommentForm extends Component {
               <button type="submit" className="btn btn-dark btn-sm">
                 Comment
               </button>
+              <button
+                type="button"
+                onClick={() =>
+                  this.setState({ showEmojis: !this.state.showEmojis })
+                }
+                className="ml-3 btn"
+                style={{}}
+              >
+                <FontAwesomeIcon
+                  icon={faLaughWink}
+                  fixedWidth
+                  size="lg"
+                  className="mr-1"
+                />
+              </button>
             </form>
+            {this.state.showEmojis && (
+              <span>
+                <Picker onSelect={this.addEmoji} />
+              </span>
+            )}
           </div>
         </div>
       </div>
