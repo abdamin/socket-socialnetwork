@@ -2,7 +2,6 @@ import React from "react";
 import TextFieldGroup from "../../components/common/TextFieldGroup";
 import TextAreaFieldGroup from "../../components/common/TextAreaFieldGroup";
 import SelectListGroup from "../../components/common/SelectListGroup";
-import { MoreHorizontal } from "react-feather";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +11,11 @@ import PropTypes from "prop-types";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import { bindActionCreators } from "redux";
 import isEmpty from "../../validation/is-empty";
+import axios from "axios";
+import Spinner from "../common/Spinner";
+
+const PLACEHOLDERURL =
+  "https://res.cloudinary.com/dxemu0gku/image/upload/v1557829466/avatar-placeholder_knb8nt.gif";
 
 class EditAccount extends React.Component {
   constructor(props) {
@@ -28,7 +32,10 @@ class EditAccount extends React.Component {
       bio: "",
       errors: {},
       didSave: false,
-      avatar: ""
+      avatar: "",
+      selectedImage: null,
+      imageErrors: {},
+      changingImage: false
     };
   }
 
@@ -103,6 +110,45 @@ class EditAccount extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  onImageChange = e => {
+    this.setState({ selectedImage: e.target.files[0] });
+  };
+  uploadImage = () => {
+    const formData = new FormData();
+    formData.append("image", this.state.selectedImage);
+    this.setState({ changingImage: true });
+
+    axios
+      .post("/api/profile/uploadProfileImage", formData)
+      .then(res => {
+        this.setState({ changingImage: false });
+        window.location.reload();
+      })
+      .catch(err => {
+        this.setState({
+          imageErrors: err.response.data,
+          changingImage: false
+        });
+        console.log(err.response.data);
+      });
+  };
+
+  removeImage = () => {
+    this.setState({ changingImage: true });
+    axios
+      .post("/api/profile/removeProfileImage")
+      .then(res => {
+        this.setState({ changingImage: false });
+        window.location.reload();
+      })
+      .catch(err => {
+        this.setState({
+          imageErrors: err.response.data,
+          changingImage: false
+        });
+      });
+  };
+
   render() {
     //select options for status
     const options = [
@@ -117,196 +163,231 @@ class EditAccount extends React.Component {
       { label: "Other", value: "Other" }
     ];
 
-    return (
+    /*image upload options*/
+    const uploadOptions = (
       <div>
-        <div className="card-header">
-          <div className="card-actions float-right">
-            <div className="btn-group">
-              <a
-                className="dropdown-toggle"
-                id="dropdownMenu2"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-                href="/"
-              >
-                <MoreHorizontal />
-              </a>
-              <div className="dropdown-menu dropdown-menu-right">
-                <div className="dropdown-item">Action</div>
-                <div className="dropdown-item">Another Action</div>
-                <div className="dropdown-item">Something else here</div>
-              </div>
-            </div>
-          </div>
-          <h5 className="card-title mb-0">Public info</h5>
-        </div>
-        <div className="card-body">
-          <form onSubmit={this.onSubmit}>
-            <div className="row">
-              <div className="col-md-8">
-                <div className="form-group">
-                  <label htmlFor="handle">Profile Handle</label>
-                  <TextFieldGroup
-                    placeholder="* Profile Handle"
-                    name="handle"
-                    value={this.state.handle}
-                    onChange={this.onChange}
-                    error={this.state.errors.handle}
-                    info="A unique handle for your profile URL. Your full name, company name, nickname, etc"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="bio">Biography</label>
-                  <TextAreaFieldGroup
-                    placeholder="Short Bio"
-                    name="bio"
-                    value={this.state.bio}
-                    onChange={this.onChange}
-                    error={this.state.errors.bio}
-                    info="Tell us a little about yourself"
-                  />
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="text-center">
-                  <img
-                    alt="Chris Wood"
-                    src={this.state.avatar}
-                    className="rounded-circle img-responsive mt-2"
-                    style={{ width: "128px", height: "128px" }}
-                  />
-                  <div className="mt-2">
-                    <button className="btn btn-primary">
-                      <FontAwesomeIcon icon={faUpload} /> Upload
-                    </button>
-                  </div>
-                  <small>
-                    For best results, use an image at least 128px by 128px in
-                    .jpg format
-                  </small>
-                </div>
-              </div>
-            </div>
+        <input
+          type="file"
+          className="btn btn-primary"
+          onChange={this.onImageChange}
+        />
 
-            <div className="card-body">
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="status">Status</label>
-                    <SelectListGroup
-                      placeholder="* Status"
-                      name="status"
-                      value={this.state.status}
-                      onChange={this.onChange}
-                      options={options}
-                      error={this.state.errors.status}
-                      info="Give us an idea of where you are at in your career"
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="website">Website</label>
-                    <TextFieldGroup
-                      placeholder="Website"
-                      name="website"
-                      value={this.state.website}
-                      onChange={this.onChange}
-                      error={this.state.errors.website}
-                      info="Could be your own website or company one"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="skills">Skills</label>
-                <TextFieldGroup
-                  placeholder="Skills"
-                  name="skills"
-                  value={this.state.skills}
-                  onChange={this.onChange}
-                  error={this.state.errors.skills}
-                  info="Please use comma separated values (eg. HTML,CSS,JavaScript,PHP) "
-                />
-              </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="company">Company</label>
-                    <TextFieldGroup
-                      placeholder="Company"
-                      name="company"
-                      value={this.state.company}
-                      onChange={this.onChange}
-                      error={this.state.errors.company}
-                      info="Could be your own company or one you work for"
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="githubusername">Github Username</label>
-                    <TextFieldGroup
-                      placeholder="Github Username"
-                      name="githubusername"
-                      value={this.state.githubusername}
-                      onChange={this.onChange}
-                      error={this.state.errors.githubusername}
-                      info="If you want your latest repos and a Github link, include your github username"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="location">Location</label>
-                    <TextFieldGroup
-                      placeholder="Location"
-                      name="location"
-                      value={this.state.location}
-                      onChange={this.onChange}
-                      error={this.state.errors.location}
-                      info="City or city & state suggested (eg. Toronto, ON)"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-4">
-                <button type="submit" className="btn btn-primary">
-                  Save changes
-                </button>
-              </div>
-              <div className="col-md-6">
-                {isEmpty(this.state.errors) && this.state.didSave && (
-                  <p
-                    style={{
-                      width: "100%",
-                      color: "#5fc27e"
-                    }}
-                  >
-                    Changes saved
-                  </p>
-                )}
-                {!isEmpty(this.state.errors) && (
-                  <p
-                    style={{
-                      width: "100%",
-                      color: "#f44455"
-                    }}
-                  >
-                    Check Errors. Could not save changes.
-                  </p>
-                )}
-              </div>
-            </div>
-          </form>
+        {this.state.selectedImage && (
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={this.uploadImage}
+          >
+            <FontAwesomeIcon icon={faUpload} /> Upload
+          </button>
+        )}
+        <div>
+          {!isEmpty(this.state.imageErrors) && (
+            <p
+              style={{
+                width: "100%",
+                color: "#f44455"
+              }}
+            >
+              {this.state.imageErrors.error}
+            </p>
+          )}
         </div>
       </div>
     );
+
+    const { profile, loading } = this.props.profile;
+    let dashboardContent;
+    if (profile === null || loading) {
+      dashboardContent = <Spinner />;
+    } else {
+      dashboardContent = (
+        <div>
+          <div className="card-header">
+            <h5 className="card-title mb-0">Public info</h5>
+          </div>
+          <div className="card-body">
+            <form onSubmit={this.onSubmit}>
+              <div className="row">
+                <div className="col-md-8">
+                  <div className="form-group">
+                    <label htmlFor="handle">Profile Handle</label>
+                    <TextFieldGroup
+                      placeholder="* Profile Handle"
+                      name="handle"
+                      value={this.state.handle}
+                      onChange={this.onChange}
+                      error={this.state.errors.handle}
+                      info="A unique handle for your profile URL. Your full name, company name, nickname, etc"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="bio">Biography</label>
+                    <TextAreaFieldGroup
+                      placeholder="Short Bio"
+                      name="bio"
+                      value={this.state.bio}
+                      onChange={this.onChange}
+                      error={this.state.errors.bio}
+                      info="Tell us a little about yourself"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-3 p-0 m-0">
+                  <div className="text-center">
+                    <img
+                      alt={this.props.auth.user.name}
+                      src={this.state.avatar}
+                      className="rounded-circle img-responsive mt-2"
+                      style={{ width: "128px", height: "128px" }}
+                    />
+
+                    <div className="mt-2">
+                      {this.state.changingImage ? <Spinner /> : uploadOptions}
+                    </div>
+
+                    <small>
+                      For best results, use an image at least 128px by 128px in
+                      .jpg format
+                    </small>
+                  </div>
+                </div>
+                <div className="col-md-1 p-0 m-0">
+                  {this.state.avatar !== PLACEHOLDERURL &&
+                    !this.state.changingImage && (
+                      <button
+                        type="button"
+                        className="btn btn-danger btn-secondary btn-sm"
+                        onClick={this.removeImage}
+                      >
+                        {/* <FontAwesomeIcon icon={faUpload} /> Remove */}
+                        Remove
+                      </button>
+                    )}
+                </div>
+              </div>
+
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label htmlFor="status">Status</label>
+                      <SelectListGroup
+                        placeholder="* Status"
+                        name="status"
+                        value={this.state.status}
+                        onChange={this.onChange}
+                        options={options}
+                        error={this.state.errors.status}
+                        info="Give us an idea of where you are at in your career"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label htmlFor="website">Website</label>
+                      <TextFieldGroup
+                        placeholder="Website"
+                        name="website"
+                        value={this.state.website}
+                        onChange={this.onChange}
+                        error={this.state.errors.website}
+                        info="Could be your own website or company one"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="skills">Skills</label>
+                  <TextFieldGroup
+                    placeholder="Skills"
+                    name="skills"
+                    value={this.state.skills}
+                    onChange={this.onChange}
+                    error={this.state.errors.skills}
+                    info="Please use comma separated values (eg. HTML,CSS,JavaScript,PHP) "
+                  />
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label htmlFor="company">Company</label>
+                      <TextFieldGroup
+                        placeholder="Company"
+                        name="company"
+                        value={this.state.company}
+                        onChange={this.onChange}
+                        error={this.state.errors.company}
+                        info="Could be your own company or one you work for"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label htmlFor="githubusername">Github Username</label>
+                      <TextFieldGroup
+                        placeholder="Github Username"
+                        name="githubusername"
+                        value={this.state.githubusername}
+                        onChange={this.onChange}
+                        error={this.state.errors.githubusername}
+                        info="If you want your latest repos and a Github link, include your github username"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label htmlFor="location">Location</label>
+                      <TextFieldGroup
+                        placeholder="Location"
+                        name="location"
+                        value={this.state.location}
+                        onChange={this.onChange}
+                        error={this.state.errors.location}
+                        info="City or city & state suggested (eg. Toronto, ON)"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-4">
+                  <button type="submit" className="btn btn-primary">
+                    Save changes
+                  </button>
+                </div>
+                <div className="col-md-6">
+                  {isEmpty(this.state.errors) && this.state.didSave && (
+                    <p
+                      style={{
+                        width: "100%",
+                        color: "#5fc27e"
+                      }}
+                    >
+                      Changes saved
+                    </p>
+                  )}
+                  {!isEmpty(this.state.errors) && (
+                    <p
+                      style={{
+                        width: "100%",
+                        color: "#f44455"
+                      }}
+                    >
+                      Check Errors. Could not save changes.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      );
+    }
+
+    return <div className="">{dashboardContent}</div>;
   }
 }
 EditAccount.propTypes = {
