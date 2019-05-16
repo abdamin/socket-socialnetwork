@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
 import { getPost } from "../../actions/postActions";
-import PostItem from "../posts/PostItem";
+import PostItem from "../social/PostItem";
 import { Link } from "react-router-dom";
 import CommentForm from "./CommentForm";
 import CommentFeed from "./CommentFeed";
@@ -22,7 +22,13 @@ class Post extends Component {
     } else {
       postContent = (
         <div>
-          <PostItem post={post} showActions={false} />
+          <div className="card flex-fill">
+            <PostItem
+              post={post}
+              showActions={true}
+              fromCommentSection={true}
+            />
+          </div>
           <CommentForm postId={post._id} />
           <CommentFeed postId={post._id} comments={post.comments} />
         </div>
@@ -33,8 +39,8 @@ class Post extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <Link to="/feed" className="btn btn-light mb-3">
-                Back to Feed
+              <Link to="/social" className="btn btn-light mb-3">
+                Back to Social Feed
               </Link>
               {postContent}
             </div>

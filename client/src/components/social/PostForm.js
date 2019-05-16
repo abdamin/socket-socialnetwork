@@ -23,7 +23,7 @@ class PostForm extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { user } = this.props.auth;
+    const { user } = this.props.profile.profile;
     const newPost = {
       text: this.state.text,
       name: user.name,
@@ -43,12 +43,15 @@ class PostForm extends Component {
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
-          <div className="card-header bg-info text-white">Say Something...</div>
+          <div className="card-header bg-light text-white">
+            <h5 className="card-title">Create a post</h5>
+            <h6 className="card-subtitle text-muted">Say something...</h6>
+          </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <TextAreaFieldGroup
-                  placeholder="Create a post"
+                  placeholder="What's on your mind?"
                   name="text"
                   value={this.state.text}
                   onChange={this.onChange}
@@ -56,7 +59,7 @@ class PostForm extends Component {
                 />
               </div>
               <button type="submit" className="btn btn-dark">
-                Submit
+                Share
               </button>
             </form>
           </div>
@@ -69,7 +72,8 @@ class PostForm extends Component {
 PostForm.propTypes = {
   addPost: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 ***REMOVED***
 
 const mapDispatchToProps = dispatch => {
@@ -78,7 +82,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     errors: state.errors,
-    auth: state.auth
+    auth: state.auth,
+    profile: state.profile
   ***REMOVED***
 ***REMOVED***
 
