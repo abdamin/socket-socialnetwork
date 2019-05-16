@@ -90,6 +90,10 @@ export const addLike = postId => dispatch => {
   axios
     .post(`/api/posts/like/${postId}`)
     .then(res => {
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      });
       dispatch(getPosts());
     })
     .catch(err => {
@@ -105,6 +109,10 @@ export const removeLike = postId => dispatch => {
   axios
     .post(`/api/posts/unlike/${postId}`)
     .then(res => {
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      });
       dispatch(getPosts());
     })
     .catch(err => {

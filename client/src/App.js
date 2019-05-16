@@ -30,12 +30,11 @@ import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
 import NotFound from "./components/not-found/NotFound";
 
-import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
 
 import Dashboard from "./components/dashboard/Dashboard";
 
-import Social from "./theme-test/pages/postFeed/Social";
+import Social from "./components/social/Social";
 
 //Check for Token and change store state to make it persists over page refreshes as well
 if (localStorage.jwtToken) {
@@ -71,10 +70,6 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/profile/:handle" component={Profile} />
-
-              <Switch>
-                <PrivateRoute exact path="/testsocial" component={Social} />
-              </Switch>
 
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
@@ -126,7 +121,7 @@ class App extends Component {
                 />
               </Switch>
               <Switch>
-                <PrivateRoute exact path="/feed" component={Posts} />
+                <PrivateRoute exact path="/social" component={Social} />
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/post/:id" component={Post} />

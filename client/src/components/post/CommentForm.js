@@ -45,22 +45,22 @@ class CommentForm extends Component {
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
-          <div className="card-header bg-info text-white">
-            Make a comment...
+          <div className="card-header bg-light text-white">
+            <h5 className="card-title">Post a comment</h5>
           </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <TextAreaFieldGroup
-                  placeholder="Reply to post"
+                  placeholder="Write a comment..."
                   name="text"
                   value={this.state.text}
                   onChange={this.onChange}
                   error={errors.text}
                 />
               </div>
-              <button type="submit" className="btn btn-dark">
-                Submit
+              <button type="submit" className="btn btn-dark btn-sm">
+                Comment
               </button>
             </form>
           </div>

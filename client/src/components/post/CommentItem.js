@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import { deleteComment } from "../../actions/postActions";
+import { MoreHorizontal } from "react-feather";
+import Moment from "react-moment";
 
 class CommentItem extends Component {
   onDeleteClick = (postId, commentId) => {
@@ -10,31 +12,60 @@ class CommentItem extends Component {
   };
   render() {
     const { comment, postId, auth } = this.props;
-    return (
-      <div className="card card-body mb-3">
-        <div className="row">
-          <div className="col-md-2">
-            <a href="profile.html">
-              <img
-                className="rounded-circle d-none d-md-block"
-                src={comment.avatar}
-                alt=""
-              />
-            </a>
-            <br />
-            <p className="text-center">{comment.name}</p>
+
+    const deleteOptions = (
+      <div>
+        {comment.user === auth.user.id ? (
+          <div className="mr-4 pt-0">
+            <div className="card-actions float-right">
+              <div className="btn-group">
+                <a
+                  href="/"
+                  id="dropdownMenu2"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <MoreHorizontal />
+                </a>
+                <div className="dropdown-menu dropdown-menu-right">
+                  <button
+                    className="dropdown-item"
+                    onClick={() => this.onDeleteClick(postId, comment._id)}
+                  >
+                    Delete Comment
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="col-md-10">
-            <p className="lead">{comment.text}</p>
-            {comment.user === auth.user.id ? (
-              <button
-                onClick={() => this.onDeleteClick(postId, comment._id)}
-                type="button"
-                className="btn btn-danger mr-1"
-              >
-                <i className="fas fa-times" />
-              </button>
-            ) : null}
+        ) : null}
+      </div>
+    );
+
+    return (
+      <div>
+        <div className="card">
+          {deleteOptions}
+          <div className="card-body">
+            <div className="media">
+              <div className="pr-2">
+                <img
+                  src={comment.avatar}
+                  style={{ width: "36px", height: "36px" }}
+                  className="rounded-circle mr-2"
+                  alt="Stacie Hall"
+                />
+              </div>
+              <div className="media-body">
+                <small className="float-right text-navy">
+                  <Moment fromNow>{comment.date}</Moment>
+                </small>
+                <p className="text-muted">
+                  <strong>{comment.name}</strong>: {comment.text}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
