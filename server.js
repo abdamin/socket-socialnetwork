@@ -40,7 +40,7 @@ app.use("/api/passwordChange", passwordChange);
 //multer middleware error handler
 app.use(function(err, req, res, next) {
   if (err.name === "MulterError" || err.message === "Upload an image") {
-    res.status(500).json({ error: err.message });
+    res.status(400).json({ error: err.message });
   } else {
     next(err);
   }
