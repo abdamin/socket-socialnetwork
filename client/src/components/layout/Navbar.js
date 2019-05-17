@@ -19,11 +19,19 @@ class Navbar extends Component {
     const avatar = !isEmpty(this.props.profile.profile)
       ? this.props.profile.profile.user.avatar
       : "";
+    const handle = !isEmpty(this.props.profile.profile)
+      ? this.props.profile.profile.handle
+      : "";
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link className="nav-link" to="/social">
             Social
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to={`/profile/${handle}`}>
+            Profile
           </Link>
         </li>
         <li className="nav-item">
