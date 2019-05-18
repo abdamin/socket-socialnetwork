@@ -5,6 +5,7 @@ const passport = require("passport");
 const cloudinary = require("cloudinary");
 const multer = require("multer");
 const path = require("path");
+const axios = require("axios");
 
 //Load Validation
 const validateProfileInput = require("../../validation/profile");
@@ -110,9 +111,24 @@ router.post(
               //add image url to db
               user.avatar = avatar;
               user.save().then(user => {
-                return res
-                  .status(200)
-                  .json({ Response: "Image upload succesful" });
+                //add to user activities
+                //add to activities document
+                const activityData = {
+                  type: "IMAGE",
+                  detail: "Updated",
+                  handle: req.body.handle
+                };
+
+                axios.defaults.headers.common["Authorization"] =
+                  req.headers.authorization;
+                axios
+                  .post("http://localhost:5000/api/activity/", activityData)
+                  .then(response => {
+                    return res
+                      .status(200)
+                      .json({ Response: "Image upload succesful" });
+                  })
+                  .catch(err => console.log(err));
               });
             }
           });
@@ -395,7 +411,24 @@ router.post(
       //Add to experience array -- not push() because that will add it to the end so we do unshift() to add it to the beginning
       profile.experience.unshift(newExp);
 
-      profile.save().then(profile => res.json(profile));
+      profile.save().then(profile => {
+        //add to activities document
+        const activityData = {
+          type: "EXPERIENCE",
+          detail: newExp.company,
+          handle: req.body.handle
+        };
+
+        axios.defaults.headers.common["Authorization"] =
+          req.headers.authorization;
+        axios
+          .post("http://localhost:5000/api/activity/", activityData)
+          .then(response => {
+            console.log(response);
+            return res.json(profile);
+          })
+          .catch(err => console.log(err));
+      });
     });
   }
 );
@@ -429,7 +462,24 @@ router.post(
       //Add to education array -- not push() because that will add it to the end so we do unshift() to add it to the beginning
       profile.education.unshift(newEdu);
 
-      profile.save().then(profile => res.json(profile));
+      profile.save().then(profile => {
+        //add to activities document
+        const activityData = {
+          type: "EDUCATION",
+          detail: newEdu.school,
+          handle: req.body.handle
+        };
+
+        axios.defaults.headers.common["Authorization"] =
+          req.headers.authorization;
+        axios
+          .post("http://localhost:5000/api/activity/", activityData)
+          .then(response => {
+            console.log(response);
+            return res.json(profile);
+          })
+          .catch(err => console.log(err));
+      });
     });
   }
 );

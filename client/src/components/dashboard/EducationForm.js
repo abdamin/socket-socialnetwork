@@ -33,6 +33,10 @@ class EducationForm extends React.Component {
   onSubmit = e => {
     e.preventDefault();
 
+    //this is added to for the activites document
+    const handle = this.props.profile.profile
+      ? this.props.profile.profile.handle
+      : "";
     const educData = {
       school: this.state.school,
       degree: this.state.degree,
@@ -40,7 +44,8 @@ class EducationForm extends React.Component {
       from: this.state.from,
       to: this.state.to,
       current: this.state.current,
-      description: this.state.description
+      description: this.state.description,
+      handle: handle
     };
 
     this.props.addEducation(educData, this.props.history);

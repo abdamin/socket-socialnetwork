@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
+const axios = require("axios");
 
 //Load Post Model
 const Post = require("../../models/Post");
@@ -94,8 +95,22 @@ router.post(
         .populate("user", ["name", "avatar"])
         .execPopulate()
         .then(post => {
-          console.log(post);
-          return res.json(post);
+          //add to activities document
+          const activityData = {
+            type: "POST",
+            detail: post.text,
+            handle: post.handle
+          };
+
+          axios.defaults.headers.common["Authorization"] =
+            req.headers.authorization;
+          axios
+            .post("http://localhost:5000/api/activity/", activityData)
+            .then(response => {
+              console.log(response);
+              return res.json(post);
+            })
+            .catch(err => console.log(err));
         })
     );
   }
