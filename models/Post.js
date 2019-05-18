@@ -12,12 +12,15 @@ const PostSchema = new Schema({
     type: String,
     required: true
 ***REMOVED***
-  name: {
+  // name: {
+  //   type: String
+  // },
+  handle: {
     type: String
 ***REMOVED***
-  avatar: {
-    type: String
-***REMOVED***
+  // avatar: {
+  //   type: String
+  // },
   likes: [
     {
       user: {
@@ -36,12 +39,15 @@ const PostSchema = new Schema({
         type: String,
         required: true
     ***REMOVED***
-      name: {
+      // name: {
+      //   type: String
+      // },
+      handle: {
         type: String
     ***REMOVED***
-      avatar: {
-        type: String
-    ***REMOVED***
+      // avatar: {
+      //   type: String
+      // },
       date: {
         type: Date,
         default: Date.now

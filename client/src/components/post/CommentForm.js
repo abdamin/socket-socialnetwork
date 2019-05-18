@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { addComment } from "../../actions/postActions";
+import { getCurrentProfile } from "../../actions/profileActions";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,6 +21,10 @@ class CommentForm extends Component {
     ***REMOVED***
   }
 
+  componentDidMount() {
+    this.props.getCurrentProfile();
+  }
+
   componentWillReceiveProps(newProps) {
     if (newProps.errors) {
       this.setState({ errors: newProps.errors });
@@ -29,13 +34,12 @@ class CommentForm extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { user } = this.props.auth;
+    // const { user } = this.props.auth;
     const { postId } = this.props;
 
     const newComment = {
       text: this.state.text,
-      name: user.name,
-      avatar: user.avatar
+      handle: this.props.profile.profile.handle
     ***REMOVED***
 
     this.props.addComment(postId, newComment);
@@ -124,12 +128,16 @@ CommentForm.propTypes = {
 ***REMOVED***
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ addComment: addComment }, dispatch);
+  return bindActionCreators(
+    { addComment: addComment, getCurrentProfile: getCurrentProfile },
+    dispatch
+  );
 ***REMOVED***
 const mapStateToProps = state => {
   return {
     errors: state.errors,
-    auth: state.auth
+    auth: state.auth,
+    profile: state.profile
   ***REMOVED***
 ***REMOVED***
 

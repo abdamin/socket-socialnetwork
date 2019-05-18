@@ -3,72 +3,59 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
 
-//Load Post Model
-const Post = require("../../models/Post");
+//Load Activity Model
+const Activity = require("../../models/Activity");
 //Load Profile Model
 const Profile = require("../../models/Profile");
 
-//Validation
-const validatePostInput = require("../../validation/post");
-
 //  @route GET api/posts/test
-//  @desc Tests posts router
+//  @desc Tests activity router
 //  @access Public
-router.get("/test", (req, res) => res.json({ msg: "Posts Works" }));
+router.get("/test", (req, res) => res.json({ msg: "Activity Works" }));
 
-//  @route GET api/posts
-//  @desc Get posts
+//  @route GET api/activity/handle/:handle
+//  @desc Get User's Activities by handle
+//  @access Public
+router.get("/handle/:handle", (req, res) => {
+  let errors = {***REMOVED***
+
+  Activity.findOne({ handle: req.params.handle })
+    .populate("user", ["name", "avatar"])
+    .sort({ date: -1 })
+    .then(activity => {
+      if (!activity) {
+        errors.noactivity = "There is no activity for this user";
+        return res.status(404).json(errors);
+      }
+
+      res.json(activity);
+    })
+    .catch(err => res.status(404).json(err));
+});
+
+//  @route GET api/activity
+//  @desc Get all activities
 //  @access Public
 router.get("/", (req, res) => {
-  Post.find()
+  Activity.find()
     .sort({ date: -1 })
-    .populate("user", ["name", "avatar"])
-    .then(posts => res.json(posts))
+    .then(activities => res.json(activities))
     .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
 });
 
-//  @route GET api/posts/:id
-//  @desc Get post by id
+//  @route GET api/activity/:id
+//  @desc Get activity by id
 //  @access Public
-//NOTE THAT another way (same result) of populating child attributes is commented out because we also have to do This is also different from doing populate by itself.
 router.get("/:id", (req, res) => {
-  Post.findById(req.params.id)
-    .populate("user", ["name", "avatar"])
-    .then(populatedPost =>
-      populatedPost
-        .populate("comments.user", ["name", "avatar"])
-        .execPopulate()
-        .then(populatedComments => {
-          res.json(populatedComments);
-        })
-    )
+  Activity.findById(req.params.id)
+    .then(activity => res.json(activity))
     .catch(err =>
-      res.status(404).json({ nopostfound: "No post found with that id" })
+      res.status(404).json({ nopostfound: "No activity found with that id" })
     );
-
-  // .populate({
-  //   path: "user",
-  //   select: "name avatar"
-  // })
-  // .execPopulate()
-  // .then(post => {
-  //   post
-  //     .populate({
-  //       path: "comments.user",
-  //       select: "name avatar"
-  //     })
-  //     .execPopulate()
-  //     .then(finalPost => {
-  //       return res.json(finalPost);
-  //     });
-  // })
-  // .catch(err =>
-  //   res.status(404).json({ nopostfound: "No post found with that id" })
-  // );
 });
 
-//  @route POST api/posts
-//  @desc Create post
+//  @route POST api/activity
+//  @desc Create Activity
 //  @access Private
 router.post(
   "/",
@@ -85,19 +72,13 @@ router.post(
     //for avatar in react we will pull the name and the avatar from the state
     const newPost = new Post({
       text: req.body.text,
+      name: req.body.name,
+      avatar: req.body.avatar,
       user: req.user.id,
       handle: req.body.handle
     });
 
-    newPost.save().then(newPost =>
-      newPost
-        .populate("user", ["name", "avatar"])
-        .execPopulate()
-        .then(post => {
-          console.log(post);
-          return res.json(post);
-        })
-    );
+    newPost.save().then(post => res.json(post));
   }
 );
 
@@ -155,26 +136,7 @@ router.post(
           //Add the user id to likes array
           post.likes.unshift({ user: req.user.id });
 
-          post.save().then(newPost =>
-            newPost
-              .populate({
-                path: "user",
-                select: "name avatar"
-              })
-              .execPopulate()
-              .then(post => {
-                post
-                  .populate({
-                    path: "comments.user",
-                    select: "name avatar"
-                  })
-                  .execPopulate()
-                  .then(finalPost => {
-                    return res.json(finalPost);
-                  });
-              })
-              .catch(err => console.log(err))
-          );
+          post.save().then(post => res.json(post));
         })
         .catch(err => res.status(404).json({ postnotfound: "Post not found" }));
     });
@@ -209,26 +171,7 @@ router.post(
           post.likes.splice(removeIndex, 1);
 
           //Save
-          post.save().then(newPost =>
-            newPost
-              .populate({
-                path: "user",
-                select: "name avatar"
-              })
-              .execPopulate()
-              .then(post => {
-                post
-                  .populate({
-                    path: "comments.user",
-                    select: "name avatar"
-                  })
-                  .execPopulate()
-                  .then(finalPost => {
-                    return res.json(finalPost);
-                  });
-              })
-              .catch(err => console.log(err))
-          );
+          post.save().then(post => res.json(post));
         })
         .catch(err => res.status(404).json({ postnotfound: "Post not found" }));
     });
@@ -254,6 +197,8 @@ router.post(
       .then(post => {
         const newComment = {
           text: req.body.text,
+          name: req.body.name,
+          avatar: req.body.avatar,
           user: req.user.id,
           handle: req.body.handle
         ***REMOVED***
@@ -262,30 +207,7 @@ router.post(
         post.comments.unshift(newComment);
 
         //save
-        // This is another way to populate by populating the result with name and avatar values of //user. Note that we also do sub population of the comment's user's name and avatar
-        //we also call execPopulate to run the population and return the result. This is required
-        //in many cases such as after saving a document. Try using using execPopulate() or exec()
-        // all the time for consistent results
-        post.save().then(newPost =>
-          newPost
-            .populate({
-              path: "user",
-              select: "name avatar"
-            })
-            .execPopulate()
-            .then(post => {
-              post
-                .populate({
-                  path: "comments.user",
-                  select: "name avatar"
-                })
-                .execPopulate()
-                .then(finalPost => {
-                  return res.json(finalPost);
-                });
-            })
-            .catch(err => console.log(err))
-        );
+        post.save().then(post => res.json(post));
       })
       .catch(err => res.status(404).json({ postnotfound: "No post found" }));
   }
@@ -320,26 +242,7 @@ router.delete(
         post.comments.splice(removeIndex, 1);
 
         //Save
-        post.save().then(newPost =>
-          newPost
-            .populate({
-              path: "user",
-              select: "name avatar"
-            })
-            .execPopulate()
-            .then(post => {
-              post
-                .populate({
-                  path: "comments.user",
-                  select: "name avatar"
-                })
-                .execPopulate()
-                .then(finalPost => {
-                  return res.json(finalPost);
-                });
-            })
-            .catch(err => console.log(err))
-        );
+        post.save().then(post => res.json(post));
       })
       .catch(err => res.status(404).json({ postnotfound: "No post found" }));
   }

@@ -34,7 +34,7 @@ class PostItem extends Component {
 
     const deleteOptions = (
       <div>
-        {post.user === auth.user.id ? (
+        {post.user._id === auth.user.id ? (
           <div className="mr-4 pt-0">
             <div className="card-actions float-right">
               <div className="btn-group">
@@ -61,6 +61,14 @@ class PostItem extends Component {
         ) : null}
       </div>
     );
+    const calendarStrings = {
+      lastDay: "[Yesterday at] LT",
+      sameDay: "[Today at] LT",
+      nextDay: "[Tomorrow at] LT",
+      lastWeek: "[last] dddd [at] LT",
+      nextWeek: "dddd [at] LT",
+      sameElse: "L"
+    ***REMOVED***
 
     return (
       <div>
@@ -68,7 +76,7 @@ class PostItem extends Component {
         <div className="card-body">
           <div className="media">
             <img
-              src={post.avatar}
+              src={post.user.avatar}
               style={{ width: "40px", height: "40px" }}
               className="rounded-circle mr-2"
               alt="Ashley Briggs"
@@ -79,7 +87,15 @@ class PostItem extends Component {
               </small>
               <p>
                 {" "}
-                <strong>{post.name}</strong> posted
+                <strong>
+                  <Link to={`/profile/${post.handle}`}>{post.user.name}</Link>
+                </strong>{" "}
+                posted
+                <br />
+                <small className="text-muted">
+                  {" "}
+                  <Moment calendar={calendarStrings}>{post.date}</Moment>
+                </small>
               </p>
 
               <p>

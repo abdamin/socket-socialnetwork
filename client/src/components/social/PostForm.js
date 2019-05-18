@@ -29,11 +29,10 @@ class PostForm extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { user } = this.props.profile.profile;
+    // const { user } = this.props.profile.profile;
     const newPost = {
       text: this.state.text,
-      name: user.name,
-      avatar: user.avatar
+      handle: this.props.profile.profile.handle
     ***REMOVED***
 
     this.props.addPost(newPost);
