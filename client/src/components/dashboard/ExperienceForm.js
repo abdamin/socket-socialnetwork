@@ -33,6 +33,10 @@ class ExperienceForm extends React.Component {
   onSubmit = e => {
     e.preventDefault();
 
+    //this is added to for the activites document
+    const handle = this.props.profile.profile
+      ? this.props.profile.profile.handle
+      : "";
     const expData = {
       company: this.state.company,
       title: this.state.title,
@@ -40,7 +44,8 @@ class ExperienceForm extends React.Component {
       from: this.state.from,
       to: this.state.to,
       current: this.state.current,
-      description: this.state.description
+      description: this.state.description,
+      handle: handle
     ***REMOVED***
 
     this.props.addExperience(expData);

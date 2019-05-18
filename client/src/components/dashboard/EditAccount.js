@@ -116,6 +116,7 @@ class EditAccount extends React.Component {
   uploadImage = () => {
     const formData = new FormData();
     formData.append("image", this.state.selectedImage);
+    formData.append("handle", this.state.handle);
     this.setState({ changingImage: true });
 
     axios
