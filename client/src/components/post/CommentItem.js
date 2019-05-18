@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { deleteComment } from "../../actions/postActions";
 import { MoreHorizontal } from "react-feather";
 import Moment from "react-moment";
+import { Link } from "react-router-dom";
 
 class CommentItem extends Component {
   onDeleteClick = (postId, commentId) => {
@@ -15,7 +16,7 @@ class CommentItem extends Component {
 
     const deleteOptions = (
       <div>
-        {comment.user === auth.user.id ? (
+        {comment.user._id === auth.user.id ? (
           <div className="mr-4 pt-0">
             <div className="card-actions float-right">
               <div className="btn-group">
@@ -51,10 +52,10 @@ class CommentItem extends Component {
             <div className="media">
               <div className="pr-2">
                 <img
-                  src={comment.avatar}
+                  src={comment.user.avatar}
                   style={{ width: "36px", height: "36px" }}
                   className="rounded-circle mr-2"
-                  alt="Stacie Hall"
+                  alt={comment.user.name}
                 />
               </div>
               <div className="media-body">
@@ -62,7 +63,10 @@ class CommentItem extends Component {
                   <Moment fromNow>{comment.date}</Moment>
                 </small>
                 <p className="text-muted">
-                  <strong>{comment.name}</strong>: {comment.text}
+                  <Link to={`/profile/${comment.handle}`}>
+                    {comment.user.name}
+                  </Link>
+                  : {comment.text}
                 </p>
               </div>
             </div>

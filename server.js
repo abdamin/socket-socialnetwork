@@ -6,6 +6,7 @@ const passport = require("passport");
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const posts = require("./routes/api/posts");
+// const activity = require("./routes/api/activity");
 const confirmation = require("./routes/api/confirmation");
 const passwordChange = require("./routes/api/passwordChange");
 
@@ -34,6 +35,7 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/posts", posts);
+// app.use("/api/activity", activity);
 app.use("/api/confirmation", confirmation);
 app.use("/api/passwordChange", passwordChange);
 
