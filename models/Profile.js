@@ -23,8 +23,7 @@ const ProfileSchema = new Schema({
     type: String
 ***REMOVED***
   status: {
-    type: String,
-    required: true
+    type: String
 ***REMOVED***
   skills: {
     type: [String],

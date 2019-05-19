@@ -7,6 +7,7 @@ const keys = require("../../config/keys");
 const passport = require("passport");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const axios = require("axios");
 
 //nodemail credentials
 const EMAIL = require("../../config/keys").emailAddress;
@@ -19,6 +20,12 @@ const validateLoginInput = require("../../validation/login");
 
 //Load user model
 const User = require("../../models/User");
+
+//Load Profile Model
+const Profile = require("../../models/Profile");
+
+//Load Activity Model
+const Activity = require("../../models/Activity");
 
 //Load Account Verification Token Model
 const Token = require("../../models/Token");
@@ -106,7 +113,29 @@ router.post("/register", (req, res) => {
                 }
                 console.log(info);
               });
-              return res.json(user);
+
+              //create a new profile with user id as profile handle by default upon registeration
+              const profileFields = {
+                user: user._id,
+                handle: user._id,
+                status: ""
+              ***REMOVED***
+              new Profile(profileFields).save().then(profile => {
+                //add to activities document the join date
+                const newActivity = new Activity({
+                  type: "JOINED",
+                  detail: "date",
+                  handle: profileFields.handle,
+                  user: user._id
+                });
+
+                newActivity
+                  .save()
+                  .then(activity => {
+                    return res.json(user);
+                  })
+                  .catch(err => console.log(err));
+              });
             })
             .catch(err => console.log(err));
         });

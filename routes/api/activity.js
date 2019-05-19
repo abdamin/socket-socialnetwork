@@ -22,16 +22,16 @@ router.get("/test", (req, res) => res.json({ msg: "Activity Works" }));
 router.get("/handle/:handle", (req, res) => {
   let errors = {***REMOVED***
 
-  Activity.findOne({ handle: req.params.handle })
+  Activity.find({ handle: req.params.handle })
     .sort({ date: -1 })
     .populate("user", ["name", "avatar"])
-    .then(activity => {
-      if (!activity) {
+    .then(activities => {
+      if (!activities) {
         errors.noactivity = "There is no activity for this user";
         return res.status(404).json(errors);
       }
 
-      res.json(activity);
+      res.json(activities);
     })
     .catch(err => res.status(404).json(err));
 });
