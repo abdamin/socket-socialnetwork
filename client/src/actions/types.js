@@ -11,3 +11,6 @@ export const GET_POSTS = "GET_POSTS";
 export const GET_POST = "GET_POST";
 export const ADD_POST = "ADD_POST";
 export const DELETE_POST = "DELETE_POST";
+export const GET_ACTIVITIES = "GET_ACTIVITIES";
+export const CLEAR_ACTIVITIES = "CLEAR_ACTIVITIES";
+export const ACTIVITY_LOADING = "ACTIVITY_LOADING";

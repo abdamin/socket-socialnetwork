@@ -95,6 +95,8 @@ router.post(
         .populate("user", ["name", "avatar"])
         .execPopulate()
         .then(post => {
+
+          
           //add to activities document
           const activityData = {
             type: "POST",
