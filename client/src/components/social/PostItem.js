@@ -88,7 +88,9 @@ class PostItem extends Component {
               <p>
                 {" "}
                 <strong>
-                  <Link to={`/profile/${post.handle}`}>{post.user.name}</Link>
+                  <Link to={`/profile/${post.profile.handle}`}>
+                    {post.user.name}
+                  </Link>
                 </strong>{" "}
                 posted
                 <br />

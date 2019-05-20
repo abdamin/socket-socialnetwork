@@ -12,12 +12,16 @@ const PostSchema = new Schema({
     type: String,
     required: true
 ***REMOVED***
+  profile: {
+    type: Schema.Types.ObjectId,
+    ref: "profiles"
+***REMOVED***
   // name: {
   //   type: String
   // },
-  handle: {
-    type: String
-***REMOVED***
+  // handle: {
+  //   type: String
+  // },
   // avatar: {
   //   type: String
   // },
@@ -42,8 +46,12 @@ const PostSchema = new Schema({
       // name: {
       //   type: String
       // },
-      handle: {
-        type: String
+      // handle: {
+      //   type: String
+      // },
+      profile: {
+        type: Schema.Types.ObjectId,
+        ref: "profiles"
     ***REMOVED***
       // avatar: {
       //   type: String
@@ -60,4 +68,4 @@ const PostSchema = new Schema({
   }
 });
 
-module.exports = Post = mongoose.model("post", PostSchema);
+module.exports = Post = mongoose.model("posts", PostSchema);

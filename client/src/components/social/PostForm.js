@@ -32,7 +32,7 @@ class PostForm extends Component {
     // const { user } = this.props.profile.profile;
     const newPost = {
       text: this.state.text,
-      handle: this.props.profile.profile.handle
+      profile: this.props.profile.profile._id
     ***REMOVED***
 
     this.props.addPost(newPost);

@@ -20,10 +20,11 @@ router.get("/test", (req, res) => res.json({ msg: "Posts Works" }));
 //  @route GET api/posts
 //  @desc Get posts
 //  @access Public
+//note that here we use short cut of populate to get name and avatar of user model and handle of profile model
 router.get("/", (req, res) => {
   Post.find()
     .sort({ date: -1 })
-    .populate("user", ["name", "avatar"])
+    .populate("user profile", ["name", "avatar", "handle"])
     .then(posts => res.json(posts))
     .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
 });
@@ -37,11 +38,16 @@ router.get("/:id", (req, res) => {
     .populate("user", ["name", "avatar"])
     .then(populatedPost =>
       populatedPost
-        .populate("comments.user", ["name", "avatar"])
+        .populate("profile", ["handle"])
         .execPopulate()
-        .then(populatedComments => {
-          res.json(populatedComments);
-        })
+        .then(fullPopulatedPost =>
+          fullPopulatedPost
+            .populate("comments.user", ["name", "avatar"])
+            .execPopulate()
+            .then(populatedComments => {
+              res.json(populatedComments);
+            })
+        )
     )
     .catch(err =>
       res.status(404).json({ nopostfound: "No post found with that id" })
@@ -87,33 +93,36 @@ router.post(
     const newPost = new Post({
       text: req.body.text,
       user: req.user.id,
-      handle: req.body.handle
+      profile: req.body.profile
     });
 
     newPost.save().then(newPost =>
       newPost
         .populate("user", ["name", "avatar"])
         .execPopulate()
-        .then(post => {
+        .then(post =>
+          post
+            .populate("profile", ["handle"])
+            .execPopulate()
+            .then(populatedPost => {
+              //add to activities document
+              const activityData = {
+                type: "POST",
+                detail: populatedPost.text,
+                profile: populatedPost.profile._id
+              ***REMOVED***
 
-          
-          //add to activities document
-          const activityData = {
-            type: "POST",
-            detail: post.text,
-            handle: post.handle
-          ***REMOVED***
-
-          axios.defaults.headers.common["Authorization"] =
-            req.headers.authorization;
-          axios
-            .post("http://localhost:5000/api/activity/", activityData)
-            .then(response => {
-              console.log(response);
-              return res.json(post);
+              axios.defaults.headers.common["Authorization"] =
+                req.headers.authorization;
+              axios
+                .post("http://localhost:5000/api/activity/", activityData)
+                .then(response => {
+                  console.log(response);
+                  return res.json(populatedPost);
+                })
+                .catch(err => console.log(err));
             })
-            .catch(err => console.log(err));
-        })
+        )
     );
   }
 );
@@ -186,8 +195,16 @@ router.post(
                     select: "name avatar"
                   })
                   .execPopulate()
-                  .then(finalPost => {
-                    return res.json(finalPost);
+                  .then(populatedPost => {
+                    populatedPost
+                      .populate({
+                        path: "profile",
+                        select: "handle"
+                      })
+                      .execPopulate()
+                      .then(finalPost => {
+                        return res.json(finalPost);
+                      });
                   });
               })
               .catch(err => console.log(err))
@@ -240,8 +257,16 @@ router.post(
                     select: "name avatar"
                   })
                   .execPopulate()
-                  .then(finalPost => {
-                    return res.json(finalPost);
+                  .then(populatedPost => {
+                    populatedPost
+                      .populate({
+                        path: "profile",
+                        select: "handle"
+                      })
+                      .execPopulate()
+                      .then(finalPost => {
+                        return res.json(finalPost);
+                      });
                   });
               })
               .catch(err => console.log(err))
@@ -279,7 +304,7 @@ router.post(
         post.comments.unshift(newComment);
 
         //save
-        // This is another way to populate by populating the result with name and avatar values of //user. Note that we also do sub population of the comment's user's name and avatar
+        // This is another way to populate by populating the result with name and avatar values of //user. Note that we also do sub population of the comment's user's name and avatar and another sub population of users profile
         //we also call execPopulate to run the population and return the result. This is required
         //in many cases such as after saving a document. Try using using execPopulate() or exec()
         // all the time for consistent results
@@ -297,8 +322,16 @@ router.post(
                   select: "name avatar"
                 })
                 .execPopulate()
-                .then(finalPost => {
-                  return res.json(finalPost);
+                .then(populatedPost => {
+                  populatedPost
+                    .populate({
+                      path: "profile",
+                      select: "handle"
+                    })
+                    .execPopulate()
+                    .then(finalPost => {
+                      return res.json(finalPost);
+                    });
                 });
             })
             .catch(err => console.log(err))
@@ -336,7 +369,6 @@ router.delete(
         //Splice out of array
         post.comments.splice(removeIndex, 1);
 
-        //Save
         post.save().then(newPost =>
           newPost
             .populate({
@@ -351,8 +383,16 @@ router.delete(
                   select: "name avatar"
                 })
                 .execPopulate()
-                .then(finalPost => {
-                  return res.json(finalPost);
+                .then(populatedPost => {
+                  populatedPost
+                    .populate({
+                      path: "profile",
+                      select: "handle"
+                    })
+                    .execPopulate()
+                    .then(finalPost => {
+                      return res.json(finalPost);
+                    });
                 });
             })
             .catch(err => console.log(err))

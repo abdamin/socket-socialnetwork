@@ -16,15 +16,15 @@ const validateActivityInput = require("../../validation/activity");
 //  @access Public
 router.get("/test", (req, res) => res.json({ msg: "Activity Works" }));
 
-//  @route GET api/activity/handle/:handle
-//  @desc Get User's Activities by handle
+//  @route GET api/activity/profile/:id
+//  @desc Get User's Activities by profile id
 //  @access Public
-router.get("/handle/:handle", (req, res) => {
+router.get("/profile/:id", (req, res) => {
   let errors = {***REMOVED***
 
-  Activity.find({ handle: req.params.handle })
+  Activity.find({ profile: req.params.id })
     .sort({ date: -1 })
-    .populate("user", ["name", "avatar"])
+    .populate("user profile", ["name", "avatar", "handle"])
     .then(activities => {
       if (!activities) {
         errors.noactivity = "There is no activity for this user";
@@ -42,7 +42,7 @@ router.get("/handle/:handle", (req, res) => {
 router.get("/", (req, res) => {
   Activity.find()
     .sort({ date: -1 })
-    .populate("user", ["name", "avatar"])
+    .populate("user profile", ["name", "avatar", "handle"])
     .then(activities => res.json(activities))
     .catch(err =>
       res.status(404).json({ noactivitiesfound: "No activities found" })
@@ -54,7 +54,7 @@ router.get("/", (req, res) => {
 //  @access Public
 router.get("/:id", (req, res) => {
   Activity.findById(req.params.id)
-    .populate("user", ["name", "avatar"])
+    .populate("user profile", ["name", "avatar", "handle"])
     .then(activity => res.json(activity))
     .catch(err =>
       res.status(404).json({ nopostfound: "No activity found with that id" })
@@ -81,7 +81,7 @@ router.post(
       type: req.body.type,
       detail: req.body.detail,
       user: req.user.id,
-      handle: req.body.handle
+      profile: req.body.profile
     });
 
     newActivity.save().then(activity => {

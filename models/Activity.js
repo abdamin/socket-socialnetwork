@@ -8,10 +8,14 @@ const ActivitySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
 ***REMOVED***
-  handle: {
-    type: String,
-    required: true,
-    max: 40
+  // handle: {
+  //   type: String,
+  //   required: true,
+  //   max: 40
+  // },
+  profile: {
+    type: Schema.Types.ObjectId,
+    ref: "profiles"
 ***REMOVED***
   type: {
     type: String,

@@ -113,22 +113,26 @@ router.post(
               user.save().then(user => {
                 //add to user activities
                 //add to activities document
-                const activityData = {
-                  type: "IMAGE",
-                  detail: "Updated",
-                  handle: req.body.handle
-                ***REMOVED***
+                //first find the relevant profile to get user's profile id
 
-                axios.defaults.headers.common["Authorization"] =
-                  req.headers.authorization;
-                axios
-                  .post("http://localhost:5000/api/activity/", activityData)
-                  .then(response => {
-                    return res
-                      .status(200)
-                      .json({ Response: "Image upload succesful" });
-                  })
-                  .catch(err => console.log(err));
+                Profile.findOne({ user: req.user.id }).then(profile => {
+                  const activityData = {
+                    type: "IMAGE",
+                    detail: "Updated",
+                    profile: profile._id
+                  ***REMOVED***
+
+                  axios.defaults.headers.common["Authorization"] =
+                    req.headers.authorization;
+                  axios
+                    .post("http://localhost:5000/api/activity/", activityData)
+                    .then(response => {
+                      return res
+                        .status(200)
+                        .json({ Response: "Image upload succesful" });
+                    })
+                    .catch(err => console.log(err));
+                });
               });
             }
           });
@@ -416,7 +420,7 @@ router.post(
         const activityData = {
           type: "EXPERIENCE",
           detail: newExp.company,
-          handle: req.body.handle
+          profile: profile._id
         ***REMOVED***
 
         axios.defaults.headers.common["Authorization"] =
@@ -467,7 +471,7 @@ router.post(
         const activityData = {
           type: "EDUCATION",
           detail: newEdu.school,
-          handle: req.body.handle
+          profile: profile._id
         ***REMOVED***
 
         axios.defaults.headers.common["Authorization"] =
