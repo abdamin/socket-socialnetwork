@@ -130,7 +130,7 @@ class EditAccount extends React.Component {
       .post("/api/profile/uploadProfileImage", formData)
       .then(res => {
         this.setState({ changingImage: false });
-        this.props.updateAvatar(res.avatarUrl);
+        this.props.updateAvatar(res.data.avatarUrl);
         window.location.reload();
       })
       .catch(err => {

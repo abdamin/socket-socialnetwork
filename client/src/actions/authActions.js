@@ -87,7 +87,7 @@ export const sendPasswordChangeEmail = userData => dispatch => {
 
 // update image state of authenticated user
 export const updateAvatar = avatarData => dispatch => {
-  dispatch({
+  return dispatch({
     type: UPDATE_IMAGE,
     payload: avatarData
   });

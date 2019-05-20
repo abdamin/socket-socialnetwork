@@ -27,7 +27,6 @@ class ProfileActivities extends Component {
 }
 
 const Activities = ({ activities }) => {
-  console.log(activities);
   let activityItems = activities.map(activity => {
     return (
       <ActivityItem
