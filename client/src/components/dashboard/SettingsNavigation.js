@@ -2,8 +2,10 @@ import React from "react";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { deleteAccount } from "../../actions/profileActions";
+import { deleteAccount, clearErrors } from "../../actions/profileActions";
 import { bindActionCreators } from "redux";
+import isEmpty from "../../validation/is-empty";
+
 class SettingsNavigation extends React.Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,9 @@ class SettingsNavigation extends React.Component {
   handleOptionClick = option => {
     this.props.handleOptionChange(option);
     this.setState({ chosenLink: option });
+    if (!isEmpty(this.props.errors)) {
+      this.props.clearErrors();
+    }
   ***REMOVED***
 
   render() {
@@ -100,11 +105,18 @@ SettingsNavigation.propTypes = {
   deleteAccount: PropTypes.func.isRequired
 ***REMOVED***
 
+const mapStateToProps = state => ({
+  errors: state.errors
+});
+
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ deleteAccount: deleteAccount }, dispatch);
+  return bindActionCreators(
+    { deleteAccount: deleteAccount, clearErrors: clearErrors },
+    dispatch
+  );
 ***REMOVED***
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SettingsNavigation);

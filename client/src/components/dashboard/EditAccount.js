@@ -52,7 +52,7 @@ class EditAccount extends React.Component {
       const profile = nextProps.profile.profile;
 
       //bring skills array back to CSV
-      const skillsCSV = !isEmpty(profile.company)
+      const skillsCSV = !isEmpty(profile.skills)
         ? profile.skills.join(",")
         : "";
 
@@ -111,7 +111,10 @@ class EditAccount extends React.Component {
   ***REMOVED***
 
   onImageChange = e => {
-    this.setState({ selectedImage: e.target.files[0] });
+    this.setState({
+      selectedImage: e.target.files[0],
+      avatar: URL.createObjectURL(e.target.files[0])
+    });
   ***REMOVED***
   uploadImage = () => {
     const formData = new FormData();
