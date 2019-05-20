@@ -63,7 +63,7 @@ class CommentItem extends Component {
                   <Moment fromNow>{comment.date}</Moment>
                 </small>
                 <p className="text-muted">
-                  <Link to={`/profile/${comment.handle}`}>
+                  <Link to={`/profile/${comment.profile.handle}`}>
                     {comment.user.name}
                   </Link>
                   : {comment.text}
