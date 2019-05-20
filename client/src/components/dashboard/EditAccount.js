@@ -213,6 +213,16 @@ class EditAccount extends React.Component {
                 <div className="col-md-8">
                   <div className="form-group">
                     <label htmlFor="handle">Profile Handle</label>
+                    <a
+                      className="ml-2"
+                      href={`http://localhost:3000/profile/${
+                        this.state.handle
+                      }`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {`http://localhost:3000/profile/${this.state.handle}`}
+                    </a>
                     <TextFieldGroup
                       placeholder="* Profile Handle"
                       name="handle"

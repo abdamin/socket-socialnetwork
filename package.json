@@ -19,7 +19,6 @@
     "cloudinary": "^1.14.0",
     "concurrently": "^4.1.0",
     "express": "^4.16.4",
-    "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.19",
     "multer": "^1.4.1",

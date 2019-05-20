@@ -30,12 +30,20 @@ class Profiles extends Component {
       <div className="profiles">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
-              <h1 className="display-4 text-center">Developer Profiles</h1>
-              <p className="lead text-center">
-                Browse and Connect with Developers
-              </p>
-              {profileItems}
+            <div className="col-md-12 pl-5 pr-5">
+              <div className="post-form mb-3">
+                <div className="card card-info">
+                  <div className="card-header bg-light text-white">
+                    <h3 className="card-title">Developer Profiles</h3>
+                    <h5 className="card-subtitle text-muted">
+                      {" "}
+                      Browse and Connect with Developers
+                    </h5>
+                  </div>
+
+                  <div className="card-body pl-5 pr-5">{profileItems}</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

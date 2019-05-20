@@ -4,7 +4,6 @@ import Moment from "react-moment";
 class activityItem extends Component {
   render() {
     let itemContent;
-    console.log(this.props);
 
     const calendarStrings = {
       lastDay: "[Yesterday at] LT",
