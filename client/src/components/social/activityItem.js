@@ -4,7 +4,6 @@ import Moment from "react-moment";
 class activityItem extends Component {
   render() {
     let itemContent;
-
     console.log(this.props);
 
     const calendarStrings = {
@@ -32,7 +31,10 @@ class activityItem extends Component {
                   {" "}
                   <Moment fromNow>{this.props.activity.date}</Moment>
                 </small>
-                You <strong> Joined</strong> Devconnector
+                {this.props.page === "PROFILE_PAGE"
+                  ? this.props.activity.user.name
+                  : " You"}{" "}
+                <strong> Joined</strong> Devconnector
                 <br />
                 <small className="text-muted">
                   {" "}
@@ -63,8 +65,16 @@ class activityItem extends Component {
                 <small className="float-right text-navy">
                   <Moment fromNow>{this.props.activity.date}</Moment>
                 </small>
-                <strong>You</strong> posted on
-                <strong> your</strong> timeline
+                <strong>
+                  {this.props.page === "PROFILE_PAGE"
+                    ? this.props.activity.user.name
+                    : " You"}{" "}
+                </strong>{" "}
+                posted on
+                <strong>
+                  {this.props.page === "PROFILE_PAGE" ? " his " : " your "}
+                </strong>
+                timeline
                 <br />
                 <small className="text-muted">
                   {" "}
@@ -98,8 +108,17 @@ class activityItem extends Component {
                   {" "}
                   <Moment fromNow>{this.props.activity.date}</Moment>
                 </small>
-                <strong>You</strong> added work experience at
-                <strong> {this.props.activity.detail}</strong> to your profile
+                <strong>
+                  {this.props.page === "PROFILE_PAGE"
+                    ? this.props.activity.user.name
+                    : " You"}{" "}
+                </strong>{" "}
+                added work experience at
+                <strong> {this.props.activity.detail}</strong> to{" "}
+                <span>
+                  {this.props.page === "PROFILE_PAGE" ? " his" : " your"}
+                </span>{" "}
+                profile
                 <br />
                 <small className="text-muted">
                   {" "}
@@ -130,8 +149,17 @@ class activityItem extends Component {
                   {" "}
                   <Moment fromNow>{this.props.activity.date}</Moment>
                 </small>
-                <strong>You</strong> added education at
-                <strong> {this.props.activity.detail}</strong> to your profile
+                <strong>
+                  {this.props.page === "PROFILE_PAGE"
+                    ? this.props.activity.user.name
+                    : " You"}{" "}
+                </strong>{" "}
+                added education at
+                <strong> {this.props.activity.detail}</strong> to
+                <span>
+                  {this.props.page === "PROFILE_PAGE" ? " his" : " your"}
+                </span>{" "}
+                profile
                 <br />
                 <small className="text-muted">
                   {" "}
@@ -161,7 +189,17 @@ class activityItem extends Component {
                   {" "}
                   <Moment fromNow>{this.props.activity.date}</Moment>
                 </small>
-                <strong>You</strong> updated your profile image
+                <strong>
+                  {this.props.page === "PROFILE_PAGE"
+                    ? this.props.activity.user.name
+                    : " You"}{" "}
+                </strong>{" "}
+                updated{" "}
+                <span>
+                  {" "}
+                  {this.props.page === "PROFILE_PAGE" ? " his " : " your "}{" "}
+                </span>{" "}
+                profile image
                 <br />
                 <small className="text-muted">
                   {" "}

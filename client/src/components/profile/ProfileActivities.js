@@ -1,31 +1,43 @@
 import React, { Component } from "react";
+import ActivityItem from "../social/activityItem";
 
 import { MoreHorizontal } from "react-feather";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
+// import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
-import avatar1 from "../avatars/avatar.jpg";
-import avatar2 from "../avatars/avatar-2.jpg";
-import avatar4 from "../avatars/avatar-4.jpg";
-import avatar5 from "../avatars/avatar-5.jpg";
+// import avatar1 from "../avatars/avatar.jpg";
+// import avatar2 from "../avatars/avatar-2.jpg";
+// import avatar4 from "../avatars/avatar-4.jpg";
+// import avatar5 from "../avatars/avatar-5.jpg";
 
-import unsplash1 from "../../img/unsplash-1.jpg";
-import unsplash2 from "../../img/unsplash-2.jpg";
+// import unsplash1 from "../../img/unsplash-1.jpg";
+// import unsplash2 from "../../img/unsplash-2.jpg";
 
 class ProfileActivities extends Component {
   render() {
-    const { profile } = this.props;
+    const { activities } = this.props;
     return (
       <div>
-        <Activities profile={profile} />
+        <Activities activities={activities} />
       </div>
     );
   }
 }
 
-const Activities = ({ profile }) => {
+const Activities = ({ activities }) => {
+  console.log(activities);
+  let activityItems = activities.map(activity => {
+    return (
+      <ActivityItem
+        page={"PROFILE_PAGE"}
+        key={activity._id}
+        activity={activity}
+        type={activity.type}
+      />
+    );
+  });
   return (
     <div className="card">
       <div className="card-header">
@@ -51,7 +63,9 @@ const Activities = ({ profile }) => {
         <h5 className="card-title mb-0">Activities</h5>
       </div>
       <div className="card-body">
-        <div className="media">
+        {activityItems}
+
+        {/* <div className="media">
           <img
             src={avatar5}
             style={{ width: "40px", height: "40px" }}
@@ -231,7 +245,7 @@ const Activities = ({ profile }) => {
         </div>
 
         <hr />
-        <button className="btn btn-primary btn-block">Load more</button>
+        <button className="btn btn-primary btn-block">Load more</button> */}
       </div>
     </div>
   );

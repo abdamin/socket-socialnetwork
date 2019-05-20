@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { getActivities } from "./activityActions";
 import {
   ADD_POST,
   GET_ERRORS,
@@ -20,6 +20,7 @@ export const addPost = postData => dispatch => {
         type: ADD_POST,
         payload: res.data
       });
+      dispatch(getActivities(postData.handle));
     })
     .catch(err => {
       dispatch({
