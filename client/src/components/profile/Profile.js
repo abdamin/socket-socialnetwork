@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 // import ProfileGithub from "./ProfileGithub";
 import Spinner from "../common/Spinner";
 import { getProfileByHandle } from "../../actions/profileActions";
+import { getActivities } from "../../actions/activityActions";
 import ProfileDetails from "./ProfileDetails";
 import ProfileActivities from "./ProfileActivities";
 
@@ -16,6 +17,7 @@ class Profile extends Component {
   componentDidMount() {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
+      this.props.getActivities(this.props.match.params.handle);
     }
   }
 
@@ -26,8 +28,10 @@ class Profile extends Component {
   }
   render() {
     const { profile, loading } = this.props.profile;
+    const { activities, activityloading } = this.props.activity;
+
     let profileContent;
-    if (profile === null || loading) {
+    if (profile === null || loading || activityloading || activities === null) {
       profileContent = <Spinner />;
     } else {
       profileContent = (
@@ -53,7 +57,7 @@ class Profile extends Component {
               <ProfileDetails profile={profile} />
             </div>
             <div className="col-md-8 col-xl-9">
-              <ProfileActivities profile={profile} />
+              <ProfileActivities activities={activities} />
             </div>
           </div>
         </div>
@@ -64,14 +68,16 @@ class Profile extends Component {
 }
 Profile.propTypes = {
   profile: PropTypes.object.isRequired,
-  getProfileByHandle: PropTypes.func.isRequired
+  getProfileByHandle: PropTypes.func.isRequired,
+  activity: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  activity: state.activity
 });
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { getProfileByHandle: getProfileByHandle },
+    { getProfileByHandle: getProfileByHandle, getActivities: getActivities },
     dispatch
   );
 };
