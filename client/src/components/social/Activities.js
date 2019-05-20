@@ -18,16 +18,16 @@ class Activities extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      handle: ""
+      _id: ""
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps) {
       if (nextProps.profile.profile) {
-        if (nextProps.profile.profile.handle !== this.state.handle) {
-          this.setState({ handle: nextProps.profile.profile.handle });
-          this.props.getActivities(nextProps.profile.profile.handle);
+        if (nextProps.profile.profile._id !== this.state._id) {
+          this.setState({ _id: nextProps.profile.profile._id });
+          this.props.getActivities(nextProps.profile.profile._id);
         }
       }
     }

@@ -123,7 +123,7 @@ router.post("/register", (req, res) => {
                 const newActivity = new Activity({
                   type: "JOINED",
                   detail: "date",
-                  handle: profileFields.handle,
+                  profile: profile._id,
                   user: user._id
                 });
 

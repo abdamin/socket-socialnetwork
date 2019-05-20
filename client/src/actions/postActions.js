@@ -20,7 +20,7 @@ export const addPost = postData => dispatch => {
         type: ADD_POST,
         payload: res.data
       });
-      dispatch(getActivities(postData.handle));
+      dispatch(getActivities(postData.profile));
     })
     .catch(err => {
       dispatch({

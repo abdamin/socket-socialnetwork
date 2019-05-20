@@ -14,16 +14,27 @@ import ProfileDetails from "./ProfileDetails";
 import ProfileActivities from "./ProfileActivities";
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      _id: ""
+    };
+  }
   componentDidMount() {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
-      this.props.getActivities(this.props.match.params.handle);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile === null && this.props.profile.loading) {
       this.props.history.push("/not-found");
+    }
+    if (nextProps.profile.profile) {
+      if (nextProps.profile.profile._id !== this.state._id) {
+        this.setState({ _id: nextProps.profile.profile._id });
+        this.props.getActivities(nextProps.profile.profile._id);
+      }
     }
   }
   render() {

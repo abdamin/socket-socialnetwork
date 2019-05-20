@@ -1,11 +1,11 @@
 import axios from "axios";
 import { GET_ACTIVITIES, ACTIVITY_LOADING } from "./types";
 
-//get all user activities by handle
-export const getActivities = handle => dispatch => {
+//get all user activities by profileId
+export const getActivities = id => dispatch => {
   dispatch(setActivityLoading());
   axios
-    .get(`/api/activity/handle/${handle}`)
+    .get(`/api/activity/profile/${id}`)
     .then(res => {
       dispatch({
         type: GET_ACTIVITIES,
