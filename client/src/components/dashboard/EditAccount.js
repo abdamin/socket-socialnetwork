@@ -35,7 +35,8 @@ class EditAccount extends React.Component {
       avatar: "",
       selectedImage: null,
       imageErrors: {},
-      changingImage: false
+      changingImage: false,
+      saveClicked: true
     ***REMOVED***
   }
 
@@ -69,7 +70,7 @@ class EditAccount extends React.Component {
         : "";
       profile.bio = !isEmpty(profile.bio) ? profile.bio : "";
 
-      if (isEmpty(nextProps.errors)) {
+      if (isEmpty(nextProps.errors) && this.state.saveClicked) {
         //Set component fields state
         this.setState({
           handle: profile.handle,
@@ -108,6 +109,7 @@ class EditAccount extends React.Component {
   onChange = e => {
     this.setState({ didSave: false });
     this.setState({ [e.target.name]: e.target.value });
+    this.setState({ saveClicked: false });
   ***REMOVED***
 
   onImageChange = e => {
