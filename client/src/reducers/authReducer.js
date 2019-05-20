@@ -1,9 +1,10 @@
-import { SET_CURRENT_USER } from "../actions/types";
+import { SET_CURRENT_USER, UPDATE_IMAGE } from "../actions/types";
 import isEmpty from "../validation/is-empty";
 
 const initialState = {
   isAuthenticated: false,
-  user: {}
+  user: {},
+  avatar: ""
 };
 
 export default function(state = initialState, action) {
@@ -12,7 +13,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: !isEmpty(action.payload),
-        user: action.payload
+        user: action.payload,
+        avatar: action.payload.avatar
+      };
+    case UPDATE_IMAGE:
+      return {
+        ...state,
+        avatar: action.payload
       };
     default:
       return state;
