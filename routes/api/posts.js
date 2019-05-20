@@ -12,6 +12,10 @@ const Profile = require("../../models/Profile");
 //Validation
 const validatePostInput = require("../../validation/post");
 
+/*NOTE THAT A LOT OF THE POPULATE ARE NOT WRITTEN CLEANLY. 
+  THEY CAN BE SHORTENED ALOT. ALL INTO ONE AND ONLY ONE CALL WITH SPACED STRINGS
+*/
+
 //  @route GET api/posts/test
 //  @desc Tests posts router
 //  @access Public
