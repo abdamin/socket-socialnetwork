@@ -42,7 +42,11 @@ router.get("/:id", (req, res) => {
         .execPopulate()
         .then(fullPopulatedPost =>
           fullPopulatedPost
-            .populate("comments.user", ["name", "avatar"])
+            .populate("comments.user comments.profile", [
+              "name",
+              "avatar",
+              "handle"
+            ])
             .execPopulate()
             .then(populatedComments => {
               res.json(populatedComments);
@@ -184,8 +188,8 @@ router.post(
           post.save().then(newPost =>
             newPost
               .populate({
-                path: "user",
-                select: "name avatar"
+                path: "user profile",
+                select: "name avatar handle"
               })
               .execPopulate()
               .then(post => {
@@ -198,7 +202,7 @@ router.post(
                   .then(populatedPost => {
                     populatedPost
                       .populate({
-                        path: "profile",
+                        path: "comments.profile",
                         select: "handle"
                       })
                       .execPopulate()
@@ -246,8 +250,8 @@ router.post(
           post.save().then(newPost =>
             newPost
               .populate({
-                path: "user",
-                select: "name avatar"
+                path: "user profile",
+                select: "name avatar handle"
               })
               .execPopulate()
               .then(post => {
@@ -260,7 +264,7 @@ router.post(
                   .then(populatedPost => {
                     populatedPost
                       .populate({
-                        path: "profile",
+                        path: "comments.profile",
                         select: "handle"
                       })
                       .execPopulate()
@@ -297,7 +301,7 @@ router.post(
         const newComment = {
           text: req.body.text,
           user: req.user.id,
-          handle: req.body.handle
+          profile: req.body.profile
         };
 
         //Add to comments array
@@ -311,8 +315,8 @@ router.post(
         post.save().then(newPost =>
           newPost
             .populate({
-              path: "user",
-              select: "name avatar"
+              path: "user profile",
+              select: "name avatar handle"
             })
             .execPopulate()
             .then(post => {
@@ -325,7 +329,7 @@ router.post(
                 .then(populatedPost => {
                   populatedPost
                     .populate({
-                      path: "profile",
+                      path: "comments.profile",
                       select: "handle"
                     })
                     .execPopulate()
@@ -372,8 +376,8 @@ router.delete(
         post.save().then(newPost =>
           newPost
             .populate({
-              path: "user",
-              select: "name avatar"
+              path: "user profile",
+              select: "name avatar handle"
             })
             .execPopulate()
             .then(post => {
@@ -386,7 +390,7 @@ router.delete(
                 .then(populatedPost => {
                   populatedPost
                     .populate({
-                      path: "profile",
+                      path: "comments.profile",
                       select: "handle"
                     })
                     .execPopulate()

@@ -39,7 +39,7 @@ class CommentForm extends Component {
 
     const newComment = {
       text: this.state.text,
-      handle: this.props.profile.profile.handle
+      profile: this.props.profile.profile._id
     };
 
     this.props.addComment(postId, newComment);
