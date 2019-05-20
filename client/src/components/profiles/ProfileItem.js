@@ -26,20 +26,21 @@ class ProfileItem extends Component {
                 <span>{profile.location}</span>
               )}
             </p>
-            <Link to={`/profile/${profile.handle}`} className="btn btn-info">
+            <Link to={`/profile/${profile.handle}`} className="btn btn-primary">
               View Profile
             </Link>
           </div>
-          <div className="col-md-4 d-none d-md-block">
-            <h4>Skill Set</h4>
-            <ul className="list-group">
+          {/* <div className="col-md-4 d-none d-md-block"> */}
+          <div className="">
+            <h4 className="mb-0 pb-0">Skill Set</h4>
+
+            <div className="card-body pl-0">
               {profile.skills.slice(0, 4).map((skill, index) => (
-                <li key={index} className="list-group-item">
-                  <i className="fa fa-check pr" />
+                <span key={index} className="badge badge-primary mr-1 my-1">
                   {skill}
-                </li>
+                </span>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </div>

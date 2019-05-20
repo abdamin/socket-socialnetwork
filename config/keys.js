@@ -10,5 +10,9 @@ module.exports = {
     api_secret: "Cgf4N5fEfbtVj4gP9hNc82MI-Pw"
   },
   avatarPlaceholderUrl:
-    "https://res.cloudinary.com/dxemu0gku/image/upload/v1557829466/avatar-placeholder_knb8nt.gif"
+    "https://res.cloudinary.com/dxemu0gku/image/upload/v1557829466/avatar-placeholder_knb8nt.gif",
+  facebookOAuth: {
+    clientID: "841211302923731",
+    clientSecret: "1d6cdfc6a1a27b3c622140b76e2d40a5"
+  }
 };

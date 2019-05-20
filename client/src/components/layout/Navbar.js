@@ -6,6 +6,8 @@ import { logoutUser } from "../../actions/authActions";
 import { bindActionCreators } from "redux";
 import { clearCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 class Navbar extends Component {
   onLogoutClick = e => {
@@ -88,7 +90,8 @@ class Navbar extends Component {
               <li className="nav-item">
                 <Link className="nav-link" to="/profiles">
                   {" "}
-                  Developers
+                  <FontAwesomeIcon className="mr-1" icon={faSearch} />
+                  Developer Profiles
                 </Link>
               </li>
             </ul>

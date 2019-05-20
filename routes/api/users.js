@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
-const axios = require("axios");
 
 //nodemail credentials
 const EMAIL = require("../../config/keys").emailAddress;
