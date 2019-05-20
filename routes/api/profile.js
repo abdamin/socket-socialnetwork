@@ -127,9 +127,7 @@ router.post(
                   axios
                     .post("http://localhost:5000/api/activity/", activityData)
                     .then(response => {
-                      return res
-                        .status(200)
-                        .json({ Response: "Image upload succesful" });
+                      return res.status(200).json({ avatarUrl: avatar });
                     })
                     .catch(err => console.log(err));
                 });

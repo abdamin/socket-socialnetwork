@@ -9,6 +9,8 @@ import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
+import { updateAvatar } from "../../actions/authActions";
+
 import { bindActionCreators } from "redux";
 import isEmpty from "../../validation/is-empty";
 import axios from "axios";
@@ -128,6 +130,7 @@ class EditAccount extends React.Component {
       .post("/api/profile/uploadProfileImage", formData)
       .then(res => {
         this.setState({ changingImage: false });
+        this.props.updateAvatar(res.avatarUrl);
         window.location.reload();
       })
       .catch(err => {
@@ -410,7 +413,8 @@ EditAccount.propTypes = {
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired
+  getCurrentProfile: PropTypes.func.isRequired,
+  updateAvatar: PropTypes.func.isRequired
 ***REMOVED***
 
 const mapStateToProps = state => ({
@@ -421,7 +425,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { createProfile: createProfile, getCurrentProfile: getCurrentProfile },
+    {
+      createProfile: createProfile,
+      getCurrentProfile: getCurrentProfile,
+      updateAvatar
+  ***REMOVED***
     dispatch
   );
 ***REMOVED***

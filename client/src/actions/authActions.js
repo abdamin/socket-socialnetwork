@@ -2,7 +2,12 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
-import { GET_ERRORS, SET_CURRENT_USER, CLEAR_ERRORS } from "./types";
+import {
+  GET_ERRORS,
+  SET_CURRENT_USER,
+  CLEAR_ERRORS,
+  UPDATE_IMAGE
+} from "./types";
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -78,6 +83,14 @@ export const sendPasswordChangeEmail = userData => dispatch => {
         payload: err.response.data
       });
     });
+***REMOVED***
+
+// update image state of authenticated user
+export const updateAvatar = avatarData => dispatch => {
+  dispatch({
+    type: UPDATE_IMAGE,
+    payload: avatarData
+  });
 ***REMOVED***
 
 //Login - Get User Token
