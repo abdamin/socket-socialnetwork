@@ -87,6 +87,8 @@ export const sendPasswordChangeEmail = userData => dispatch => {
 
 // update image state of authenticated user
 export const updateAvatar = avatarData => dispatch => {
+  //Save avatar url to local storage
+  localStorage.setItem("avatar", avatarData);
   return dispatch({
     type: UPDATE_IMAGE,
     payload: avatarData
@@ -109,8 +111,12 @@ export const loginUser = userData => dispatch => {
       setAuthToken(token);
       //Decode token to get user data
       const decoded = jwt_decode(token);
+
       //Set current user
       dispatch(setCurrentUser(decoded));
+
+      //set avatar
+      dispatch(updateAvatar(decoded.avatar));
     })
     .catch(err => {
       return dispatch({
@@ -132,10 +138,15 @@ export const setCurrentUser = decoded => {
 export const logoutUser = () => dispatch => {
   //remove token from local storage
   localStorage.removeItem("jwtToken");
+
+  //remove avatar url from local storage
+  localStorage.removeItem("avatar");
   //Remove the auth header for future requests
   setAuthToken(false);
   // Set current user to empty object which will also set isAuthenticated to false
   dispatch(setCurrentUser({}));
+  dispatch(updateAvatar(""));
+  window.location.href = "/login";
 ***REMOVED***
 
 //Clear errors

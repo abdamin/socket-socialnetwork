@@ -18,9 +18,10 @@ class Navbar extends Component {
 
   render() {
     const { isAuthenticated } = this.props.auth;
-    const avatar = !isEmpty(this.props.profile.profile)
-      ? this.props.auth.avatar
-      : "";
+    const avatar =
+      this.props.auth.avatar === ""
+        ? this.props.auth.user.avatar
+        : this.props.auth.avatar;
     const handle = !isEmpty(this.props.profile.profile)
       ? this.props.profile.profile.handle
       : "";

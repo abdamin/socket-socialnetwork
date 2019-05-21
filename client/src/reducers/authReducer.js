@@ -13,8 +13,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: !isEmpty(action.payload),
-        user: action.payload,
-        avatar: action.payload.avatar
+        user: action.payload
       ***REMOVED***
     case UPDATE_IMAGE:
       return {

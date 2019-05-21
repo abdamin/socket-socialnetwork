@@ -4,7 +4,11 @@ import { Provider } from "react-redux";
 import store from "./store";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
+import {
+  setCurrentUser,
+  logoutUser,
+  updateAvatar
+} from "./actions/authActions";
 
 import PrivateRoute from "./components/common/PrivateRoute";
 
@@ -40,8 +44,13 @@ if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   //Decode token and get user info and exp
   const decoded = jwt_decode(localStorage.jwtToken);
+
+  //get avatar url from local storage
+  const avatar = localStorage.avatar;
   //Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
+  //Set image url to persist on browser refreshes as well
+  store.dispatch(updateAvatar(avatar));
 
   //check for expired token
   const currentTime = Date.now() / 1000;

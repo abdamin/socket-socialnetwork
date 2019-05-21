@@ -161,7 +161,7 @@ router.post(
           //add image url to db
           user.avatar = AVATARPLACEHOLDERURL;
           user.save().then(user => {
-            return res.status(200).json({ response: "Image Removed" });
+            return res.status(200).json({ avatarUrl: AVATARPLACEHOLDERURL });
           });
         }
       });
