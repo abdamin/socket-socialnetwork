@@ -35,6 +35,12 @@ class Profile extends Component {
         this.setState({ _id: nextProps.profile.profile._id });
         this.props.getActivities(nextProps.profile.profile._id);
       }
+      //when params changes re load the page
+      if (nextProps.match.params.handle !== nextProps.profile.profile.handle) {
+        console.log("here");
+        //rerender
+        window.location.reload();
+      }
     }
   }
   render() {

@@ -9,7 +9,7 @@ import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
-import { updateAvatar } from "../../actions/authActions";
+import { updateAvatar, updateHandle } from "../../actions/authActions";
 
 import { bindActionCreators } from "redux";
 import isEmpty from "../../validation/is-empty";
@@ -53,6 +53,11 @@ class EditAccount extends React.Component {
     }
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
+
+      //update logged in user handle if it changes
+      if (this.props.auth.handle !== profile.handle) {
+        this.props.updateHandle(profile.handle);
+      }
 
       //bring skills array back to CSV
       const skillsCSV = !isEmpty(profile.skills)
@@ -429,7 +434,8 @@ const mapDispatchToProps = dispatch => {
     {
       createProfile: createProfile,
       getCurrentProfile: getCurrentProfile,
-      updateAvatar
+      updateAvatar: updateAvatar,
+      updateHandle: updateHandle
   ***REMOVED***
     dispatch
   );

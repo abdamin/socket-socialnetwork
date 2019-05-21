@@ -6,7 +6,8 @@ import {
   GET_ERRORS,
   SET_CURRENT_USER,
   CLEAR_ERRORS,
-  UPDATE_IMAGE
+  UPDATE_IMAGE,
+  UPDATE_HANDLE
 } from "./types";
 
 // Register User
@@ -87,11 +88,21 @@ export const sendPasswordChangeEmail = userData => dispatch => {
 
 // update image state of authenticated user
 export const updateAvatar = avatarData => dispatch => {
-  //Save avatar url to local storage
+  //Save avatar url to local storage so that it persists over browser refreshes
   localStorage.setItem("avatar", avatarData);
   return dispatch({
     type: UPDATE_IMAGE,
     payload: avatarData
+  });
+***REMOVED***
+
+// update image state of authenticated user
+export const updateHandle = handleData => dispatch => {
+  //Save handle url to local storage so that it persists over browser refreshes
+  localStorage.setItem("handle", handleData);
+  return dispatch({
+    type: UPDATE_HANDLE,
+    payload: handleData
   });
 ***REMOVED***
 
@@ -117,6 +128,9 @@ export const loginUser = userData => dispatch => {
 
       //set avatar
       dispatch(updateAvatar(decoded.avatar));
+
+      //set handle
+      dispatch(updateHandle(""));
     })
     .catch(err => {
       return dispatch({
@@ -141,11 +155,15 @@ export const logoutUser = () => dispatch => {
 
   //remove avatar url from local storage
   localStorage.removeItem("avatar");
+
+  //remove handle from local storage
+  localStorage.removeItem("handle");
+
   //Remove the auth header for future requests
   setAuthToken(false);
   // Set current user to empty object which will also set isAuthenticated to false
+
   dispatch(setCurrentUser({}));
-  dispatch(updateAvatar(""));
   window.location.href = "/login";
 ***REMOVED***
 

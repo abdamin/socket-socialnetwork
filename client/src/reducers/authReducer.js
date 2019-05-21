@@ -1,10 +1,15 @@
-import { SET_CURRENT_USER, UPDATE_IMAGE } from "../actions/types";
+import {
+  SET_CURRENT_USER,
+  UPDATE_IMAGE,
+  UPDATE_HANDLE
+} from "../actions/types";
 import isEmpty from "../validation/is-empty";
 
 const initialState = {
   isAuthenticated: false,
   user: {},
-  avatar: ""
+  updatedAvatar: "",
+  handle: ""
 ***REMOVED***
 
 export default function(state = initialState, action) {
@@ -18,7 +23,12 @@ export default function(state = initialState, action) {
     case UPDATE_IMAGE:
       return {
         ...state,
-        avatar: action.payload
+        updatedAvatar: action.payload
+      ***REMOVED***
+    case UPDATE_HANDLE:
+      return {
+        ...state,
+        handle: action.payload
       ***REMOVED***
     default:
       return state;
