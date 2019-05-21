@@ -19,11 +19,11 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated } = this.props.auth;
     const avatar =
-      this.props.auth.avatar === ""
+      this.props.auth.updatedAvatar === ""
         ? this.props.auth.user.avatar
-        : this.props.auth.avatar;
-    const handle = !isEmpty(this.props.profile.profile)
-      ? this.props.profile.profile.handle
+        : this.props.auth.updatedAvatar;
+    const handle = !isEmpty(this.props.auth.handle)
+      ? this.props.auth.handle
       : "";
     const authLinks = (
       <ul className="navbar-nav ml-auto">

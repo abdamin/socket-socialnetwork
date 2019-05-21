@@ -7,7 +7,8 @@ import setAuthToken from "./utils/setAuthToken";
 import {
   setCurrentUser,
   logoutUser,
-  updateAvatar
+  updateAvatar,
+  updateHandle
 } from "./actions/authActions";
 
 import PrivateRoute from "./components/common/PrivateRoute";
@@ -47,10 +48,17 @@ if (localStorage.jwtToken) {
 
   //get avatar url from local storage
   const avatar = localStorage.avatar;
+
+  //get logged in user handle from local storage
+  const handle = localStorage.handle;
+
   //Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
   //Set image url to persist on browser refreshes as well
   store.dispatch(updateAvatar(avatar));
+
+  //Set handle to persist on browser refreshes as well
+  store.dispatch(updateHandle(handle));
 
   //check for expired token
   const currentTime = Date.now() / 1000;
@@ -59,8 +67,6 @@ if (localStorage.jwtToken) {
     store.dispatch(logoutUser());
     //TODO:clear the current profile
     store.dispatch(clearCurrentProfile());
-    //redirect to login
-    window.location.href = "/login";
   }
 }
 
