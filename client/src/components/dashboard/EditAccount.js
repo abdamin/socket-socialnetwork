@@ -148,6 +148,7 @@ class EditAccount extends React.Component {
       .post("/api/profile/removeProfileImage")
       .then(res => {
         this.setState({ changingImage: false });
+        this.props.updateAvatar(res.data.avatarUrl);
         window.location.reload();
       })
       .catch(err => {
