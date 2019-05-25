@@ -33,7 +33,7 @@ class activityItem extends Component {
                 {this.props.page === "PROFILE_PAGE"
                   ? this.props.activity.user.name
                   : " You"}{" "}
-                <strong> Joined</strong> Devconnector
+                <strong> Joined</strong> Socket
                 <br />
                 <small className="text-muted">
                   {" "}

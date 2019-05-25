@@ -61,7 +61,7 @@ class Register extends Component {
             <div className="col-md-6">
               <div className="text-center mt-4">
                 <h1 className="h2">Get started</h1>
-                <p className="lead">Create your Devconnector account</p>
+                <p className="lead">Create your Socket account</p>
               </div>
 
               <div className="card">

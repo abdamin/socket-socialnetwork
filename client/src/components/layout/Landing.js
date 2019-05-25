@@ -18,11 +18,11 @@ class Landing extends Component {
             <div className="row">
               <div className="col-md-12 text-center mt-7">
                 <h1 style={{ color: "white" }} className="display-3 mb-4">
-                  Developer Connector
+                  Socket
                 </h1>
                 <p className="lead">
-                  Create a developer profile/portfolio, share posts and get help
-                  from other developers
+                  Create a developer profile, share posts and get in touch with
+                  other developers
                 </p>
                 <hr />
                 <Link to="/register" className="btn btn-lg btn-light mr-2">
