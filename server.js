@@ -58,7 +58,7 @@ app.use(function(err, req, res, next) {
 //serve static assets in production
 if (process.env.NODE_ENV === "production") {
   //Set static/public folder
-  app.user(express.static("client/build"));
+  app.use(express.static("client/build"));
 
   //serve that index.html file ('*' means anything aside from these api routes above)
   app.get("*", (req, res) => {
