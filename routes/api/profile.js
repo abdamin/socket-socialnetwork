@@ -20,7 +20,7 @@ const CLOUDINARY_CONFIG = require("../../config/keys").cloudinary;
 cloudinary.config(CLOUDINARY_CONFIG);
 
 //api url config
-const API_URL = require("./config/keys").API_URL;
+const API_URL = require("../../config/keys").API_URL;
 
 //Load Profile Model
 const Profile = require("../../models/Profile");

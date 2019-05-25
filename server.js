@@ -21,6 +21,10 @@ app.use(bodyParser.json());
 //DB Config
 const db = require("./config/keys").mongoURI;
 
+const API_URL = require("./config/keys").API_URL;
+
+console.log(API_URL);
+
 //Connect to MongoDB
 mongoose
   .connect(db, { useNewUrlParser: true })

@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 //front end api url config
-const FRONT_API_URL = require("./config/keys").FRONT_API_URL;
+const FRONT_API_URL = require("../../config/keys").FRONT_API_URL;
 
 //Load user model
 const User = require("../../models/User");
