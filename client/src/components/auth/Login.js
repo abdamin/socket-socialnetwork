@@ -66,7 +66,7 @@ class Login extends Component {
                   <div className="m-sm-4">
                     <div className="text-center">
                       <h2 className="mb-4">
-                        <strong>DevConnector</strong>{" "}
+                        <strong>{"< Socket />"}</strong>{" "}
                       </h2>
                     </div>
                     <form onSubmit={this.onSubmit}>

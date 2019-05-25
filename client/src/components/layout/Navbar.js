@@ -75,7 +75,7 @@ class Navbar extends Component {
       <nav className="navbar sticky-top navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            DevConnector
+            {"< Socket />"}
           </Link>
           <button
             className="navbar-toggler"
