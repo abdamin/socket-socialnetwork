@@ -1,10 +1,10 @@
-import React from "./node_modules/react";
-import axios from "./node_modules/axios";
-import PropTypes from "./node_modules/prop-types";
-import { withRouter } from "./node_modules/react-router-dom";
-import { connect } from "./node_modules/react-redux";
+import React from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import { resetPassword } from "../../actions/authActions";
-import { bindActionCreators } from "./node_modules/redux";
+import { bindActionCreators } from "redux";
 import TextFieldGroup from "../common/TextFieldGroup";
 
 class ChangePassword extends React.Component {
