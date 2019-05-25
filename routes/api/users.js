@@ -4,8 +4,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
-const nodemailer = require("nodemailer");
+// const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+
+//set up sendgrid mail
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(require("../../config/keys").sendgrid_api_key);
 
 //front end api url config
 const FRONT_API_URL = require("../../config/keys").FRONT_API_URL;
@@ -83,36 +87,53 @@ router.post("/register", (req, res) => {
                 }
               });
 
-              //send a confirmation email
-              const transporter = nodemailer.createTransport({
-                service: "gmail",
-                port: 25,
-                auth: {
-                  user: EMAIL,
-                  pass: PASSWORD
-                },
-                tls: {
-                  rejectUnauthorised: false
-                }
-              });
+              // //send a confirmation email using node mailer
+              // const transporter = nodemailer.createTransport({
+              //   service: "gmail",
+              //   port: 25,
+              //   auth: {
+              //     user: EMAIL,
+              //     pass: PASSWORD
+              //   },
+              //   tls: {
+              //     rejectUnauthorised: false
+              //   }
+              // });
 
-              const mailOptions = {
-                from: "no-reply@devconnector.com",
+              // const mailOptions = {
+              //   from: "no-reply@devconnector.com",
+              //   to: newUser.email,
+              //   subject: "Account Verification Token",
+              //   text:
+              //     `Hello ${user.name},\n\n` +
+              //     `Please verify your account by clicking the link: \n ${FRONT_API_URL}` +
+              //     "/account-verify/" +
+              //     token.token +
+              //     ".\n"
+              // };
+              // transporter.sendMail(mailOptions, (err, info) => {
+              //   if (err) {
+              //     return console.log(err);
+              //   }
+              //   console.log(info);
+              // });
+
+              const msg = {
                 to: newUser.email,
-                subject: "Account Verification Token",
+                from: "no-reply@socket.com",
+                subject: "Socket - Email Verification",
                 text:
                   `Hello ${user.name},\n\n` +
                   `Please verify your account by clicking the link: \n ${FRONT_API_URL}` +
                   "/account-verify/" +
                   token.token +
                   ".\n"
+                // html: `<strong>This is a test email.</strong>`
               };
-              transporter.sendMail(mailOptions, (err, info) => {
-                if (err) {
-                  return console.log(err);
-                }
-                console.log(info);
-              });
+              sgMail
+                .send(msg)
+                .then(response => console.log(response))
+                .catch(err => console.log(err.message));
 
               //create a new profile with user id as profile handle by default upon registeration
               const profileFields = {

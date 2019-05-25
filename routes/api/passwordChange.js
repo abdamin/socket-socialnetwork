@@ -5,6 +5,10 @@ const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
+//set up sendgrid mail
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(require("../../config/keys").sendgrid_api_key);
+
 //front end api url config
 const FRONT_API_URL = require("../../config/keys").FRONT_API_URL;
 
@@ -219,38 +223,56 @@ router.post("/user/send", (req, res) => {
       .save()
       .then(token => {
         if (token) {
-          //send a confirmation email
-          const transporter = nodemailer.createTransport({
-            service: "gmail",
-            port: 25,
-            auth: {
-              user: EMAIL,
-              pass: PASSWORD
-            },
-            tls: {
-              rejectUnauthorised: false
-            }
-          });
+          // //send a password change email using node mailer
+          // const transporter = nodemailer.createTransport({
+          //   service: "gmail",
+          //   port: 25,
+          //   auth: {
+          //     user: EMAIL,
+          //     pass: PASSWORD
+          //   },
+          //   tls: {
+          //     rejectUnauthorised: false
+          //   }
+          // });
+          // const mailOptions = {
+          //   from: "no-reply@devconnector.com",
+          //   to: user.email,
+          //   subject: "Account Password Change Instructions",
+          //   text:
+          //     `Hello ${user.name},\n\n` +
+          //     "You are receiving this email because you (or someone else) have requested to reset the password of your account.\n" +
+          //     `Please click on this link or paste this link into your browser to change your account password: \n ${FRONT_API_URL}` +
+          //     "/change-password/" +
+          //     token.token +
+          //     ".\n" +
+          //     "If you did not request this, please ignore this email.\n"
+          // };
+          // transporter.sendMail(mailOptions, (err, info) => {
+          //   if (err) {
+          //     return console.log(err);
+          //   }
+          //   console.log(info);
+          // });
 
-          const mailOptions = {
-            from: "no-reply@devconnector.com",
+          const msg = {
             to: user.email,
-            subject: "Account Password Change Instructions",
+            from: "no-reply@socket.com",
+            subject: "Socket - Password Change Instructions",
             text:
               `Hello ${user.name},\n\n` +
-              "You are receiving this email because you (or someone else) have requested to reset the password of your account.\n" +
+              "You are receiving this email because you have requested to reset the password of your account.\n" +
               `Please click on this link or paste this link into your browser to change your account password: \n ${FRONT_API_URL}` +
               "/change-password/" +
               token.token +
               ".\n" +
               "If you did not request this, please ignore this email.\n"
+            // html: `<strong>This is a test email.</strong>`
           };
-          transporter.sendMail(mailOptions, (err, info) => {
-            if (err) {
-              return console.log(err);
-            }
-            console.log(info);
-          });
+          sgMail
+            .send(msg)
+            .then(response => console.log(response))
+            .catch(err => console.log(err.message));
         }
       })
       .catch(err => {
