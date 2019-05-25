@@ -12,6 +12,8 @@ const Profile = require("../../models/Profile");
 //Validation
 const validatePostInput = require("../../validation/post");
 
+const API_URL = require("./config/keys").API_URL;
+
 /*NOTE THAT A LOT OF THE POPULATE ARE NOT WRITTEN CLEANLY. 
   THEY CAN BE SHORTENED ALOT. ALL INTO ONE AND ONLY ONE CALL WITH SPACED STRINGS
 */
@@ -120,12 +122,10 @@ router.post(
                 profile: populatedPost.profile._id
               ***REMOVED***
 
-              console.log("API_URL:" + process.env.API_URL);
-
               axios.defaults.headers.common["Authorization"] =
                 req.headers.authorization;
               axios
-                .post(`${process.env.API_URL}/api/activity/`, activityData)
+                .post(`${API_URL}/api/activity/`, activityData)
                 .then(response => {
                   console.log(response);
                   return res.json(populatedPost);

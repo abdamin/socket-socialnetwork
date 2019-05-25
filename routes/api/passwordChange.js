@@ -5,6 +5,9 @@ const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
+//front end api url config
+const FRONT_API_URL = require("./config/keys").FRONT_API_URL;
+
 //Load user model
 const User = require("../../models/User");
 
@@ -236,8 +239,7 @@ router.post("/user/send", (req, res) => {
             text:
               `Hello ${user.name},\n\n` +
               "You are receiving this email because you (or someone else) have requested to reset the password of your account.\n" +
-              "Please click on this link or paste this link into your browser to change your account password: \nhttp://" +
-              "localhost:3000" +
+              `Please click on this link or paste this link into your browser to change your account password: \n ${FRONT_API_URL}` +
               "/change-password/" +
               token.token +
               ".\n" +
