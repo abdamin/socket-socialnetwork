@@ -16,7 +16,8 @@ import isEmpty from "../../validation/is-empty";
 import axios from "axios";
 import Spinner from "../common/Spinner";
 
-const URL = JSON.stringify(process.env.API_URL) || "http://localhost:3000";
+// const URL = "http://localhost:3000";
+const URL = "https://salty-everglades-17999.herokuapp.com";
 
 const PLACEHOLDERURL =
   "https://res.cloudinary.com/dxemu0gku/image/upload/v1557829466/avatar-placeholder_knb8nt.gif";
