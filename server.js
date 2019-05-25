@@ -10,6 +10,8 @@ const activity = require("./routes/api/activity");
 const confirmation = require("./routes/api/confirmation");
 const passwordChange = require("./routes/api/passwordChange");
 
+const path = require("path");
+
 const app = express();
 
 //Body Parser middleware
@@ -52,6 +54,18 @@ app.use(function(err, req, res, next) {
 app.use(function(err, req, res, next) {
   return res.status(500).json({ error: err });
 });
+
+//serve static assets in production
+if (process.env.NODE_ENV === "production") {
+  //Set static/public folder
+  app.user(express.static("client/build"));
+
+  //serve that index.html file ('*' means anything aside from these api routes above)
+  app.get("*", (req, res) => {
+    //load the index.html file
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const port = process.env.PORT || 5000;
 
