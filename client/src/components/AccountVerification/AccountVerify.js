@@ -36,13 +36,13 @@ class AccountVerify extends React.Component {
               <div className="col-md-8 m-auto">
                 <h1 className="display-4 text-center">Account Verified</h1>
                 <p className="lead text-center">
-                  You may sign in to your DevConnector account
+                  You may sign in to your Socket account
                 </p>
                 <div className="text-center">
                   <Link
                     to="/login"
                     value="Login"
-                    className="btn btn-info btn-lg mt-4"
+                    className="btn btn-primary btn-lg mt-4"
                   >
                     Login
                   </Link>
