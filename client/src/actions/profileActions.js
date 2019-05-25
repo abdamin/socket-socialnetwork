@@ -8,6 +8,7 @@ import {
   SET_CURRENT_USER,
   GET_PROFILES
 } from "./types";
+import setAuthToken from "../utils/setAuthToken";
 
 //Get current profile
 export const getCurrentProfile = () => dispatch => {
@@ -184,6 +185,19 @@ export const deleteAccount = () => dispatch => {
     axios
       .delete("/api/profile")
       .then(res => {
+        //remove token from local storage
+        localStorage.removeItem("jwtToken");
+
+        //remove avatar url from local storage
+        localStorage.removeItem("avatar");
+
+        //remove handle from local storage
+        localStorage.removeItem("handle");
+
+        //Remove the auth header for future requests
+        setAuthToken(false);
+        // Set current user to empty object which will also set isAuthenticated to false
+
         dispatch({
           type: SET_CURRENT_USER,
           payload: {}
