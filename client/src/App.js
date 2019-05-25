@@ -21,8 +21,8 @@ import Login from "./components/auth/Login";
 import AccountVerify from "./components/AccountVerification/AccountVerify";
 
 import EmailVerification from "./components/AccountVerification/EmailVerification";
-import ForgotPassword from "./components/forgotPassword/ForgotPassword";
-import ChangePassword from "./components/forgotPassword/ChangePassword";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import ChangePassword from "./components/ForgotPassword/ChangePassword";
 
 import AddEducation from "./components/add-credentials/AddEducation";
 import AddExperience from "./components/add-credentials/AddExperience";
