@@ -18,9 +18,9 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import AccountVerify from "./components/accountVerification/AccountVerify";
+import AccountVerify from "./components/AccountVerification/AccountVerify";
 
-import EmailVerification from "./components/accountVerification/EmailVerification";
+import EmailVerification from "./components/AccountVerification/EmailVerification";
 import ForgotPassword from "./components/forgotPassword/ForgotPassword";
 import ChangePassword from "./components/forgotPassword/ChangePassword";
 
