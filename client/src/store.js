@@ -11,9 +11,9 @@ const store = createStore(
   initialState,
   //so that we can use the redux chrome extension
   compose(
-    applyMiddleware(...middleware),
+    applyMiddleware(...middleware)
     //could commented out so that the app can run on browsers other than chrome
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 
