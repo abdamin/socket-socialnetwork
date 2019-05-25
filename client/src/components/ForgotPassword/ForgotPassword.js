@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { Component } from "./node_modules/react";
+import PropTypes from "./node_modules/prop-types";
+import { connect } from "./node_modules/react-redux";
 import { sendPasswordChangeEmail } from "../../actions/authActions";
-import { bindActionCreators } from "redux";
-import { withRouter } from "react-router-dom";
-import classnames from "classnames";
+import { bindActionCreators } from "./node_modules/redux";
+import { withRouter } from "./node_modules/react-router-dom";
+import classnames from "./node_modules/classnames";
 import isEmpty from "../../validation/is-empty";
 
 class ForgotPassword extends Component {

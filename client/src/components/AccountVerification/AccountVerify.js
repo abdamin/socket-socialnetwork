@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React from "./node_modules/react";
+import { Link } from "./node_modules/react-router-dom";
+import axios from "./node_modules/axios";
 
 class AccountVerify extends React.Component {
   constructor() {
