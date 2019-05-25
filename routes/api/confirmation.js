@@ -7,7 +7,7 @@ const crypto = require("crypto");
 const User = require("../../models/User");
 
 //front end api url config
-const FRONT_API_URL = require("./config/keys").FRONT_API_URL;
+const FRONT_API_URL = require("../../config/keys").FRONT_API_URL;
 
 //Load Account Verification Token Model
 const Token = require("../../models/Token");

@@ -12,7 +12,7 @@ const Profile = require("../../models/Profile");
 //Validation
 const validatePostInput = require("../../validation/post");
 
-const API_URL = require("./config/keys").API_URL;
+const API_URL = require("../../config/keys").API_URL;
 
 /*NOTE THAT A LOT OF THE POPULATE ARE NOT WRITTEN CLEANLY. 
   THEY CAN BE SHORTENED ALOT. ALL INTO ONE AND ONLY ONE CALL WITH SPACED STRINGS

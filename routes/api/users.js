@@ -8,7 +8,7 @@ const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
 //front end api url config
-const FRONT_API_URL = require("./config/keys").FRONT_API_URL;
+const FRONT_API_URL = require("../../config/keys").FRONT_API_URL;
 
 //nodemail credentials
 const EMAIL = require("../../config/keys").emailAddress;
