@@ -6,6 +6,9 @@ const crypto = require("crypto");
 //Load user model
 const User = require("../../models/User");
 
+//front end api url config
+const FRONT_API_URL = require("./config/keys").FRONT_API_URL;
+
 //Load Account Verification Token Model
 const Token = require("../../models/Token");
 
@@ -133,8 +136,7 @@ router.post("/resend", (req, res) => {
             subject: "Account Verification Token",
             text:
               `Hello ${user.name},\n\n` +
-              "Please verify your account by clicking the link: \nhttp://" +
-              "localhost:3000" +
+              `Please verify your account by clicking the link: \n ${FRONT_API_URL}` +
               "/account-verify/" +
               token.token +
               ".\n"

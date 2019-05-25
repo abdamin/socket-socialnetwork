@@ -7,6 +7,9 @@ const passport = require("passport");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
+//front end api url config
+const FRONT_API_URL = require("./config/keys").FRONT_API_URL;
+
 //nodemail credentials
 const EMAIL = require("../../config/keys").emailAddress;
 const PASSWORD = require("../../config/keys").password;
@@ -99,8 +102,7 @@ router.post("/register", (req, res) => {
                 subject: "Account Verification Token",
                 text:
                   `Hello ${user.name},\n\n` +
-                  "Please verify your account by clicking the link: \nhttp://" +
-                  "localhost:3000" +
+                  `Please verify your account by clicking the link: \n ${FRONT_API_URL}` +
                   "/account-verify/" +
                   token.token +
                   ".\n"

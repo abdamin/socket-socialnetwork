@@ -19,6 +19,9 @@ const AVATARPLACEHOLDERURL = require("../../config/keys").avatarPlaceholderUrl;
 const CLOUDINARY_CONFIG = require("../../config/keys").cloudinary;
 cloudinary.config(CLOUDINARY_CONFIG);
 
+//api url config
+const API_URL = require("./config/keys").API_URL;
+
 //Load Profile Model
 const Profile = require("../../models/Profile");
 //Load User Model
@@ -125,7 +128,7 @@ router.post(
                   axios.defaults.headers.common["Authorization"] =
                     req.headers.authorization;
                   axios
-                    .post("http://localhost:5000/api/activity/", activityData)
+                    .post(`${API_URL}/api/activity/`, activityData)
                     .then(response => {
                       return res.status(200).json({ avatarUrl: avatar });
                     })
@@ -424,7 +427,7 @@ router.post(
         axios.defaults.headers.common["Authorization"] =
           req.headers.authorization;
         axios
-          .post("http://localhost:5000/api/activity/", activityData)
+          .post(`${API_URL}/api/activity/`, activityData)
           .then(response => {
             console.log(response);
             return res.json(profile);
@@ -475,7 +478,7 @@ router.post(
         axios.defaults.headers.common["Authorization"] =
           req.headers.authorization;
         axios
-          .post("http://localhost:5000/api/activity/", activityData)
+          .post(`${API_URL}/api/activity/`, activityData)
           .then(response => {
             console.log(response);
             return res.json(profile);

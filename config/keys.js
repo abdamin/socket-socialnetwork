@@ -14,5 +14,7 @@ module.exports = {
   facebookOAuth: {
     clientID: "841211302923731",
     clientSecret: "1d6cdfc6a1a27b3c622140b76e2d40a5"
-  }
+  },
+  API_URL: process.env.API_URL || "http://localhost:5000",
+  FRONT_API_URL: process.env.API_URL || "http://localhost:3000"
 };
