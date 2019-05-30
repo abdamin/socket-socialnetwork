@@ -7,6 +7,9 @@ const passport = require("passport");
 // const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
+//load email template
+const confirmationEmailTemplate = require("../../emailTemplates/confirmation");
+
 //set up sendgrid mail
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(require("../../config/keys").sendgrid_api_key);
@@ -127,8 +130,11 @@ router.post("/register", (req, res) => {
                   `Please verify your account by clicking the link: \n ${FRONT_API_URL}` +
                   "/account-verify/" +
                   token.token +
-                  ".\n"
-                // html: `<strong>This is a test email.</strong>`
+                  ".\n",
+                html: confirmationEmailTemplate(
+                  user,
+                  FRONT_API_URL + "/account-verify/" + token.token
+                )
               };
               sgMail
                 .send(msg)

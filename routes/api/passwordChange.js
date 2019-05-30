@@ -9,6 +9,9 @@ const passport = require("passport");
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(require("../../config/keys").sendgrid_api_key);
 
+//load email template
+const passwordChangeEmailTemplate = require("../../emailTemplates/passwordChange");
+
 //front end api url config
 const FRONT_API_URL = require("../../config/keys").FRONT_API_URL;
 
@@ -266,8 +269,11 @@ router.post("/user/send", (req, res) => {
               "/change-password/" +
               token.token +
               ".\n" +
-              "If you did not request this, please ignore this email.\n"
-            // html: `<strong>This is a test email.</strong>`
+              "If you did not request this, please ignore this email.\n",
+            html: passwordChangeEmailTemplate(
+              user,
+              FRONT_API_URL + "/change-password/" + token.token
+            )
           };
           sgMail
             .send(msg)
