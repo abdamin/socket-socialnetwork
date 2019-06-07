@@ -123,7 +123,7 @@ router.post("/register", (req, res) => {
 
               const msg = {
                 to: newUser.email,
-                from: "no-reply@socket.com",
+                from: "Socket <no-reply@socket.com>",
                 subject: "Socket - Email Verification",
                 text:
                   `Hello ${user.name},\n\n` +
