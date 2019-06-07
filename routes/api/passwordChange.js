@@ -260,7 +260,7 @@ router.post("/user/send", (req, res) => {
 
           const msg = {
             to: user.email,
-            from: "no-reply@socket.com",
+            from: "Socket <no-reply@socket.com>",
             subject: "Socket - Password Change Instructions",
             text:
               `Hello ${user.name},\n\n` +
