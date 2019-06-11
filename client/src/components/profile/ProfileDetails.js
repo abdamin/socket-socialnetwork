@@ -25,6 +25,12 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 class ProfileDetails extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showModal: false
+    ***REMOVED***
+  }
   render() {
     const { profile } = this.props;
 
@@ -34,7 +40,9 @@ class ProfileDetails extends Component {
           <h5 className="card-title mb-0">Profile Details</h5>
         </div>
 
-        <ProfileHeader profile={profile} />
+        <Modal />
+
+        <ProfileHeader profile={profile} showModal={this.state.showModal} />
 
         <hr className="my-0" />
         <EducationItems profile={profile} />
@@ -48,6 +56,52 @@ class ProfileDetails extends Component {
     );
   }
 }
+
+const Modal = () => {
+  return (
+    <div>
+      <div
+        class="modal fade"
+        id="exampleModalCenter"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">
+                Feature Coming Soon
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              We are still working on making this feature available to you as
+              soon as possible
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+***REMOVED***
 
 const EducationItems = ({ profile }) => {
   const eduItems = profile.education.map(edu => (
@@ -214,7 +268,7 @@ const SocialLinks = ({ profile }) => {
   );
 ***REMOVED***
 
-const ProfileHeader = ({ profile }) => {
+const ProfileHeader = ({ profile, showModal }) => {
   const skills = profile.skills.map((skill, index) => (
     <span key={index} className="badge badge-primary mr-1 my-1">
       {skill}
@@ -237,8 +291,20 @@ const ProfileHeader = ({ profile }) => {
         </div>
 
         <div>
-          <button className="btn btn-primary btn-sm mr-1">Follow</button>
-          <button className="btn btn-primary btn-sm" size="sm" color="primary">
+          <button
+            data-toggle="modal"
+            data-target="#exampleModalCenter"
+            className="btn btn-primary btn-sm mr-1"
+          >
+            Follow
+          </button>
+          <button
+            data-toggle="modal"
+            data-target="#exampleModalCenter"
+            className="btn btn-primary btn-sm"
+            size="sm"
+            color="primary"
+          >
             <MessageSquare width={16} height={16} /> Message
           </button>
         </div>
