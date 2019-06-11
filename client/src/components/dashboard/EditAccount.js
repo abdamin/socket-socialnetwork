@@ -125,7 +125,7 @@ class EditAccount extends React.Component {
   onImageChange = e => {
     this.setState({
       selectedImage: e.target.files[0],
-      avatar: URL.createObjectURL(e.target.files[0])
+      avatar: window.URL.createObjectURL(e.target.files[0])
     });
   };
   uploadImage = () => {
