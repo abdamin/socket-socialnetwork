@@ -6,6 +6,10 @@ const crypto = require("crypto");
 //Load user model
 const User = require("../../models/User");
 
+//set up sendgrid mail
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(require("../../config/keys").sendgrid_api_key);
+
 //front end api url config
 const FRONT_API_URL = require("../../config/keys").FRONT_API_URL;
 
@@ -141,12 +145,16 @@ router.post("/resend", (req, res) => {
               token.token +
               ".\n"
           };
-          transporter.sendMail(mailOptions, (err, info) => {
-            if (err) {
-              return console.log(err);
-            }
-            console.log(info);
-          });
+          // transporter.sendMail(mailOptions, (err, info) => {
+          //   if (err) {
+          //     return console.log(err);
+          //   }
+          //   console.log(info);
+          // });
+          sgMail
+            .send(mailOptions)
+            .then(response => console.log(response))
+            .catch(err => console.log(err.message));
         }
       })
       .catch(err => {
