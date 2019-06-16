@@ -30,7 +30,7 @@ const validatePasswordInput = require("../../validation/passwordChange");
 const validateEmailInput = require("../../validation/confirmation");
 const validateProfilePasswordChangeInput = require("../../validation/profilePasswordChange");
 
-//  @route GET api/confirmation/test
+//  @route GET api/passwordChange/test
 //  @desc Tests confirmation router
 //  @access Public
 router.get("/test", (req, res) => res.json({ msg: "Password Change Works" }));
@@ -131,7 +131,7 @@ router.post("/:token", (req, res) => {
 
 //  @route post api/passwordChange/profile
 //  @desc Change User's Account password from profile settings
-//  @access Publlic
+//  @access Private
 router.post(
   "/profile/password",
   passport.authenticate("jwt", { session: false }),
