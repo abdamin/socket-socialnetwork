@@ -135,7 +135,7 @@ router.post("/resend", (req, res) => {
           });
 
           const mailOptions = {
-            from: "no-reply@devconnector.com",
+            from: "Socket <no-reply@socket.com>",
             to: user.email,
             subject: "Account Verification Token",
             text:
