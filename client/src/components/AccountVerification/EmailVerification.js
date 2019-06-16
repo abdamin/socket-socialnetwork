@@ -56,7 +56,7 @@ class EmailVerification extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Email Verification</h1>
               <p className="lead text-center">
-                Verify your DevConnector Email Address
+                Verify your Socket Email Address
               </p>
               <form onSubmit={this.onSubmit}>
                 <div>
@@ -84,7 +84,10 @@ class EmailVerification extends Component {
                     )}
                   </div>
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input
+                  type="submit"
+                  className="btn btn-primary btn-block mt-4"
+                />
               </form>
             </div>
           </div>
