@@ -22,6 +22,9 @@ router.get("/test", (req, res) => res.json({ msg: "Activity Works" }));
 router.get("/profile/:id", (req, res) => {
   let errors = {};
 
+  if (!ObjectId.isValid(req.params.id))
+    return res.json({ error: "Invalid Id" });
+
   Activity.find({ profile: req.params.id })
     .sort({ date: -1 })
     .populate("user profile", ["name", "avatar", "handle"])
