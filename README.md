@@ -15,5 +15,5 @@ You can view a hosted instance of Socket [here](https://salty-everglades-17999.h
 
 # App Info
 
-<h5>Author<h5/>
+<h4>Author<h4/>
 Abdullah Amin
