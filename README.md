@@ -12,3 +12,8 @@ You can view a hosted instance of Socket [here](https://salty-everglades-17999.h
     $ npm install
     $ npm run build
     $ npm start
+
+# App Info
+
+<h5>Author<h5/>
+Abdullah Amin
