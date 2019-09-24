@@ -13,8 +13,10 @@ You can view a hosted instance of Socket [here](https://salty-everglades-17999.h
     $ npm run build
     $ npm start
 
+# Setup API Keys and other credentials
+
 # App Info
 
-<h4>Author<h4/>: Abdullah Amin
+Author: Abdullah Amin
 
 License: MIT
