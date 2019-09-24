@@ -9,9 +9,11 @@ You can view a hosted instance of Socket [here](https://salty-everglades-17999.h
 # Set up locally
 
     $ git clone https://github.com/abdamin/socket-socialnetwork.git
-    $ npm install
-    $ npm run build
-    $ npm start
+    $ npm install //install server dependencies
+    $ cd client
+    $ npm install //install client dependencies
+    $ cd ../
+    $ npm run dev //to run both server and client concurrently
 
 # Setup API Keys and other credentials
 
