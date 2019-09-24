@@ -56,6 +56,7 @@ app.use(function(err, req, res, next) {
 
 // catch all error handling function for express middleware
 app.use(function(err, req, res, next) {
+  console.log(err);
   return res.status(500).json({ error: err });
 });
 
