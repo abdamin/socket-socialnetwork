@@ -42,7 +42,7 @@ class Landing extends Component {
 
 Landing.propTypes = {
   auth: PropTypes.object.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   auth: state.auth

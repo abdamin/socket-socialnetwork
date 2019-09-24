@@ -127,4 +127,4 @@ module.exports = function confirmation(user, link) {
     </div>  
    </body>
   </html>`;
-***REMOVED***
+};

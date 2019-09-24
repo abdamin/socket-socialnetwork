@@ -11,14 +11,14 @@ import Moment from "react-moment";
 class PostItem extends Component {
   onDeleteClick = postId => {
     this.props.deletePost(postId);
-  ***REMOVED***
+  };
 
   onLikeClick = postId => {
     this.props.addLike(postId);
-  ***REMOVED***
+  };
   onUnlikeClick = postId => {
     this.props.removeLike(postId);
-  ***REMOVED***
+  };
 
   findUserLike = likes => {
     const { auth } = this.props;
@@ -27,7 +27,7 @@ class PostItem extends Component {
     } else {
       return false;
     }
-  ***REMOVED***
+  };
 
   render() {
     const { post, auth, showActions } = this.props;
@@ -68,7 +68,7 @@ class PostItem extends Component {
       lastWeek: "[last] dddd [at] LT",
       nextWeek: "dddd [at] LT",
       sameElse: "L"
-    ***REMOVED***
+    };
 
     return (
       <div>
@@ -154,7 +154,7 @@ class PostItem extends Component {
 
 PostItem.defaultProps = {
   showActions: true
-***REMOVED***
+};
 
 PostItem.propTypes = {
   auth: PropTypes.object.isRequired,
@@ -162,7 +162,7 @@ PostItem.propTypes = {
   deletePost: PropTypes.func.isRequired,
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   auth: state.auth
@@ -173,7 +173,7 @@ const mapDispatchToProps = dispatch => {
     { deletePost: deletePost, addLike: addLike, removeLike: removeLike },
     dispatch
   );
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

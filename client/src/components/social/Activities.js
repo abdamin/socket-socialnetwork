@@ -19,7 +19,7 @@ class Activities extends React.Component {
     super(props);
     this.state = {
       _id: ""
-    ***REMOVED***
+    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -227,7 +227,7 @@ class Activities extends React.Component {
 Activities.propTypes = {
   profile: PropTypes.object.isRequired,
   activity: PropTypes.object.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   profile: state.profile,
@@ -236,7 +236,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getActivities: getActivities }, dispatch);
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

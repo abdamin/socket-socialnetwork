@@ -50,6 +50,6 @@ class ProfileItem extends Component {
 
 ProfileItem.propTypes = {
   profile: PropTypes.object.isRequired
-***REMOVED***
+};
 
 export default ProfileItem;

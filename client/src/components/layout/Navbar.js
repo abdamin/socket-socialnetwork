@@ -14,7 +14,7 @@ class Navbar extends Component {
     e.preventDefault();
     this.props.clearCurrentProfile();
     this.props.logoutUser();
-  ***REMOVED***
+  };
 
   render() {
     const { isAuthenticated } = this.props.auth;
@@ -107,7 +107,7 @@ class Navbar extends Component {
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -119,7 +119,7 @@ const mapDispatchToProps = dispatch => {
     { logoutUser: logoutUser, clearCurrentProfile: clearCurrentProfile },
     dispatch
   );
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

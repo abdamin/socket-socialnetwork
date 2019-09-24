@@ -29,7 +29,7 @@ class Timeline extends Component {
 Timeline.propTypes = {
   post: PropTypes.object.isRequired,
   getPosts: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   post: state.post
@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getPosts: getPosts }, dispatch);
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

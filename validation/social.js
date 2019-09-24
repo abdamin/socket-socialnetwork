@@ -2,7 +2,7 @@ const Validator = require("validator");
 const isEmpty = require("./is-empty");
 
 module.exports = function validateSocialInput(data) {
-  let errors = {***REMOVED***
+  let errors = {};
 
   if (!isEmpty(data.youtube)) {
     if (!Validator.isURL(data.youtube)) {
@@ -33,5 +33,5 @@ module.exports = function validateSocialInput(data) {
   return {
     errors: errors,
     isValid: isEmpty(errors)
-  ***REMOVED***
-***REMOVED***
+  };
+};

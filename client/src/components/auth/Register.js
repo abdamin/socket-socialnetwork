@@ -16,7 +16,7 @@ class Register extends Component {
       password: "",
       password2: "",
       errors: {}
-    ***REMOVED***
+    };
   }
 
   componentDidMount() {
@@ -35,7 +35,7 @@ class Register extends Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  ***REMOVED***
+  };
 
   onSubmit = e => {
     e.preventDefault();
@@ -45,10 +45,10 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2
-    ***REMOVED***
+    };
 
     this.props.registerUser(newUser, this.props.history);
-  ***REMOVED***
+  };
 
   render() {
     const { errors } = this.state;
@@ -145,7 +145,7 @@ Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -155,12 +155,12 @@ const mapStateToProps = state => ({
 // const mapDispatchToProps = dispatch => {
 //   return {
 //     registerUser: userData => dispatch(registerUser(dispatch))
-//   ***REMOVED***
-// ***REMOVED***
+//   };
+// };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ registerUser: registerUser }, dispatch);
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

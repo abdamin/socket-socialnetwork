@@ -29,7 +29,7 @@ class ProfileDetails extends Component {
     super();
     this.state = {
       showModal: false
-    ***REMOVED***
+    };
   }
   render() {
     const { profile } = this.props;
@@ -101,7 +101,7 @@ const Modal = () => {
       </div>
     </div>
   );
-***REMOVED***
+};
 
 const EducationItems = ({ profile }) => {
   const eduItems = profile.education.map(edu => (
@@ -144,7 +144,7 @@ const EducationItems = ({ profile }) => {
       )}
     </div>
   );
-***REMOVED***
+};
 
 const ExperienceItems = ({ profile }) => {
   const expItems = profile.experience.map(exp => (
@@ -187,7 +187,7 @@ const ExperienceItems = ({ profile }) => {
       )}
     </div>
   );
-***REMOVED***
+};
 
 const SocialLinks = ({ profile }) => {
   return (
@@ -266,7 +266,7 @@ const SocialLinks = ({ profile }) => {
       </ul>
     </div>
   );
-***REMOVED***
+};
 
 const ProfileHeader = ({ profile, showModal }) => {
   const skills = profile.skills.map((skill, index) => (
@@ -343,6 +343,6 @@ const ProfileHeader = ({ profile, showModal }) => {
       </div>
     </div>
   );
-***REMOVED***
+};
 
 export default ProfileDetails;

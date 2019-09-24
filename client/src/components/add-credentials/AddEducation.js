@@ -20,7 +20,7 @@ class AddEducation extends Component {
       description: "",
       errors: {},
       disabled: false
-    ***REMOVED***
+    };
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
@@ -39,21 +39,21 @@ class AddEducation extends Component {
       to: this.state.to,
       current: this.state.current,
       description: this.state.description
-    ***REMOVED***
+    };
 
     this.props.addEducation(educData, this.props.history);
-  ***REMOVED***
+  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  ***REMOVED***
+  };
 
   onCheck = e => {
     this.setState({
       disabled: !this.state.disabled,
       current: !this.state.current
     });
-  ***REMOVED***
+  };
 
   render() {
     const { errors } = this.state;
@@ -150,7 +150,7 @@ AddEducation.propTypes = {
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   addEducation: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   profile: state.profile,
@@ -159,7 +159,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ addEducation: addEducation }, dispatch);
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

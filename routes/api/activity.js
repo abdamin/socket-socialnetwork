@@ -20,7 +20,7 @@ router.get("/test", (req, res) => res.json({ msg: "Activity Works" }));
 //  @desc Get User's Activities by profile id
 //  @access Public
 router.get("/profile/:id", (req, res) => {
-  let errors = {***REMOVED***
+  let errors = {};
 
   Activity.find({ profile: req.params.id })
     .sort({ date: -1 })

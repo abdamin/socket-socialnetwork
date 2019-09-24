@@ -11,7 +11,7 @@ class PostForm extends Component {
     this.state = {
       text: "",
       errors: {}
-    ***REMOVED***
+    };
   }
 
   componentWillReceiveProps(newProps) {
@@ -28,15 +28,15 @@ class PostForm extends Component {
       text: this.state.text,
       name: user.name,
       avatar: user.avatar
-    ***REMOVED***
+    };
 
     this.props.addPost(newPost);
     this.setState({ text: "" });
-  ***REMOVED***
+  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  ***REMOVED***
+  };
 
   render() {
     const { errors } = this.state;
@@ -73,17 +73,17 @@ PostForm.propTypes = {
   addPost: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
-***REMOVED***
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ addPost: addPost }, dispatch);
-***REMOVED***
+};
 const mapStateToProps = state => {
   return {
     errors: state.errors,
     auth: state.auth
-  ***REMOVED***
-***REMOVED***
+  };
+};
 
 export default connect(
   mapStateToProps,

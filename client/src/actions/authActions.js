@@ -25,7 +25,7 @@ export const registerUser = (userData, history) => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 // Resend User Account Verification Email
 export const verifyUser = userData => dispatch => {
@@ -38,7 +38,7 @@ export const verifyUser = userData => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 // Reset User Password through email method
 export const resetPassword = (userData, history, token) => dispatch => {
@@ -55,7 +55,7 @@ export const resetPassword = (userData, history, token) => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 // Change User Password from profile settings
 export const changePassword = userData => dispatch => {
@@ -69,7 +69,7 @@ export const changePassword = userData => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 // Send Password Change Email
 export const sendPasswordChangeEmail = userData => dispatch => {
@@ -84,7 +84,7 @@ export const sendPasswordChangeEmail = userData => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 // update image state of authenticated user
 export const updateAvatar = avatarData => dispatch => {
@@ -94,7 +94,7 @@ export const updateAvatar = avatarData => dispatch => {
     type: UPDATE_IMAGE,
     payload: avatarData
   });
-***REMOVED***
+};
 
 // update image state of authenticated user
 export const updateHandle = handleData => dispatch => {
@@ -104,7 +104,7 @@ export const updateHandle = handleData => dispatch => {
     type: UPDATE_HANDLE,
     payload: handleData
   });
-***REMOVED***
+};
 
 //Login - Get User Token
 export const loginUser = userData => dispatch => {
@@ -138,15 +138,15 @@ export const loginUser = userData => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 //Set logged in user
 export const setCurrentUser = decoded => {
   return {
     type: SET_CURRENT_USER,
     payload: decoded
-  ***REMOVED***
-***REMOVED***
+  };
+};
 
 //log user out
 export const logoutUser = () => dispatch => {
@@ -165,11 +165,11 @@ export const logoutUser = () => dispatch => {
 
   dispatch(setCurrentUser({}));
   window.location.href = "/login";
-***REMOVED***
+};
 
 //Clear errors
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS
-  ***REMOVED***
-***REMOVED***
+  };
+};

@@ -8,7 +8,7 @@ import { deleteEducation } from "../../../actions/profileActions";
 class Education extends Component {
   onDeleteClick = id => {
     this.props.deleteEducation(id);
-  ***REMOVED***
+  };
 
   render() {
     const education = this.props.education.map(edu => (
@@ -52,11 +52,11 @@ class Education extends Component {
 }
 Education.propTypes = {
   deleteEducation: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ deleteEducation: deleteEducation }, dispatch);
-***REMOVED***
+};
 
 export default connect(
   null,

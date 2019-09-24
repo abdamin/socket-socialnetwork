@@ -11,11 +11,11 @@ class SettingsNavigation extends React.Component {
     super(props);
     this.state = {
       chosenLink: "Account"
-    ***REMOVED***
+    };
   }
   onDeleteClick = e => {
     this.props.deleteAccount();
-  ***REMOVED***
+  };
 
   handleOptionClick = option => {
     this.props.handleOptionChange(option);
@@ -23,7 +23,7 @@ class SettingsNavigation extends React.Component {
     if (!isEmpty(this.props.errors)) {
       this.props.clearErrors();
     }
-  ***REMOVED***
+  };
 
   render() {
     return (
@@ -103,7 +103,7 @@ class SettingsNavigation extends React.Component {
 
 SettingsNavigation.propTypes = {
   deleteAccount: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   errors: state.errors
@@ -114,7 +114,7 @@ const mapDispatchToProps = dispatch => {
     { deleteAccount: deleteAccount, clearErrors: clearErrors },
     dispatch
   );
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

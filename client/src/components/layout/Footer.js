@@ -6,4 +6,4 @@ export default () => {
       Copyright &copy; {new Date().getFullYear()} Socket
     </footer>
   );
-***REMOVED***
+};

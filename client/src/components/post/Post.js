@@ -54,11 +54,11 @@ class Post extends Component {
 Post.propTypes = {
   getPost: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired
-***REMOVED***
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getPost: getPost }, dispatch);
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   post: state.post

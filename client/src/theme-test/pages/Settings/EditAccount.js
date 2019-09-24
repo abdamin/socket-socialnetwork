@@ -31,7 +31,7 @@ class EditAccount extends React.Component {
       bio: "",
       errors: {},
       didSave: false
-    ***REMOVED***
+    };
   }
 
   componentDidMount() {
@@ -86,17 +86,17 @@ class EditAccount extends React.Component {
       skills: this.state.skills,
       githubusername: this.state.githubusername,
       bio: this.state.bio
-    ***REMOVED***
+    };
     this.props.createProfile(profileData);
     if (isEmpty(this.props.errors)) {
       this.setState({ didSave: true });
     }
-  ***REMOVED***
+  };
 
   onChange = e => {
     this.setState({ didSave: false });
     this.setState({ [e.target.name]: e.target.value });
-  ***REMOVED***
+  };
 
   render() {
     //select options for status
@@ -309,7 +309,7 @@ EditAccount.propTypes = {
   errors: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -322,7 +322,7 @@ const mapDispatchToProps = dispatch => {
     { createProfile: createProfile, getCurrentProfile: getCurrentProfile },
     dispatch
   );
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

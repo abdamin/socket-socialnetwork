@@ -14,6 +14,6 @@ class CommentFeed extends Component {
 CommentFeed.propTypes = {
   comments: PropTypes.array.isRequired,
   postId: PropTypes.string.isRequired
-***REMOVED***
+};
 
 export default CommentFeed;

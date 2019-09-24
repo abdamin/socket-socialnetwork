@@ -17,7 +17,7 @@ class PostForm extends Component {
       text: "",
       errors: {},
       showEmojis: false
-    ***REMOVED***
+    };
   }
 
   componentWillReceiveProps(newProps) {
@@ -33,15 +33,15 @@ class PostForm extends Component {
     const newPost = {
       text: this.state.text,
       profile: this.props.profile.profile._id
-    ***REMOVED***
+    };
 
     this.props.addPost(newPost);
     this.setState({ text: "", showEmojis: false });
-  ***REMOVED***
+  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  ***REMOVED***
+  };
 
   addEmoji = e => {
     //console.log(e.unified)
@@ -61,7 +61,7 @@ class PostForm extends Component {
         text: this.state.text + emojiPic
       });
     }
-  ***REMOVED***
+  };
 
   render() {
     const { errors } = this.state;
@@ -119,18 +119,18 @@ PostForm.propTypes = {
   errors: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
-***REMOVED***
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ addPost: addPost }, dispatch);
-***REMOVED***
+};
 const mapStateToProps = state => {
   return {
     errors: state.errors,
     auth: state.auth,
     profile: state.profile
-  ***REMOVED***
-***REMOVED***
+  };
+};
 
 export default connect(
   mapStateToProps,

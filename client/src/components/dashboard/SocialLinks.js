@@ -21,7 +21,7 @@ class SocialLinks extends React.Component {
       youtube: "",
       instagram: "",
       errors: {}
-    ***REMOVED***
+    };
   }
 
   componentDidMount() {
@@ -36,7 +36,7 @@ class SocialLinks extends React.Component {
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
 
-      profile.social = !isEmpty(profile.social) ? profile.social : {***REMOVED***
+      profile.social = !isEmpty(profile.social) ? profile.social : {};
       profile.twitter = !isEmpty(profile.social.twitter)
         ? profile.social.twitter
         : "";
@@ -73,17 +73,17 @@ class SocialLinks extends React.Component {
       linkedin: this.state.linkedin,
       youtube: this.state.youtube,
       instagram: this.state.instagram
-    ***REMOVED***
+    };
 
     this.props.createSocialLinks(profileData);
     if (isEmpty(this.props.errors)) {
       this.setState({ didSave: true });
     }
-  ***REMOVED***
+  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  ***REMOVED***
+  };
 
   render() {
     return (
@@ -174,7 +174,7 @@ SocialLinks.propTypes = {
   errors: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -188,10 +188,10 @@ const mapDispatchToProps = dispatch => {
       createProfile: createProfile,
       getCurrentProfile: getCurrentProfile,
       createSocialLinks: createSocialLinks
-  ***REMOVED***
+    },
     dispatch
   );
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

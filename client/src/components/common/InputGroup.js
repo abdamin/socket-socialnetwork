@@ -35,7 +35,7 @@ const InputGroup = ({
       </div>
     </div>
   );
-***REMOVED***
+};
 
 InputGroup.propTypes = {
   name: PropTypes.string.isRequired,
@@ -45,10 +45,10 @@ InputGroup.propTypes = {
   error: PropTypes.string,
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
-***REMOVED***
+};
 
 InputGroup.defaultProps = {
   type: "text"
-***REMOVED***
+};
 
 export default InputGroup;

@@ -7,22 +7,22 @@ const UserSchema = new Schema({
   name: {
     type: String,
     required: true
-***REMOVED***
+  },
   email: {
     type: String,
     required: true
-***REMOVED***
+  },
   password: {
     type: String,
     required: true
-***REMOVED***
+  },
   avatar: {
     type: String
-***REMOVED***
+  },
   date: {
     type: Date,
     default: Date.now
-***REMOVED***
+  },
   isVerified: {
     type: Boolean,
     default: false

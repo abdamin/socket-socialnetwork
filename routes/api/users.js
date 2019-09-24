@@ -97,7 +97,7 @@ router.post("/register", (req, res) => {
               //   auth: {
               //     user: EMAIL,
               //     pass: PASSWORD
-              // ***REMOVED***
+              //   },
               //   tls: {
               //     rejectUnauthorised: false
               //   }
@@ -113,7 +113,7 @@ router.post("/register", (req, res) => {
               //     "/account-verify/" +
               //     token.token +
               //     ".\n"
-              // ***REMOVED***
+              // };
               // transporter.sendMail(mailOptions, (err, info) => {
               //   if (err) {
               //     return console.log(err);
@@ -135,7 +135,7 @@ router.post("/register", (req, res) => {
                   user,
                   FRONT_API_URL + "/account-verify/" + token.token
                 )
-              ***REMOVED***
+              };
               sgMail
                 .send(msg)
                 .then(response => console.log(response))
@@ -146,7 +146,7 @@ router.post("/register", (req, res) => {
                 user: user._id,
                 handle: user._id,
                 status: ""
-              ***REMOVED***
+              };
               new Profile(profileFields).save().then(profile => {
                 //add to activities document the join date
                 const newActivity = new Activity({
@@ -204,7 +204,7 @@ router.post("/login", (req, res) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         //User Matched
-        const payload = { id: user.id, name: user.name, avatar: user.avatar ***REMOVED*** //Create JWT Payload
+        const payload = { id: user.id, name: user.name, avatar: user.avatar }; //Create JWT Payload
 
         //Sign Token
         jwt.sign(

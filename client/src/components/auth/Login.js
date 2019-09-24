@@ -13,12 +13,12 @@ class Login extends Component {
       email: "",
       password: "",
       errors: {}
-    ***REMOVED***
+    };
   }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  ***REMOVED***
+  };
 
   componentDidMount() {
     //if logged in go to dashboard
@@ -41,10 +41,10 @@ class Login extends Component {
     const userData = {
       email: this.state.email,
       password: this.state.password
-    ***REMOVED***
+    };
 
     this.props.loginUser(userData);
-  ***REMOVED***
+  };
 
   render() {
     const { errors } = this.state;
@@ -151,7 +151,7 @@ Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -160,7 +160,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ loginUser: loginUser }, dispatch);
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

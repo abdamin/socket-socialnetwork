@@ -7,7 +7,7 @@ import {
 const initialState = {
   activities: null,
   loading: false
-***REMOVED***
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -16,19 +16,19 @@ export default function(state = initialState, action) {
         ...state,
         activities: action.payload,
         loading: false
-      ***REMOVED***
+      };
 
     case CLEAR_ACTIVITIES:
       return {
         ...state,
         activities: null,
         loading: false
-      ***REMOVED***
+      };
     case ACTIVITY_LOADING:
       return {
         ...state,
         loading: true
-      ***REMOVED***
+      };
     default:
       return state;
   }

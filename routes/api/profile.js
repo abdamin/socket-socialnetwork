@@ -95,7 +95,7 @@ router.post(
           quality: "auto:eco",
           width: "400",
           height: "400"
-      ***REMOVED***
+        },
         (error, result) => {
           if (error) {
             console.log(error);
@@ -123,7 +123,7 @@ router.post(
                     type: "IMAGE",
                     detail: "Updated",
                     profile: profile._id
-                  ***REMOVED***
+                  };
 
                   axios.defaults.headers.common["Authorization"] =
                     req.headers.authorization;
@@ -179,7 +179,7 @@ router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    let errors = {***REMOVED***
+    let errors = {};
     Profile.findOne({ user: req.user.id })
       //add user name and avatar data from the user schema to the returned result as well
       .populate("user", ["name", "avatar"])
@@ -200,7 +200,7 @@ router.get(
 //  @desc Get all Profiles
 //  @access Public
 router.get("/all", (req, res) => {
-  let errors = {***REMOVED***
+  let errors = {};
 
   Profile.find()
     .populate("user", ["name", "avatar"])
@@ -221,7 +221,7 @@ router.get("/all", (req, res) => {
 //  @desc Get User's Profile by handle
 //  @access Public
 router.get("/handle/:handle", (req, res) => {
-  let errors = {***REMOVED***
+  let errors = {};
 
   Profile.findOne({ handle: req.params.handle })
     .populate("user", ["name", "avatar"])
@@ -242,7 +242,7 @@ router.get("/handle/:handle", (req, res) => {
 //  @desc Get User's Profile by User ID
 //  @access Public
 router.get("/user/:user_id", (req, res) => {
-  let errors = {***REMOVED***
+  let errors = {};
 
   Profile.findOne({ user: req.params.user_id })
     .populate("user", ["name", "avatar"])
@@ -275,7 +275,7 @@ router.post(
     }
 
     //Get fields
-    const profileFields = {***REMOVED***
+    const profileFields = {};
     profileFields.user = req.user.id;
     if (req.body.handle) profileFields.handle = req.body.handle;
     if (req.body.company) profileFields.company = req.body.company;
@@ -291,7 +291,7 @@ router.post(
       profileFields.skills = req.body.skills.split(",");
     }
     // //Social initialize first becuase social will be an object that we receive
-    // profileFields.social = {***REMOVED***
+    // profileFields.social = {};
     // if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
     // if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
     // if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
@@ -354,11 +354,11 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    const profileFields = {***REMOVED***
+    const profileFields = {};
     profileFields.user = req.user.id;
 
     //Social initialize first becuase social will be an object that we receive
-    profileFields.social = {***REMOVED***
+    profileFields.social = {};
     if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
     if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
     if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
@@ -413,7 +413,7 @@ router.post(
         to: req.body.to,
         current: req.body.current,
         description: req.body.description
-      ***REMOVED***
+      };
 
       //Add to experience array -- not push() because that will add it to the end so we do unshift() to add it to the beginning
       profile.experience.unshift(newExp);
@@ -424,7 +424,7 @@ router.post(
           type: "EXPERIENCE",
           detail: newExp.company,
           profile: profile._id
-        ***REMOVED***
+        };
 
         axios.defaults.headers.common["Authorization"] =
           req.headers.authorization;
@@ -464,7 +464,7 @@ router.post(
         to: req.body.to,
         current: req.body.current,
         description: req.body.description
-      ***REMOVED***
+      };
 
       //Add to education array -- not push() because that will add it to the end so we do unshift() to add it to the beginning
       profile.education.unshift(newEdu);
@@ -475,7 +475,7 @@ router.post(
           type: "EDUCATION",
           detail: newEdu.school,
           profile: profile._id
-        ***REMOVED***
+        };
 
         axios.defaults.headers.common["Authorization"] =
           req.headers.authorization;

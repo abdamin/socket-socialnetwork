@@ -15,7 +15,7 @@ class PasswordChangeForm extends React.Component {
       password: "",
       password2: "",
       errors: {}
-    ***REMOVED***
+    };
   }
   componentWillReceiveProps(nextProps) {
     //console.log(nextProps);
@@ -28,7 +28,7 @@ class PasswordChangeForm extends React.Component {
     this.setState({ didSave: false });
 
     this.setState({ [e.target.name]: e.target.value });
-  ***REMOVED***
+  };
 
   onSubmit = e => {
     e.preventDefault();
@@ -37,11 +37,11 @@ class PasswordChangeForm extends React.Component {
       currentPassword: this.state.currentPassword,
       password: this.state.password,
       password2: this.state.password2
-    ***REMOVED***
+    };
 
     this.props.changePassword(newPassword);
     this.setState({ didSave: true });
-  ***REMOVED***
+  };
   render() {
     const { errors } = this.state;
     return (
@@ -142,7 +142,7 @@ PasswordChangeForm.propTypes = {
   changePassword: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -151,7 +151,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ changePassword: changePassword }, dispatch);
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

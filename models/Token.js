@@ -7,15 +7,15 @@ const TokenSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "users"
-***REMOVED***
+  },
   type: {
     type: String,
     required: true
-***REMOVED***
+  },
   token: {
     type: String,
     required: true
-***REMOVED***
+  },
   createdAt: {
     type: Date,
     required: true,

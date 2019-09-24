@@ -128,7 +128,7 @@ router.post("/resend", (req, res) => {
             auth: {
               user: EMAIL,
               pass: PASSWORD
-          ***REMOVED***
+            },
             tls: {
               rejectUnauthorised: false
             }
@@ -144,7 +144,7 @@ router.post("/resend", (req, res) => {
               "/account-verify/" +
               token.token +
               ".\n"
-          ***REMOVED***
+          };
           // transporter.sendMail(mailOptions, (err, info) => {
           //   if (err) {
           //     return console.log(err);

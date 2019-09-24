@@ -28,7 +28,7 @@ export const addPost = postData => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 //Get Posts
 export const getPosts = () => dispatch => {
@@ -47,7 +47,7 @@ export const getPosts = () => dispatch => {
         payload: null
       });
     });
-***REMOVED***
+};
 
 //Get Single Post
 export const getPost = postId => dispatch => {
@@ -66,7 +66,7 @@ export const getPost = postId => dispatch => {
         payload: null
       });
     });
-***REMOVED***
+};
 
 //Delete Post
 export const deletePost = postId => dispatch => {
@@ -84,7 +84,7 @@ export const deletePost = postId => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 //Add like
 export const addLike = postId => dispatch => {
@@ -103,7 +103,7 @@ export const addLike = postId => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 //Remove Like
 export const removeLike = postId => dispatch => {
@@ -122,7 +122,7 @@ export const removeLike = postId => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 //Add Comment
 export const addComment = (postId, commentData) => dispatch => {
@@ -141,7 +141,7 @@ export const addComment = (postId, commentData) => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 //Delete Comment
 export const deleteComment = (postId, commentId) => dispatch => {
@@ -159,18 +159,18 @@ export const deleteComment = (postId, commentId) => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 //Set Post Loading
 export const setPostLoading = () => {
   return {
     type: POST_LOADING
-  ***REMOVED***
-***REMOVED***
+  };
+};
 
 //Clear errors
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS
-  ***REMOVED***
-***REMOVED***
+  };
+};

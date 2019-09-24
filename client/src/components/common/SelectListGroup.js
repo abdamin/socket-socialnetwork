@@ -29,7 +29,7 @@ const SelectListGroup = ({ name, value, error, info, onChange, options }) => {
       </div>
     </div>
   );
-***REMOVED***
+};
 
 SelectListGroup.propTypes = {
   name: PropTypes.string.isRequired,
@@ -38,6 +38,6 @@ SelectListGroup.propTypes = {
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired
-***REMOVED***
+};
 
 export default SelectListGroup;

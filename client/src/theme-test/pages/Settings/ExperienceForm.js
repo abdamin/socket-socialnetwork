@@ -25,7 +25,7 @@ class ExperienceForm extends React.Component {
       errors: {},
       disabled: false,
       didSave: false
-    ***REMOVED***
+    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,25 +44,25 @@ class ExperienceForm extends React.Component {
       to: this.state.to,
       current: this.state.current,
       description: this.state.description
-    ***REMOVED***
+    };
 
     this.props.addExperience(expData);
     this.props.getCurrentProfile();
     this.setState({ didSave: true });
-  ***REMOVED***
+  };
 
   onChange = e => {
     this.setState({ didSave: false });
 
     this.setState({ [e.target.name]: e.target.value });
-  ***REMOVED***
+  };
 
   onCheck = e => {
     this.setState({
       disabled: !this.state.disabled,
       current: !this.state.current
     });
-  ***REMOVED***
+  };
   render() {
     return (
       <div>
@@ -227,7 +227,7 @@ ExperienceForm.propTypes = {
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   addExperience: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   profile: state.profile,
@@ -239,7 +239,7 @@ const mapDispatchToProps = dispatch => {
     { addExperience: addExperience, getCurrentProfile: getCurrentProfile },
     dispatch
   );
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

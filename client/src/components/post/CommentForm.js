@@ -18,7 +18,7 @@ class CommentForm extends Component {
       text: "",
       errors: {},
       showEmojis: false
-    ***REMOVED***
+    };
   }
 
   componentDidMount() {
@@ -40,15 +40,15 @@ class CommentForm extends Component {
     const newComment = {
       text: this.state.text,
       profile: this.props.profile.profile._id
-    ***REMOVED***
+    };
 
     this.props.addComment(postId, newComment);
     this.setState({ text: "", showEmojis: false });
-  ***REMOVED***
+  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  ***REMOVED***
+  };
 
   addEmoji = e => {
     //console.log(e.unified)
@@ -68,7 +68,7 @@ class CommentForm extends Component {
         text: this.state.text + emojiPic
       });
     }
-  ***REMOVED***
+  };
 
   render() {
     const { errors } = this.state;
@@ -125,21 +125,21 @@ CommentForm.propTypes = {
   errors: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired
-***REMOVED***
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     { addComment: addComment, getCurrentProfile: getCurrentProfile },
     dispatch
   );
-***REMOVED***
+};
 const mapStateToProps = state => {
   return {
     errors: state.errors,
     auth: state.auth,
     profile: state.profile
-  ***REMOVED***
-***REMOVED***
+  };
+};
 
 export default connect(
   mapStateToProps,

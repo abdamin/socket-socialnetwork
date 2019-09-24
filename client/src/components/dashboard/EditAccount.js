@@ -42,7 +42,7 @@ class EditAccount extends React.Component {
       imageErrors: {},
       changingImage: false,
       saveClicked: true
-    ***REMOVED***
+    };
   }
 
   componentDidMount() {
@@ -109,25 +109,25 @@ class EditAccount extends React.Component {
       skills: this.state.skills,
       githubusername: this.state.githubusername,
       bio: this.state.bio
-    ***REMOVED***
+    };
     this.props.createProfile(profileData);
     if (isEmpty(this.props.errors)) {
       this.setState({ didSave: true });
     }
-  ***REMOVED***
+  };
 
   onChange = e => {
     this.setState({ didSave: false });
     this.setState({ [e.target.name]: e.target.value });
     this.setState({ saveClicked: false });
-  ***REMOVED***
+  };
 
   onImageChange = e => {
     this.setState({
       selectedImage: e.target.files[0],
       avatar: window.URL.createObjectURL(e.target.files[0])
     });
-  ***REMOVED***
+  };
   uploadImage = () => {
     const formData = new FormData();
     formData.append("image", this.state.selectedImage);
@@ -148,7 +148,7 @@ class EditAccount extends React.Component {
         });
         console.log(err.response.data);
       });
-  ***REMOVED***
+  };
 
   removeImage = () => {
     this.setState({ changingImage: true });
@@ -165,7 +165,7 @@ class EditAccount extends React.Component {
           changingImage: false
         });
       });
-  ***REMOVED***
+  };
 
   render() {
     //select options for status
@@ -422,7 +422,7 @@ EditAccount.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   updateAvatar: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -437,10 +437,10 @@ const mapDispatchToProps = dispatch => {
       getCurrentProfile: getCurrentProfile,
       updateAvatar: updateAvatar,
       updateHandle: updateHandle
-  ***REMOVED***
+    },
     dispatch
   );
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

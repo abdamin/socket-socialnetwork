@@ -6,7 +6,7 @@
   "engines": {
     "node": "10.15.1",
     "npm": "6.4.1"
-***REMOVED***
+  },
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js",
@@ -14,7 +14,7 @@
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server \" \" npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-***REMOVED***
+  },
   "author": "Abdullah Amin",
   "license": "MIT",
   "dependencies": {
@@ -33,7 +33,7 @@
     "passport-jwt": "^4.0.0",
     "path": "^0.12.7",
     "validator": "^10.11.0"
-***REMOVED***
+  },
   "devDependencies": {
     "nodemon": "^1.18.10"
   }

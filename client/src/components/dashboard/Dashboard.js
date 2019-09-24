@@ -12,12 +12,12 @@ class Settings extends React.Component {
     super();
     this.state = {
       settingsOption: "Account"
-    ***REMOVED***
+    };
   }
 
   handleOptionChange = option => {
     this.setState({ settingsOption: option });
-  ***REMOVED***
+  };
 
   render() {
     let settingsContent;

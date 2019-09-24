@@ -8,7 +8,7 @@ class AccountVerify extends React.Component {
     this.state = {
       response: "",
       isVerified: false
-    ***REMOVED***
+    };
   }
 
   componentDidMount() {

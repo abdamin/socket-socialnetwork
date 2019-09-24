@@ -22,7 +22,7 @@ class EducationForm extends React.Component {
       errors: {},
       disabled: false,
       didSave: false
-    ***REMOVED***
+    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,26 +46,26 @@ class EducationForm extends React.Component {
       current: this.state.current,
       description: this.state.description,
       handle: handle
-    ***REMOVED***
+    };
 
     this.props.addEducation(educData, this.props.history);
     this.props.getCurrentProfile();
 
     this.setState({ didSave: true });
-  ***REMOVED***
+  };
 
   onChange = e => {
     this.setState({ didSave: false });
 
     this.setState({ [e.target.name]: e.target.value });
-  ***REMOVED***
+  };
 
   onCheck = e => {
     this.setState({
       disabled: !this.state.disabled,
       current: !this.state.current
     });
-  ***REMOVED***
+  };
   render() {
     return (
       <div>
@@ -226,7 +226,7 @@ EducationForm.propTypes = {
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   addEducation: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   profile: state.profile,
@@ -238,7 +238,7 @@ const mapDispatchToProps = dispatch => {
     { addEducation: addEducation, getCurrentProfile: getCurrentProfile },
     dispatch
   );
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

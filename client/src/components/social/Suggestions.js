@@ -71,16 +71,16 @@ class Suggestions extends Component {
 Suggestions.propTypes = {
   getProfiles: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
-***REMOVED***
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getProfiles: getProfiles }, dispatch);
-***REMOVED***
+};
 const mapStateToProps = state => {
   return {
     profile: state.profile
-  ***REMOVED***
-***REMOVED***
+  };
+};
 
 export default connect(
   mapStateToProps,

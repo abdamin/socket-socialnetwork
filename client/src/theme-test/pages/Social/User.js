@@ -15,7 +15,7 @@ class User extends React.Component {
       handle: "",
       avatar: "",
       status: ""
-    ***REMOVED***
+    };
   }
   componentDidMount() {
     this.props.getCurrentProfile();
@@ -72,7 +72,7 @@ class User extends React.Component {
 User.propTypes = {
   profile: PropTypes.object.isRequired,
   getCurrentProfile: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   profile: state.profile
@@ -80,7 +80,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getCurrentProfile: getCurrentProfile }, dispatch);
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

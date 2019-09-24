@@ -127,4 +127,4 @@ module.exports = function passwordChange(user, link) {
       </div>  
      </body>
     </html>`;
-***REMOVED***
+};

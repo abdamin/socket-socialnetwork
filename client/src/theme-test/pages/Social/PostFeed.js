@@ -14,6 +14,6 @@ class PostFeed extends Component {
 
 PostFeed.propTypes = {
   posts: PropTypes.array.isRequired
-***REMOVED***
+};
 
 export default PostFeed;

@@ -6,13 +6,13 @@ class SettingsNavigation extends React.Component {
     super(props);
     this.state = {
       chosenLink: "Account"
-    ***REMOVED***
+    };
   }
 
   handleOptionClick = option => {
     this.props.handleOptionChange(option);
     this.setState({ chosenLink: option });
-  ***REMOVED***
+  };
 
   render() {
     return (

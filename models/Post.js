@@ -7,15 +7,15 @@ const PostSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "users"
-***REMOVED***
+  },
   text: {
     type: String,
     required: true
-***REMOVED***
+  },
   profile: {
     type: Schema.Types.ObjectId,
     ref: "profiles"
-***REMOVED***
+  },
   // name: {
   //   type: String
   // },
@@ -38,11 +38,11 @@ const PostSchema = new Schema({
       user: {
         type: Schema.Types.ObjectId,
         ref: "users"
-    ***REMOVED***
+      },
       text: {
         type: String,
         required: true
-    ***REMOVED***
+      },
       // name: {
       //   type: String
       // },
@@ -52,7 +52,7 @@ const PostSchema = new Schema({
       profile: {
         type: Schema.Types.ObjectId,
         ref: "profiles"
-    ***REMOVED***
+      },
       // avatar: {
       //   type: String
       // },

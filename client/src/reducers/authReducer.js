@@ -10,7 +10,7 @@ const initialState = {
   user: {},
   updatedAvatar: "",
   handle: ""
-***REMOVED***
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -19,17 +19,17 @@ export default function(state = initialState, action) {
         ...state,
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload
-      ***REMOVED***
+      };
     case UPDATE_IMAGE:
       return {
         ...state,
         updatedAvatar: action.payload
-      ***REMOVED***
+      };
     case UPDATE_HANDLE:
       return {
         ...state,
         handle: action.payload
-      ***REMOVED***
+      };
     default:
       return state;
   }

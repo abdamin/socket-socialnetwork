@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 class CommentItem extends Component {
   onDeleteClick = (postId, commentId) => {
     this.props.deleteComment(postId, commentId);
-  ***REMOVED***
+  };
   render() {
     const { comment, postId, auth } = this.props;
 
@@ -82,11 +82,11 @@ CommentItem.propTypes = {
   auth: PropTypes.object.isRequired,
   comment: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired
-***REMOVED***
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ deleteComment: deleteComment }, dispatch);
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   auth: state.auth

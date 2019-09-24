@@ -12,7 +12,7 @@ class CredentialsTable extends Component {
     super(props);
     this.state = {
       type: ""
-    ***REMOVED***
+    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -63,18 +63,18 @@ CredentialsTable.propTypes = {
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired
-***REMOVED***
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getCurrentProfile: getCurrentProfile }, dispatch);
-***REMOVED***
+};
 
 const mapStateToProps = state => {
   return {
     profile: state.profile,
     auth: state.auth
-  ***REMOVED***
-***REMOVED***
+  };
+};
 
 export default connect(
   mapStateToProps,

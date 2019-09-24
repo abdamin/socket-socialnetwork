@@ -27,21 +27,21 @@ export const getCurrentProfile = () => dispatch => {
         payload: {}
       });
     });
-***REMOVED***
+};
 
 //Profile Loading
 export const setProfileLoading = () => {
   return {
     type: PROFILE_LOADING
-  ***REMOVED***
-***REMOVED***
+  };
+};
 
 //Profile Loading
 export const clearCurrentProfile = () => {
   return {
     type: CLEAR_CURRENT_PROFILE
-  ***REMOVED***
-***REMOVED***
+  };
+};
 
 export const createProfile = profileData => dispatch => {
   dispatch(clearErrors());
@@ -60,7 +60,7 @@ export const createProfile = profileData => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 export const createSocialLinks = socialData => dispatch => {
   dispatch(clearErrors());
@@ -79,7 +79,7 @@ export const createSocialLinks = socialData => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 //add Experience
 export const addExperience = expData => dispatch => {
@@ -91,7 +91,7 @@ export const addExperience = expData => dispatch => {
       payload: err.response.data
     });
   });
-***REMOVED***
+};
 
 //add Education
 export const addEducation = educData => dispatch => {
@@ -103,7 +103,7 @@ export const addEducation = educData => dispatch => {
       payload: err.response.data
     });
   });
-***REMOVED***
+};
 
 //delete experience
 export const deleteExperience = id => dispatch => {
@@ -121,7 +121,7 @@ export const deleteExperience = id => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 //delete education
 export const deleteEducation = id => dispatch => {
@@ -139,7 +139,7 @@ export const deleteEducation = id => dispatch => {
         payload: err.response.data
       });
     });
-***REMOVED***
+};
 
 //get profile by handle
 export const getProfileByHandle = handle => dispatch => {
@@ -158,7 +158,7 @@ export const getProfileByHandle = handle => dispatch => {
         payload: null
       });
     });
-***REMOVED***
+};
 
 //get all profiles
 export const getProfiles = () => dispatch => {
@@ -177,7 +177,7 @@ export const getProfiles = () => dispatch => {
         payload: null
       });
     });
-***REMOVED***
+};
 
 //delete Account & profile
 export const deleteAccount = () => dispatch => {
@@ -210,11 +210,11 @@ export const deleteAccount = () => dispatch => {
         });
       });
   }
-***REMOVED***
+};
 
 //Clear errors
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS
-  ***REMOVED***
-***REMOVED***
+  };
+};

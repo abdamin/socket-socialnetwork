@@ -248,6 +248,6 @@ const Activities = ({ activities }) => {
       </div>
     </div>
   );
-***REMOVED***
+};
 
 export default ProfileActivities;

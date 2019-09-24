@@ -2,7 +2,7 @@ const Validator = require("validator");
 const isEmpty = require("./is-empty");
 
 module.exports = function validateProfilePasswordChangeInput(data) {
-  let errors = {***REMOVED***
+  let errors = {};
 
   //if no input make them empty strings because the Validator library only takes in strings as input
   data.currentPassword = !isEmpty(data.currentPassword)
@@ -30,5 +30,5 @@ module.exports = function validateProfilePasswordChangeInput(data) {
   return {
     errors: errors,
     isValid: isEmpty(errors)
-  ***REMOVED***
-***REMOVED***
+  };
+};

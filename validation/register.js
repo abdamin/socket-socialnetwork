@@ -2,7 +2,7 @@ const Validator = require("validator");
 const isEmpty = require("./is-empty");
 
 module.exports = function validateRegisterInput(data) {
-  let errors = {***REMOVED***
+  let errors = {};
 
   //if no input make them empty strings because the Validator library only takes in strings as input
   data.name = !isEmpty(data.name) ? data.name : "";
@@ -38,5 +38,5 @@ module.exports = function validateRegisterInput(data) {
   return {
     errors: errors,
     isValid: isEmpty(errors)
-  ***REMOVED***
-***REMOVED***
+  };
+};

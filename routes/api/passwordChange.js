@@ -92,7 +92,7 @@ router.post("/:token", (req, res) => {
         const data = {
           password: req.body.password,
           password2: req.body.password2
-        ***REMOVED***
+        };
 
         const { errors, isValid } = validatePasswordInput(data);
         //Check validation
@@ -147,7 +147,7 @@ router.post(
           currentPassword: req.body.currentPassword,
           password: req.body.password,
           password2: req.body.password2
-        ***REMOVED***
+        };
 
         const { errors, isValid } = validateProfilePasswordChangeInput(data);
         //Check validation
@@ -233,7 +233,7 @@ router.post("/user/send", (req, res) => {
           //   auth: {
           //     user: EMAIL,
           //     pass: PASSWORD
-          // ***REMOVED***
+          //   },
           //   tls: {
           //     rejectUnauthorised: false
           //   }
@@ -250,7 +250,7 @@ router.post("/user/send", (req, res) => {
           //     token.token +
           //     ".\n" +
           //     "If you did not request this, please ignore this email.\n"
-          // ***REMOVED***
+          // };
           // transporter.sendMail(mailOptions, (err, info) => {
           //   if (err) {
           //     return console.log(err);
@@ -274,7 +274,7 @@ router.post("/user/send", (req, res) => {
               user,
               FRONT_API_URL + "/change-password/" + token.token
             )
-          ***REMOVED***
+          };
           sgMail
             .send(msg)
             .then(response => console.log(response))

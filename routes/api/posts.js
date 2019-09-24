@@ -120,7 +120,7 @@ router.post(
                 type: "POST",
                 detail: populatedPost.text,
                 profile: populatedPost.profile._id
-              ***REMOVED***
+              };
 
               axios.defaults.headers.common["Authorization"] =
                 req.headers.authorization;
@@ -308,7 +308,7 @@ router.post(
           text: req.body.text,
           user: req.user.id,
           profile: req.body.profile
-        ***REMOVED***
+        };
 
         //Add to comments array
         post.comments.unshift(newComment);

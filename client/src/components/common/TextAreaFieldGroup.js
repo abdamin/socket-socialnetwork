@@ -30,7 +30,7 @@ const TextAreaFieldGroup = ({
       </div>
     </div>
   );
-***REMOVED***
+};
 
 TextAreaFieldGroup.propTypes = {
   name: PropTypes.string.isRequired,
@@ -39,6 +39,6 @@ TextAreaFieldGroup.propTypes = {
   info: PropTypes.string,
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired
-***REMOVED***
+};
 
 export default TextAreaFieldGroup;

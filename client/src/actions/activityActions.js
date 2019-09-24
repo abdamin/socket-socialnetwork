@@ -18,11 +18,11 @@ export const getActivities = id => dispatch => {
         payload: null
       });
     });
-***REMOVED***
+};
 
 //Profile Loading
 export const setActivityLoading = () => {
   return {
     type: ACTIVITY_LOADING
-  ***REMOVED***
-***REMOVED***
+  };
+};

@@ -14,13 +14,13 @@ class ForgotPassword extends Component {
       email: "",
       errors: {},
       emailSent: false
-    ***REMOVED***
+    };
   }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.setState({ emailSent: false, errors: {} });
-  ***REMOVED***
+  };
 
   componentDidMount() {
     //if logged in go to dashboard
@@ -42,10 +42,10 @@ class ForgotPassword extends Component {
 
     const userData = {
       email: this.state.email
-    ***REMOVED***
+    };
     this.props.sendPasswordChangeEmail(userData);
     this.setState({ emailSent: isEmpty(this.state.errors) });
-  ***REMOVED***
+  };
 
   render() {
     const { errors, emailSent } = this.state;
@@ -119,7 +119,7 @@ ForgotPassword.propTypes = {
   sendPasswordChangeEmail: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-***REMOVED***
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -131,7 +131,7 @@ const mapDispatchToProps = dispatch => {
     { sendPasswordChangeEmail: sendPasswordChangeEmail },
     dispatch
   );
-***REMOVED***
+};
 
 export default connect(
   mapStateToProps,

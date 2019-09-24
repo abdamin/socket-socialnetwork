@@ -8,7 +8,7 @@ import { deleteExperience } from "../../actions/profileActions";
 class Experience extends Component {
   onDeleteClick = id => {
     this.props.deleteExperience(id);
-  ***REMOVED***
+  };
 
   render() {
     const experience = this.props.experience.map(exp => (
@@ -52,11 +52,11 @@ class Experience extends Component {
 }
 Experience.propTypes = {
   deleteExperience: PropTypes.func.isRequired
-***REMOVED***
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ deleteExperience: deleteExperience }, dispatch);
-***REMOVED***
+};
 
 export default connect(
   null,

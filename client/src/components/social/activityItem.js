@@ -12,7 +12,7 @@ class activityItem extends Component {
       lastWeek: "[last] dddd [at] LT",
       nextWeek: "dddd [at] LT",
       sameElse: "L"
-    ***REMOVED***
+    };
 
     switch (this.props.activity.type) {
       case "JOINED":

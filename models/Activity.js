@@ -7,7 +7,7 @@ const ActivitySchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "users"
-***REMOVED***
+  },
   // handle: {
   //   type: String,
   //   required: true,
@@ -16,15 +16,15 @@ const ActivitySchema = new Schema({
   profile: {
     type: Schema.Types.ObjectId,
     ref: "profiles"
-***REMOVED***
+  },
   type: {
     type: String,
     required: true
-***REMOVED***
+  },
   detail: {
     type: String,
     required: true
-***REMOVED***
+  },
   date: {
     type: Date,
     default: Date.now

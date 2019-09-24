@@ -13,7 +13,7 @@ class ProfileGithub extends Component {
       count: 5,
       sort: "created: asc",
       repos: []
-    ***REMOVED***
+    };
   }
 
   componentDidMount() {
@@ -89,5 +89,5 @@ class ProfileGithub extends Component {
 
 ProfileGithub.propTypes = {
   username: PropTypes.string.isRequired
-***REMOVED***
+};
 export default ProfileGithub;

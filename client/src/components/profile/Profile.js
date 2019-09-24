@@ -18,7 +18,7 @@ class Profile extends Component {
     super(props);
     this.state = {
       _id: ""
-    ***REMOVED***
+    };
   }
   componentDidMount() {
     if (this.props.match.params.handle) {
@@ -87,7 +87,7 @@ Profile.propTypes = {
   profile: PropTypes.object.isRequired,
   getProfileByHandle: PropTypes.func.isRequired,
   activity: PropTypes.object.isRequired
-***REMOVED***
+};
 const mapStateToProps = state => ({
   profile: state.profile,
   activity: state.activity
@@ -97,7 +97,7 @@ const mapDispatchToProps = dispatch => {
     { getProfileByHandle: getProfileByHandle, getActivities: getActivities },
     dispatch
   );
-***REMOVED***
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
