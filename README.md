@@ -6,7 +6,7 @@ This is a MongoDB, ExpressJS, ReactJS, NodeJS (MERN) Stack Web Application.
 
 You can view a hosted instance of Socket [here](https://salty-everglades-17999.herokuapp.com)
 
-# Quick Start
+# Set up locally
 
     $ git clone https://github.com/abdamin/socket-socialnetwork.git
     $ npm install
@@ -15,5 +15,5 @@ You can view a hosted instance of Socket [here](https://salty-everglades-17999.h
 
 # App Info
 
-<h4>Author<h4/>
+<h4>Author<h4/> <br/>
 Abdullah Amin
